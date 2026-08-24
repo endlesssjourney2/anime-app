@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Sora:wght@100..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-bg);
+}
+
+ul {
+  list-style: none;
+}
+
+:root {
+  /* bg colors */
+  --color-bg: #121212;
+  --color-card: #1c1b2e;
+  --color-card-hover: #24223a;
+
+  /* text colors */
+  --color-text-primary: #f0effa;
+  --color-text-secondary: #a8a5c4;
+  --color-text-muted: #6e6b8a;
+
+  /* accent colors */
+  --color-accent: #7f77dd;
+  --color-accent-hover: #948ce8;
+  --color-accent-dark: #534ab7;
+  --color-favorite: #d4537e;
+
+  /* border colors */
+  --color-border: #2a2942;
+  --color-border-strong: #3a3856;
+
+  /* fonts */
+  --font-heading: "Sora", sans-serif;
+
+  /* buttons */
+  --color-btn-bg: #24223a;
+  --color-btn-bg-hover: #2e2b4a;
+  --color-btn-border: #3a3856;
+  --color-btn-text: #f0effa;
+  --color-btn-text-disabled: #4a4768;
+  --color-btn-bg-disabled: #1a1928;
+
+  --color-btn-accent-bg: #7f77dd;
+  --color-btn-accent-bg-hover: #948ce8;
+  --color-btn-accent-text: #12111c;
+
+  /* meta text */
+  --color-text-meta: #8b87aa;
+  --color-text-divider: #3a3856;
+  --color-text-link: #a79ef0;
+  --color-text-link-hover: #c4bcf5;
+}

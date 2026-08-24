@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import useAnimeSearch from "../../hooks/useAnimeSearch";
 import s from "./Main.module.css";
 import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
+import AnimeItem from "./components/AnimeItem/AnimeItem";
 
 const Main = () => {
   const {
@@ -37,18 +38,7 @@ const Main = () => {
           <div className={s.content}>
             <ul className={s.list}>
               {results.map((a) => (
-                <li key={a.id} className={s.item} onClick={() => navigate("/")}>
-                  <div className={s.top}>
-                    <img src={a.coverImage.large} alt={a.title.english} />
-                  </div>
-                  <div className={s.bottom}>
-                    <span className={s.title}>
-                      {a.title.english ?? a.title.romaji ?? a.title.native}
-                    </span>
-                    <span className={s.genres}>{a.genres.join(", ")}</span>
-                    <span className={s.avgScore}>{a.averageScore}</span>
-                  </div>
-                </li>
+                <AnimeItem anime={a} onClick={() => navigate("/")} />
               ))}
             </ul>
           </div>

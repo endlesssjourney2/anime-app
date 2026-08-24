@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useAnimeSearch from "../../hooks/useAnimeSearch";
 import s from "./Main.module.css";
-import LoadingComponent from "../../features/components/Loading/LoadingComponent";
+import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
 
 const Main = () => {
   const {

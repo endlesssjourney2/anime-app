@@ -1,9 +1,9 @@
 .mainPage {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: 1200px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header {

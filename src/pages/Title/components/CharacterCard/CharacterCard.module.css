@@ -1,0 +1,28 @@
+.item {
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  margin-bottom: 6px;
+}
+
+.name {
+  font-size: 16px;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.role {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin: 0;
+}

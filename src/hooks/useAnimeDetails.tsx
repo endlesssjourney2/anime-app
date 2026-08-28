@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import type { AniListMediaDetails } from "../types/AniList";
 import { getAnimeById } from "../api/aniListApi";
 
-type Props = {
-  id: number;
-};
-
-const useAnimeDetails = ({ id }: Props) => {
+const useAnimeDetails = (id: number) => {
   const [anime, setAnime] = useState<AniListMediaDetails>();
   const [loading, setLoading] = useState(true);
 
@@ -20,16 +16,13 @@ const useAnimeDetails = ({ id }: Props) => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const clearDescription = anime.description
-    ? anime.description
-        .replace(/<br\s*\/?>/gi, " ")
-        .replace(/<[^>]*>/g, "")
-        .trim()
-    : "";
+  const clearDescription = anime?.description
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]*>/g, "")
+    .trim();
 
-  const animeTitle = anime
-    ? (anime.title.english ?? anime.title.native ?? anime.title.romaji)
-    : "";
+  const animeTitle =
+    anime?.title.english ?? anime?.title.native ?? anime?.title.romaji;
 
   return { anime, clearDescription, animeTitle, loading };
 };

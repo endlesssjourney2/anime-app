@@ -1,4 +1,4 @@
-import type { CharacterEdge } from "./Characters";
+import type { CharacterEdge } from "./Character";
 
 export type AniListTitle = {
   romaji: string;

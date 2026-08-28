@@ -23,10 +23,8 @@ const SEARCH_QUERY = `
       media(search: $search, type: ANIME, sort: $sort) {
         id
         title { romaji english native }
-        description
         coverImage { large medium }
         averageScore
-        episodes
         genres
       }
     }
@@ -46,8 +44,15 @@ const DETAILS_QUERY = `
       episodes
       status
       genres
-      studios {
-        nodes { name }
+      characters(sort: ROLE, perPage: 8) {
+        edges {
+          role
+          node {
+            id
+            name{full}
+            image{large}
+          }
+        }
       }
     }
   }
@@ -70,8 +75,6 @@ export const searchAnime = async (
 
   return response.data.data.Page;
 };
-
-//future
 
 export const getAnimeById = async (
   id: number,

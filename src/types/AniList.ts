@@ -1,3 +1,5 @@
+import type { CharacterEdge } from "./Characters";
+
 export type AniListTitle = {
   romaji: string;
   english: string | null;
@@ -24,8 +26,12 @@ export type AniListMedia = {
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
   status: string | null;
+  characters: {
+    edges: CharacterEdge[];
+  };
 };
 
+//page
 export type AniListPageInfo = {
   total: number;
   currentPage: number;
@@ -33,6 +39,7 @@ export type AniListPageInfo = {
   hasNextPage: boolean;
 };
 
+//api
 export type SearchResponse = {
   data: {
     Page: {

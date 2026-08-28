@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import Main from "./pages/Main/Main";
-import AnimeDetails from "./pages/Title/AnimeDetais";
+import AnimeDetails from "./pages/Title/AnimeDetails";
 
 export const router = createBrowserRouter([
   {

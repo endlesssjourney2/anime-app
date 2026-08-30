@@ -4,6 +4,7 @@ import s from "./AnimeDetails.module.css";
 import { useParams } from "react-router-dom";
 import CharacterCard from "./components/CharacterCard/CharacterCard";
 import { IconStarFilled } from "@tabler/icons-react";
+import StatusBadge from "../../features/components/StatusBadge/StatusBadge";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -32,9 +33,7 @@ const AnimeDetails = () => {
               <p className={s.meta}>
                 {anime?.genres.join(", ")}
                 {anime?.episodes && <> · {anime.episodes} episodes · </>}
-                {anime?.status && (
-                  <span className={s.status}>{anime.status}</span>
-                )}
+                {anime?.status && <StatusBadge status={anime.status} />}
               </p>
 
               <div className={s.score}>

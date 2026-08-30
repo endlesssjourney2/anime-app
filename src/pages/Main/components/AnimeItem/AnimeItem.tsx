@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import type { AniListMedia } from "../../../../types/AniList";
 import s from "./AnimeItem.module.css";
+import StatusBadge from "../../../../features/components/StatusBadge/StatusBadge";
 
 type Props = {
   anime: AniListMedia;
@@ -18,7 +19,10 @@ const AnimeItem: FC<Props> = ({ anime, onClick }) => {
           {anime.title.english ?? anime.title.romaji ?? anime.title.native}
         </span>
         <span className={s.genres}>{anime.genres.join(", ")}</span>
-        <span className={s.avgScore}>{anime.averageScore}</span>
+        <div className={s.info}>
+          <span className={s.avgScore}>{anime.averageScore}</span>
+          <StatusBadge status={anime.status} />
+        </div>
       </div>
     </li>
   );

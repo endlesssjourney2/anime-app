@@ -1,15 +1,22 @@
 import type { CharacterEdge } from "./Character";
 
-export type AniListTitle = {
+type AniListTitle = {
   romaji: string;
   english: string | null;
   native: string;
 };
 
-export type AniListImage = {
+type AniListImage = {
   large: string;
   medium: string;
 };
+
+export type AniListStatus =
+  | "FINISHED"
+  | "RELEASING"
+  | "NOT_YET_RELEASED"
+  | "CANCELLED"
+  | "HIATUS";
 
 // fields for card
 export type AniListMedia = {
@@ -20,12 +27,12 @@ export type AniListMedia = {
   averageScore: number | null;
   episodes: number | null;
   genres: string[];
+  status: AniListStatus;
 };
 
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
-  status: string | null;
   characters: {
     edges: CharacterEdge[];
   };

@@ -26,6 +26,7 @@ const SEARCH_QUERY = `
         coverImage { large medium }
         averageScore
         genres
+        status
       }
     }
   }
@@ -44,7 +45,7 @@ const DETAILS_QUERY = `
       episodes
       status
       genres
-      characters(sort: ROLE, perPage: 8) {
+      characters(sort: FAVOURITES_DESC, perPage: 8) {
         edges {
           role
           node {

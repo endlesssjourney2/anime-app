@@ -53,7 +53,13 @@
   text-overflow: ellipsis;
 }
 
-.avgScore {
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.avgScore,
+.status {
   font-size: 15px;
   font-weight: 500;
   color: var(--color-accent);

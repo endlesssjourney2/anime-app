@@ -1,12 +1,13 @@
-import type { CharacterEdge } from "./Character";
+import type { AnilistCharacters } from "./Character";
+import type { AnilistRelations } from "./Relation";
 
-type AniListTitle = {
+export type AniListTitle = {
   romaji: string;
   english: string | null;
   native: string;
 };
 
-type AniListImage = {
+export type AniListImage = {
   large: string;
   medium: string;
 };
@@ -33,9 +34,8 @@ export type AniListMedia = {
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
-  characters: {
-    edges: CharacterEdge[];
-  };
+  characters: AnilistCharacters;
+  relations: AnilistRelations;
 };
 
 //page

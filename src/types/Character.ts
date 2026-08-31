@@ -4,7 +4,11 @@ type CharacterNode = {
   image: { large: string };
 };
 
-export type CharacterEdge = {
+type CharacterEdge = {
   role: string;
   node: CharacterNode;
+};
+
+export type AnilistCharacters = {
+  edges: CharacterEdge[];
 };

@@ -1,0 +1,17 @@
+.section {
+  margin-top: 32px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.relationsList {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 2px 8px;
+}

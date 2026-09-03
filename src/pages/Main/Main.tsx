@@ -39,6 +39,7 @@ const Main = () => {
             <ul className={s.list}>
               {results.map((a) => (
                 <AnimeItem
+                  key={a.id}
                   anime={a}
                   onClick={() => navigate(`/anime/${a.id}`)}
                 />

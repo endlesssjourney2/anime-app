@@ -56,4 +56,11 @@ ul {
   --color-text-divider: #3a3856;
   --color-text-link: #a79ef0;
   --color-text-link-hover: #c4bcf5;
+
+  /* status colors */
+  --color-status-releasing: #6fbf9f;
+  --color-status-finished: #7f77dd;
+  --color-status-not-yet-released: #d6a85f;
+  --color-status-cancelled: #d45f76;
+  --color-status-hiatus: #8f86b8;
 }

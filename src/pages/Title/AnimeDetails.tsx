@@ -2,9 +2,9 @@ import LoadingComponent from "../../features/components/LoadingComponent/Loading
 import useAnimeDetails from "../../hooks/useAnimeDetails";
 import s from "./AnimeDetails.module.css";
 import { useParams } from "react-router-dom";
-import CharacterCard from "./components/CharacterCard/CharacterCard";
-import { IconStarFilled } from "@tabler/icons-react";
-import StatusBadge from "../../features/components/StatusBadge/StatusBadge";
+import AnimeHeader from "./components/AnimeHeader/AnimeHeader";
+import CharactersSection from "./components/CharactersSection/CharactersSection";
+import RelationsSection from "./components/RelationsSection/RelationsSection";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -19,46 +19,14 @@ const AnimeDetails = () => {
         <LoadingComponent />
       ) : (
         <>
-          <img className={s.banner} src={anime?.bannerImage} alt={animeTitle} />
-
-          <div className={s.headerBlock}>
-            <img
-              className={s.poster}
-              src={anime?.coverImage.large}
-              alt={animeTitle}
-            />
-
-            <div className={s.info}>
-              <h1 className={s.title}>{animeTitle}</h1>
-              <p className={s.meta}>
-                {anime?.genres.join(", ")}
-                {anime?.episodes && <> · {anime.episodes} episodes · </>}
-                {anime?.status && <StatusBadge status={anime.status} />}
-              </p>
-
-              <div className={s.score}>
-                <span className={s.scoreValue}>{anime?.averageScore}</span>
-                <IconStarFilled stroke={1} size={16} />
-              </div>
-            </div>
-          </div>
+          <AnimeHeader anime={anime} animeTitle={animeTitle} />
 
           <div className={s.section}>
             <p className={s.sectionTitle}>Description</p>
             <p className={s.description}>{clearDescription}</p>
           </div>
-          <div className={s.section}>
-            <p className={s.sectionTitle}>Characters</p>
-            <div className={s.charactersList}>
-              {anime.characters.edges.map((c) => (
-                <CharacterCard
-                  image={c.node.image.large}
-                  name={c.node.name.full}
-                  role={c.role}
-                />
-              ))}
-            </div>
-          </div>
+          <CharactersSection characters={anime.characters} />
+          <RelationsSection relations={anime.relations} />
         </>
       )}
     </div>

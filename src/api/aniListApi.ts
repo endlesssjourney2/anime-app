@@ -55,6 +55,17 @@ const DETAILS_QUERY = `
           }
         }
       }
+      relations {
+      edges {
+        relationType
+        node {
+          id
+          title { romaji english }
+          coverImage { large }
+          type
+          }
+        }
+      }
     }
   }
 `;

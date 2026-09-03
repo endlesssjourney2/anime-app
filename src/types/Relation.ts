@@ -1,5 +1,21 @@
 import type { AniListImage, AniListTitle } from "./AniList";
 
+export type AniListRelation =
+  | "ADAPTATION"
+  | "PREQUEL"
+  | "SEQUEL"
+  | "PARENT"
+  | "SIDE_STORY"
+  | "CHARACTER"
+  | "SUMMARY"
+  | "ALTERNATIVE"
+  | "SPIN_OFF"
+  | "OTHER"
+  | "SOURCE"
+  | "COMPILATION"
+  | "CONTAINS"
+  | "SAME_UNIVERSE";
+
 type RelationNode = {
   id: number;
   title: AniListTitle;
@@ -8,7 +24,7 @@ type RelationNode = {
 };
 
 export type RelationEdge = {
-  relationType: string;
+  relationType: AniListRelation;
   node: RelationNode;
 };
 

@@ -8,9 +8,8 @@
   aspect-ratio: 2 / 3;
   border-radius: 10px;
   object-fit: cover;
-  background: var(--color-surface);
   border: 1px solid var(--color-border);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -21,7 +20,7 @@
 }
 
 .title {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -29,8 +28,34 @@
 }
 
 .relationType {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-accent);
+}
+
+.PREQUEL,
+.SEQUEL {
+  color: var(--color-relation-main);
+}
+
+.ADAPTATION,
+.SOURCE {
+  color: var(--color-relation-source);
+}
+
+.PARENT,
+.CONTAINS {
+  color: var(--color-relation-parent);
+}
+
+.SIDE_STORY,
+.SPIN_OFF {
+  color: var(--color-relation-related);
+}
+
+.ALTERNATIVE,
+.SUMMARY,
+.COMPILATION {
+  color: var(--color-relation-other);
 }

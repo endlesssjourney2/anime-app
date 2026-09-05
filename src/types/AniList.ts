@@ -34,6 +34,7 @@ export type AniListMedia = {
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
+  startDate: { year: number | null };
   characters: AnilistCharacters;
   relations: AnilistRelations;
 };

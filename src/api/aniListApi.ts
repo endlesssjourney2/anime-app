@@ -32,7 +32,7 @@ const SEARCH_QUERY = `
   }
 `;
 
-//future
+// One anime details query
 const DETAILS_QUERY = `
   query ($id: Int) {
     Media(id: $id, type: ANIME) {
@@ -45,6 +45,7 @@ const DETAILS_QUERY = `
       episodes
       status
       genres
+      startDate {year}
       characters(sort: FAVOURITES_DESC, perPage: 8) {
         edges {
           role

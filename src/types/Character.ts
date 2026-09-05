@@ -4,8 +4,10 @@ type CharacterNode = {
   image: { large: string };
 };
 
+export type CharacterRole = "MAIN" | "SUPPORTING" | "BACKGROUND";
+
 type CharacterEdge = {
-  role: string;
+  role: CharacterRole;
   node: CharacterNode;
 };
 

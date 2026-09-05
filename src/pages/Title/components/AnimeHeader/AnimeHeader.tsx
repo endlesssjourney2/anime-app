@@ -25,10 +25,10 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
           <h1 className={s.title}>{animeTitle}</h1>
           <p className={s.meta}>
             {anime?.genres.join(", ")}
-            {anime?.episodes && <> · {anime.episodes} episodes · </>}
-            {anime?.status && <StatusBadge status={anime.status} />}
+            {` · ${anime?.episodes} episodes · `}
+            {<StatusBadge status={anime.status} />}
+            {` · ${anime?.startDate.year}`}
           </p>
-
           <div className={s.score}>
             {anime?.averageScore ? (
               <span className={s.scoreValue}>{anime.averageScore}</span>

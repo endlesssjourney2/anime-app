@@ -9,7 +9,7 @@ type Props = {
   image: string;
 };
 
-const RELATION_LABELS: Record<
+export const RELATION_LABELS: Record<
   Exclude<AniListRelation, "OTHER" | "CHARACTER">,
   string
 > = {
@@ -32,7 +32,9 @@ const RelationCard: FC<Props> = ({ relationType, title, image, onClick }) => {
     <div className={s.item}>
       <img className={s.image} src={image} alt={title} onClick={onClick} />
       <p className={s.title}>{title}</p>
-      <p className={s.relationType}>{RELATION_LABELS[relationType]}</p>
+      <p className={`${s.relationType} ${s[relationType]}`}>
+        {RELATION_LABELS[relationType]}
+      </p>
     </div>
   );
 };

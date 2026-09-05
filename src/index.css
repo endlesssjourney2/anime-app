@@ -63,4 +63,16 @@ ul {
   --color-status-not-yet-released: #d6a85f;
   --color-status-cancelled: #d45f76;
   --color-status-hiatus: #8f86b8;
+
+  /* role colors */
+  --color-role-main: #d6a85f;
+  --color-role-supporting: #7f77dd;
+  --color-role-background: #8b87aa;
+
+  /* relation colors */
+  --color-relation-main: #d6a85f;
+  --color-relation-source: #6fbf9f;
+  --color-relation-parent: #7f77dd;
+  --color-relation-related: #a8a5c4;
+  --color-relation-other: #6e6b8a;
 }

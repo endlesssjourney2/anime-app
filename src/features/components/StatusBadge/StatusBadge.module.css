@@ -1,0 +1,35 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 1.4;
+}
+
+.RELEASING {
+  color: var(--color-status-releasing);
+  background: rgba(111, 191, 159, 0.12);
+}
+
+.FINISHED {
+  color: var(--color-status-finished);
+  background: rgba(127, 119, 221, 0.14);
+}
+
+.NOT_YET_RELEASED {
+  color: var(--color-status-not-yet-released);
+  background: rgba(214, 168, 95, 0.12);
+}
+
+.CANCELLED {
+  color: var(--color-status-cancelled);
+  background: rgba(212, 95, 118, 0.12);
+}
+
+.HIATUS {
+  color: var(--color-status-hiatus);
+  background: rgba(143, 134, 184, 0.13);
+}

@@ -1,0 +1,61 @@
+.item {
+  width: 170px;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.image:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.title {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.relationType {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.PREQUEL,
+.SEQUEL {
+  color: var(--color-relation-main);
+}
+
+.ADAPTATION,
+.SOURCE {
+  color: var(--color-relation-source);
+}
+
+.PARENT,
+.CONTAINS {
+  color: var(--color-relation-parent);
+}
+
+.SIDE_STORY,
+.SPIN_OFF {
+  color: var(--color-relation-related);
+}
+
+.ALTERNATIVE,
+.SUMMARY,
+.COMPILATION {
+  color: var(--color-relation-other);
+}

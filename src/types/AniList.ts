@@ -37,6 +37,10 @@ export type AniListMediaDetails = AniListMedia & {
   startDate: { year: number | null };
   characters: AnilistCharacters;
   relations: AnilistRelations;
+  nextAiringEpisode: {
+    episode: number;
+    timeUntilAiring: number;
+  } | null;
 };
 
 //page

@@ -3,6 +3,8 @@ import s from "./AnimeHeader.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
 import type { AniListMediaDetails } from "../../../../types/AniList";
 import StatusBadge from "../../../../features/components/StatusBadge/StatusBadge";
+import { airingTimeFormatter } from "../../../../helpers/airingTimeFormatter";
+import { checkEpisodes } from "../../../../helpers/checkEpisodes";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -25,7 +27,7 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
           <h1 className={s.title}>{animeTitle}</h1>
           <p className={s.meta}>
             {anime?.genres.join(", ")}
-            {` · ${anime?.episodes} episodes · `}
+            {` · ${checkEpisodes(anime?.episodes)} · `}
             {<StatusBadge status={anime.status} />}
             {` · ${anime?.startDate.year}`}
           </p>
@@ -37,6 +39,16 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
             )}
             <IconStarFilled stroke={1} size={16} />
           </div>
+          {anime?.status === "RELEASING" && (
+            <div className={s.nextAiring}>
+              <span className={s.episodeNumber}>
+                Episode {anime.nextAiringEpisode.episode}:
+              </span>
+              <span className={s.airingDate}>
+                {airingTimeFormatter(anime.nextAiringEpisode.timeUntilAiring)}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -67,6 +67,10 @@ const DETAILS_QUERY = `
           }
         }
       }
+      nextAiringEpisode {
+        episode
+        timeUntilAiring
+      }
     }
   }
 `;

@@ -4,7 +4,7 @@ export const airingTimeFormatter = (timeUntilAiring: number) => {
   const minutes = Math.floor((timeUntilAiring % 3600) / 60);
 
   if (days > 0) {
-    return `${days}d ${hours}h ${minutes}m`;
+    return `${days}d ${hours}h`;
   }
 
   if (hours > 0) {

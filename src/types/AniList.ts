@@ -36,6 +36,13 @@ type AniListNextAiringEpisode = {
   timeUntilAiring: number;
 } | null;
 
+export type AniListExternalLink = {
+  url: string | null;
+  color: string | null;
+  site: string;
+  type: "INFO" | "STREAMING" | "SOCIAL";
+};
+
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
@@ -44,6 +51,7 @@ export type AniListMediaDetails = AniListMedia & {
   relations: AniListRelations;
   nextAiringEpisode: AniListNextAiringEpisode;
   duration: number | null;
+  externalLinks: AniListExternalLink[];
 };
 
 //page

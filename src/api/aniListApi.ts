@@ -72,6 +72,12 @@ const DETAILS_QUERY = `
         timeUntilAiring
       }
       duration
+      externalLinks {
+        url
+        color
+        site
+        type
+      }
     }
   }
 `;

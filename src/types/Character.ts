@@ -11,6 +11,6 @@ type CharacterEdge = {
   node: CharacterNode;
 };
 
-export type AnilistCharacters = {
+export type AniListCharacters = {
   edges: CharacterEdge[];
 };

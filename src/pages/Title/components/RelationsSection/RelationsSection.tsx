@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import { getDisplayableRelations } from "../../../../helpers/displayableRelations";
-import type { AnilistRelations } from "../../../../types/Relation";
+import type { AniListRelations } from "../../../../types/Relation";
 import s from "./RelationsSection.module.css";
 import RelationCard from "./components/RelationCard/RelationCard";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  relations: AnilistRelations;
+  relations: AniListRelations;
 };
 
 const RelationsSection: FC<Props> = ({ relations }) => {

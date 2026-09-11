@@ -28,6 +28,6 @@ export type RelationEdge = {
   node: RelationNode;
 };
 
-export type AnilistRelations = {
+export type AniListRelations = {
   edges: RelationEdge[];
 };

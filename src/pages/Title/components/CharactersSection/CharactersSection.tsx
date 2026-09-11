@@ -1,10 +1,10 @@
 import type { FC } from "react";
-import type { AnilistCharacters } from "../../../../types/Character";
+import type { AniListCharacters } from "../../../../types/Character";
 import s from "./CharactersSection.module.css";
 import CharacterCard from "./components/CharacterCard/CharacterCard";
 
 type Props = {
-  characters: AnilistCharacters;
+  characters: AniListCharacters;
 };
 
 const CharactersSection: FC<Props> = ({ characters }) => {

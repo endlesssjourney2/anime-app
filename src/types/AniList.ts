@@ -1,5 +1,5 @@
-import type { AnilistCharacters } from "./Character";
-import type { AnilistRelations } from "./Relation";
+import type { AniListCharacters } from "./Character";
+import type { AniListRelations } from "./Relation";
 
 export type AniListTitle = {
   romaji: string;
@@ -31,16 +31,18 @@ export type AniListMedia = {
   status: AniListStatus;
 };
 
+type AniListNextAiringEpisode = {
+  episode: number;
+  timeUntilAiring: number;
+} | null;
+
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
   startDate: { year: number | null };
-  characters: AnilistCharacters;
-  relations: AnilistRelations;
-  nextAiringEpisode: {
-    episode: number;
-    timeUntilAiring: number;
-  } | null;
+  characters: AniListCharacters;
+  relations: AniListRelations;
+  nextAiringEpisode: AniListNextAiringEpisode;
   duration: number | null;
 };
 

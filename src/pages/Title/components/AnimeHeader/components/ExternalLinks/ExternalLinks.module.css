@@ -1,0 +1,32 @@
+.externalLinks {
+  padding-top: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 10px;
+  margin-bottom: auto;
+  margin-left: auto;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(129, 140, 248, 0.12);
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  transition: all 0.15s ease;
+}
+
+.linkContainer:hover {
+  background: rgba(129, 140, 248, 0.22);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+.linkIcon {
+  width: 28px;
+  height: 28px;
+}

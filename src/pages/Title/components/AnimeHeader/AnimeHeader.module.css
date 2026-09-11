@@ -17,6 +17,14 @@
   z-index: 10;
 }
 
+.imgInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .poster {
   width: 160px;
   height: 220px;
@@ -25,50 +33,8 @@
   object-fit: cover;
 }
 
-.info {
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-  padding-top: 65px;
-}
-
-.title {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: 8px;
-}
-
-.meta {
-  font-size: 16px;
-  color: var(--color-text-secondary);
-  margin-bottom: 18px;
-}
-
-.status {
-  color: var(--color-accent);
-}
-
-.score {
-  color: var(--color-accent);
-  display: flex;
-  align-items: center;
-  gap: 3.5px;
-  margin-bottom: 10px;
-}
-
-.scoreValue {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.startDate {
-  font-size: 16px;
-  color: var(--color-text-secondary);
-}
-
 .nextAiring {
+  min-width: 160px;
   display: flex;
   align-items: center;
   gap: 3px;

@@ -1,0 +1,41 @@
+.info {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  padding-top: 65px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.meta {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+  display: flex;
+  gap: 5px;
+}
+
+.episodes {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+}
+
+.score {
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 3.5px;
+  margin-bottom: 10px;
+}
+
+.scoreValue {
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -71,6 +71,7 @@ const DETAILS_QUERY = `
         episode
         timeUntilAiring
       }
+      duration
     }
   }
 `;

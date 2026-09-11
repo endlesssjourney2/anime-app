@@ -1,10 +1,8 @@
 import type { FC } from "react";
 import s from "./AnimeHeader.module.css";
-import { IconStarFilled } from "@tabler/icons-react";
 import type { AniListMediaDetails } from "../../../../types/AniList";
-import StatusBadge from "../../../../features/components/StatusBadge/StatusBadge";
 import { airingTimeFormatter } from "../../../../helpers/airingTimeFormatter";
-import { checkEpisodes } from "../../../../helpers/checkEpisodes";
+import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -17,28 +15,12 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
       <img className={s.banner} src={anime?.bannerImage} alt={animeTitle} />
 
       <div className={s.headerBlock}>
-        <img
-          className={s.poster}
-          src={anime?.coverImage.large}
-          alt={animeTitle}
-        />
-
-        <div className={s.info}>
-          <h1 className={s.title}>{animeTitle}</h1>
-          <p className={s.meta}>
-            {anime?.genres.join(", ")}
-            {` · ${checkEpisodes(anime?.episodes)} · `}
-            {<StatusBadge status={anime.status} />}
-            {` · ${anime?.startDate.year}`}
-          </p>
-          <div className={s.score}>
-            {anime?.averageScore ? (
-              <span className={s.scoreValue}>{anime.averageScore}</span>
-            ) : (
-              <span className={s.scoreValue}>N/A</span>
-            )}
-            <IconStarFilled stroke={1} size={16} />
-          </div>
+        <div className={s.imgInfo}>
+          <img
+            className={s.poster}
+            src={anime?.coverImage.large}
+            alt={animeTitle}
+          />
           {anime?.status === "RELEASING" && (
             <div className={s.nextAiring}>
               <span className={s.episodeNumber}>
@@ -50,6 +32,8 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
             </div>
           )}
         </div>
+
+        <HeaderInfo anime={anime} animeTitle={animeTitle} />
       </div>
     </>
   );

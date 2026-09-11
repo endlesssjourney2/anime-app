@@ -41,6 +41,7 @@ export type AniListMediaDetails = AniListMedia & {
     episode: number;
     timeUntilAiring: number;
   } | null;
+  duration: number | null;
 };
 
 //page

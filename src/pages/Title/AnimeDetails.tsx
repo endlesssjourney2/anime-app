@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import AnimeHeader from "./components/AnimeHeader/AnimeHeader";
 import CharactersSection from "./components/CharactersSection/CharactersSection";
 import RelationsSection from "./components/RelationsSection/RelationsSection";
+import TrailerSection from "./components/TrailerSection/TrailerSection";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -20,11 +21,12 @@ const AnimeDetails = () => {
       ) : (
         <>
           <AnimeHeader anime={anime} animeTitle={animeTitle} />
-
           <div className={s.section}>
             <p className={s.sectionTitle}>Description</p>
             <p className={s.description}>{clearDescription}</p>
           </div>
+          {anime.trailer && <TrailerSection trailer={anime.trailer} />}
+
           <CharactersSection characters={anime.characters} />
           <RelationsSection relations={anime.relations} />
         </>

@@ -1,11 +1,17 @@
-export const checkEpisodes = (episodes: number | null) => {
-  if (episodes === 1) {
-    return "1 episode";
-  }
+export const checkEpisodes = (
+  episodes: number | null,
+  duration: number | null,
+) => {
+  const episodesText =
+    episodes === null
+      ? "Episodes unknown"
+      : episodes === 1
+        ? "1 episode"
+        : `${episodes} episodes`;
 
-  if (episodes === null) {
-    return "Episodes unknown";
-  }
+  const durationText = duration === null ? null : `${duration} minutes`;
 
-  return `${episodes} episodes`;
+  if (!durationText) return episodesText;
+
+  return `${episodesText} / ${durationText}`;
 };

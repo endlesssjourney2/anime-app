@@ -43,6 +43,12 @@ export type AniListExternalLink = {
   type: "INFO" | "STREAMING" | "SOCIAL";
 };
 
+export type AniListTrailer = {
+  site: string | null;
+  id: string | null;
+  thumbnail: string | null;
+};
+
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
@@ -52,6 +58,7 @@ export type AniListMediaDetails = AniListMedia & {
   nextAiringEpisode: AniListNextAiringEpisode;
   duration: number | null;
   externalLinks: AniListExternalLink[];
+  trailer: AniListTrailer;
 };
 
 //page

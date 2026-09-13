@@ -78,6 +78,11 @@ const DETAILS_QUERY = `
         site
         type
       }
+      trailer {
+        site
+        id
+        thumbnail
+      }
     }
   }
 `;

@@ -21,7 +21,7 @@ const HeaderInfo: FC<Props> = ({ anime, animeTitle }) => {
       </div>
       <div className={s.episodes}>
         <span className={s.episodeValue}>
-          {checkEpisodes(anime?.episodes)} / {anime?.duration} minutes
+          {checkEpisodes(anime.episodes, anime.duration)}
         </span>
       </div>
       <div className={s.score}>

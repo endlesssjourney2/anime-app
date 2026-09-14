@@ -12,8 +12,10 @@ const CharacterCard: FC<Props> = ({ role, name, image }) => {
   return (
     <div className={s.item}>
       <img className={s.image} src={image} alt={name} />
-      <p className={s.name}>{name}</p>
-      <p className={`${s.role} ${s[role]}`}>{role}</p>
+      <div className={s.info}>
+        <p className={s.name}>{name}</p>
+        <p className={`${s.role} ${s[role]}`}>{role}</p>
+      </div>
     </div>
   );
 };

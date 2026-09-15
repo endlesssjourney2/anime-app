@@ -3,6 +3,7 @@ import useAnimeSearch from "../../hooks/useAnimeSearch";
 import s from "./Main.module.css";
 import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
 import AnimeItem from "./components/AnimeItem/AnimeItem";
+import SearchControls from "./components/SearchControls/SearchControls";
 
 const Main = () => {
   const {
@@ -13,6 +14,8 @@ const Main = () => {
     page,
     setPage,
     loading,
+    sort,
+    setSort,
   } = useAnimeSearch(15);
 
   const navigate = useNavigate();
@@ -22,15 +25,13 @@ const Main = () => {
       <div className={s.header}>
         <h2 className={s.headerTitle}>Search anime here</h2>
       </div>
-      <div className={s.searchContainer}>
-        <input
-          className={s.searchInput}
-          type="text"
-          value={searchItem}
-          onChange={(e) => setSearchItem(e.target.value)}
-          placeholder="Search anime..."
-        />
-      </div>
+      <SearchControls
+        searchItem={searchItem}
+        setSearchItem={setSearchItem}
+        sort={sort}
+        setSort={setSort}
+        loading={loading}
+      />
       {loading ? (
         <LoadingComponent />
       ) : (
@@ -50,7 +51,7 @@ const Main = () => {
             <button
               className={s.btn}
               onClick={() => setPage(page - 1)}
-              disabled={page === 1}
+              disabled={page === 1 || loading}
             >
               Prev
             </button>
@@ -60,7 +61,7 @@ const Main = () => {
             <button
               className={s.btn}
               onClick={() => setPage(page + 1)}
-              disabled={!pageInfo?.hasNextPage}
+              disabled={!pageInfo?.hasNextPage || loading}
             >
               Next
             </button>

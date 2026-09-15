@@ -92,7 +92,7 @@ export const searchAnime = async (
   search = "",
   page = 1,
   perPage = 10,
-  sort: string[] = ["SCORE_DESC"],
+  sort: string[] = [""],
 ): Promise<{ media: AniListMedia[]; pageInfo: AniListPageInfo }> => {
   const response = await axios.post<SearchResponse>(
     ANILIST_URL,

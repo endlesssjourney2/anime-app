@@ -23,6 +23,7 @@ const HeaderInfo: FC<Props> = ({ anime, animeTitle }) => {
         <span className={s.episodeValue}>
           {checkEpisodes(anime.episodes, anime.duration)}
         </span>
+        <span className={s.format}>{anime.format}</span>
       </div>
       <div className={s.score}>
         {anime?.averageScore ? (

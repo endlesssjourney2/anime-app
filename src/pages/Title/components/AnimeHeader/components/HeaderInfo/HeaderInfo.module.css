@@ -25,6 +25,13 @@
   font-size: 16px;
   color: var(--color-text-secondary);
   margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.format {
+  color: var(--color-accent);
 }
 
 .score {

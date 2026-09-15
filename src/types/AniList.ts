@@ -59,6 +59,7 @@ export type AniListMediaDetails = AniListMedia & {
   duration: number | null;
   externalLinks: AniListExternalLink[];
   trailer: AniListTrailer;
+  format: string;
 };
 
 //page

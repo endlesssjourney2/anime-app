@@ -45,6 +45,7 @@ const DETAILS_QUERY = `
       episodes
       status
       genres
+      format
       startDate {year}
       characters(sort: FAVOURITES_DESC, perPage: 8) {
         edges {

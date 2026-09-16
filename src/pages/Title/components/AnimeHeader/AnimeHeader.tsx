@@ -4,6 +4,7 @@ import type { AniListMediaDetails } from "../../../../types/AniList";
 import { airingTimeFormatter } from "../../../../helpers/airingTimeFormatter";
 import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
 import ExternalLinks from "./components/ExternalLinks/ExternalLinks";
+import BackButton from "./components/BackButton/BackButton";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -17,7 +18,10 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
 
   return (
     <>
-      <img className={s.banner} src={anime?.bannerImage} alt={animeTitle} />
+      <div className={s.bannerWrapper}>
+        <img className={s.banner} src={anime?.bannerImage} alt={animeTitle} />
+        <BackButton />
+      </div>
 
       <div className={s.headerBlock}>
         <div className={s.imgInfo}>

@@ -21,14 +21,20 @@ const AnimeDetails = () => {
       ) : (
         <>
           <AnimeHeader anime={anime} animeTitle={animeTitle} />
-          <div className={s.section}>
-            <p className={s.sectionTitle}>Description</p>
-            <p className={s.description}>{clearDescription}</p>
-          </div>
+          {clearDescription && (
+            <div className={s.section}>
+              <p className={s.sectionTitle}>Description</p>
+              <p className={s.description}>{clearDescription}</p>
+            </div>
+          )}
           {anime.trailer && <TrailerSection trailer={anime.trailer} />}
 
-          <CharactersSection characters={anime.characters} />
-          <RelationsSection relations={anime.relations} />
+          {anime.characters.edges.length > 0 && (
+            <CharactersSection characters={anime.characters} />
+          )}
+          {anime.relations.edges.length > 0 && (
+            <RelationsSection relations={anime.relations} />
+          )}
         </>
       )}
     </div>

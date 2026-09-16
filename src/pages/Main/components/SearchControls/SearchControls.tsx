@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import s from "./SearchAnime.module.css";
+import s from "./SearchControls.module.css";
 import type { AniListSort } from "../../../../types/AniListSort";
 
 type Props = {

@@ -12,6 +12,6 @@
 .charactersList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px 18px;
+  gap: 10px 12px;
   overflow: hidden;
 }

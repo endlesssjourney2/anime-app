@@ -29,11 +29,11 @@ const AnimeDetails = () => {
           )}
           {anime.trailer && <TrailerSection trailer={anime.trailer} />}
 
-          {anime.characters.edges.length > 0 && (
-            <CharactersSection characters={anime.characters} />
-          )}
           {anime.relations.edges.length > 0 && (
             <RelationsSection relations={anime.relations} />
+          )}
+          {anime.characters.edges.length > 0 && (
+            <CharactersSection characters={anime.characters} />
           )}
         </>
       )}

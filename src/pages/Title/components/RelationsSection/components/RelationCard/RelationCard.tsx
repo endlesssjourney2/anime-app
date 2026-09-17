@@ -31,10 +31,12 @@ const RelationCard: FC<Props> = ({ relationType, title, image, onClick }) => {
   return (
     <div className={s.item}>
       <img className={s.image} src={image} alt={title} onClick={onClick} />
-      <p className={s.title}>{title}</p>
-      <p className={`${s.relationType} ${s[relationType]}`}>
-        {RELATION_LABELS[relationType]}
-      </p>
+      <div className={s.info}>
+        <p className={s.title}>{title}</p>
+        <p className={`${s.relationType} ${s[relationType]}`}>
+          {RELATION_LABELS[relationType]}
+        </p>
+      </div>
     </div>
   );
 };

@@ -65,6 +65,9 @@ const DETAILS_QUERY = `
           title { romaji english }
           coverImage { large }
           type
+          format
+          status
+          episodes
           }
         }
       }

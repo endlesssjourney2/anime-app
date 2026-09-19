@@ -1,14 +1,22 @@
 .item {
+  margin-top: 2px;
   display: flex;
-  height: 110px;
+  height: 150px;
   background: var(--color-card);
-  border-bottom: 1px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.item:hover {
+  background: var(--color-card-hover);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 .image {
-  width: 75px;
+  width: 100px;
   height: 100%;
   flex-shrink: 0;
   object-fit: cover;
@@ -17,34 +25,100 @@
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex: 1;
   min-width: 0;
-  padding: 4px 8px;
+  padding: 9px 10px;
 }
 
-.name {
-  font-size: 15px;
+.header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.nameFull {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: var(--font-heading);
   color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.nameNative {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mid {
+  margin-top: 10px;
+}
+
 .role {
   font-size: 12px;
-  color: var(--color-text-secondary);
-  margin: 0;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  line-height: 1;
+  border: 1px solid;
 }
 
 .MAIN {
   color: var(--color-role-main);
+  background: var(--color-role-main-bg);
+  border-color: var(--color-role-main-border);
 }
 
 .SUPPORTING {
   color: var(--color-role-supporting);
+  background: var(--color-role-supporting-bg);
+  border-color: var(--color-role-supporting-border);
 }
 
 .BACKGROUND {
   color: var(--color-role-background);
+  background: var(--color-role-background-bg);
+  border-color: var(--color-role-background-border);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.metaItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5px;
+  padding: 4px 8px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.age {
+  color: var(--color-meta-age-text);
+  background: var(--color-meta-age-bg);
+  border-color: var(--color-meta-age-border);
+}
+
+.birthday {
+  color: var(--color-meta-birthday-text);
+  background: var(--color-meta-birthday-bg);
+  border-color: var(--color-meta-birthday-border);
+}
+
+.gender {
+  color: var(--color-meta-gender-text);
+  background: var(--color-meta-gender-bg);
+  border-color: var(--color-meta-gender-border);
 }

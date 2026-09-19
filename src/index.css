@@ -35,6 +35,8 @@ ul {
   /* rating */
   --color-score: #a3c5dd;
   --color-rating-star: #f2c75c;
+  --color-score-bg: #202735;
+  --color-score-border: #38445c;
 
   /* border colors */
   --color-border: #343b50;

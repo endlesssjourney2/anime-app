@@ -25,6 +25,10 @@ const RelationsSection: FC<Props> = ({ relations }) => {
             }
             image={r.node.coverImage.large}
             relationType={r.relationType}
+            episodes={r.node.episodes}
+            format={r.node.format}
+            status={r.node.status}
+            averageScore={r.node.averageScore}
           />
         ))}
       </div>

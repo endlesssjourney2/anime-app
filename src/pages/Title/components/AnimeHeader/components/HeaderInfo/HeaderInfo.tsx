@@ -3,7 +3,7 @@ import StatusBadge from "../../../../../../features/components/StatusBadge/Statu
 import type { AniListMediaDetails } from "../../../../../../types/AniList";
 import s from "./HeaderInfo.module.css";
 import { checkEpisodes } from "../../../../../../helpers/checkEpisodes";
-import { IconStarFilled } from "@tabler/icons-react";
+import ScoreBadge from "../../../../../../features/components/ScoreBadge/ScoreBadge";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -25,14 +25,7 @@ const HeaderInfo: FC<Props> = ({ anime, animeTitle }) => {
         </span>
         <span className={s.format}>{anime.format}</span>
       </div>
-      <div className={s.score}>
-        {anime?.averageScore ? (
-          <span className={s.scoreValue}>{anime.averageScore}</span>
-        ) : (
-          <span className={s.scoreValue}>N/A</span>
-        )}
-        <IconStarFilled stroke={1} size={16} />
-      </div>
+      <ScoreBadge score={anime.averageScore} />
     </div>
   );
 };

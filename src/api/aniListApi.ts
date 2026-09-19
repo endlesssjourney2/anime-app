@@ -68,6 +68,7 @@ const DETAILS_QUERY = `
           format
           status
           episodes
+          averageScore
           }
         }
       }

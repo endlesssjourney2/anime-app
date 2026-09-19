@@ -24,6 +24,7 @@ type RelationNode = {
   format: string;
   status: AniListStatus;
   episodes: number | null;
+  averageScore: number | null;
 };
 
 export type RelationEdge = {

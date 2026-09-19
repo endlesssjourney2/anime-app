@@ -1,20 +1,23 @@
 .item {
+  margin-top: 2px;
   display: flex;
   height: 150px;
   background: var(--color-card);
-  border-bottom: 1px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .item:hover {
+  background: var(--color-card-hover);
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
 
 .image {
-  width: 110px;
+  width: 120px;
   height: 100%;
   flex-shrink: 0;
   object-fit: cover;
@@ -23,25 +26,56 @@
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex: 1;
   min-width: 0;
-  padding: 4px 8px;
+  padding: 9px 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5px;
 }
 
 .title {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-heading);
   color: var(--color-text-primary);
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.metaItem {
+  padding: 4px 8px;
+  background: var(--color-btn-bg);
+  border: 1px solid var(--color-btn-border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-meta);
 }
 
 .relationType {
+  width: fit-content;
+  letter-spacing: 1.15px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--color-accent);
+  margin-top: auto;
 }
 
 .PREQUEL,

@@ -52,8 +52,14 @@ const DETAILS_QUERY = `
           role
           node {
             id
-            name{full}
+            name{full, native}
             image{large}
+            gender
+            dateOfBirth {
+              month
+              day
+            }
+            age
           }
         }
       }

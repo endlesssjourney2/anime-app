@@ -15,8 +15,11 @@ const CharactersSection: FC<Props> = ({ characters }) => {
         {characters.edges.map((c) => (
           <CharacterCard
             image={c.node.image.large}
-            name={c.node.name.full}
+            name={c.node.name}
             role={c.role}
+            dateOfBirth={c.node.dateOfBirth}
+            age={c.node.age}
+            gender={c.node.gender}
           />
         ))}
       </div>

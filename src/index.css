@@ -70,10 +70,31 @@ ul {
   --color-status-cancelled: #dc6477;
   --color-status-hiatus: #8993ad;
 
+  /* character meta */
+  --color-meta-age-bg: #202735;
+  --color-meta-age-border: #38445c;
+  --color-meta-age-text: #a8b2c7;
+
+  --color-meta-birthday-bg: #1d2a45;
+  --color-meta-birthday-border: #36568a;
+  --color-meta-birthday-text: #93b3f3;
+
+  --color-meta-gender-bg: #29223b;
+  --color-meta-gender-border: #554474;
+  --color-meta-gender-text: #bba0e8;
+
   /* role colors */
   --color-role-main: #e0b45f;
+  --color-role-main-bg: #2b2619;
+  --color-role-main-border: #6a5528;
+
   --color-role-supporting: #6f91e8;
+  --color-role-supporting-bg: #1d2942;
+  --color-role-supporting-border: #3d568c;
+
   --color-role-background: #8993a8;
+  --color-role-background-bg: #242a35;
+  --color-role-background-border: #454e60;
 
   /* relation colors */
   --color-relation-main: #e0b45f;

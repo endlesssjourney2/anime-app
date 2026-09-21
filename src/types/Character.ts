@@ -3,13 +3,13 @@ type CharacterNode = {
   name: { full: string | null; native: string | null };
   image: { large: string };
   dateOfBirth: DateOfBirth;
-  age: string;
-  gender: string;
+  age: string | null;
+  gender: string | null;
 };
 
 export type DateOfBirth = {
-  month: number;
-  day: number;
+  month: number | null;
+  day: number | null;
 };
 
 export type CharacterRole = "MAIN" | "SUPPORTING" | "BACKGROUND";

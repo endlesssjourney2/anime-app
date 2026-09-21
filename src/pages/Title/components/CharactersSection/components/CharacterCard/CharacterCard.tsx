@@ -3,6 +3,7 @@ import {
   IconGenderMale,
   IconGift,
   IconHourglass,
+  IconQuestionMark,
 } from "@tabler/icons-react";
 import { checkBirthday } from "../../../../../../helpers/checkBirthday";
 import type {
@@ -17,8 +18,8 @@ type Props = {
   name: { full: string; native: string };
   role: CharacterRole;
   dateOfBirth: DateOfBirth;
-  age: string;
-  gender: string;
+  age: string | null;
+  gender: string | null;
 };
 
 const CharacterCard: FC<Props> = ({
@@ -57,8 +58,12 @@ const CharacterCard: FC<Props> = ({
             {checkBirthday(dateOfBirth.day, dateOfBirth.month)}
           </span>
           <span className={`${s.metaItem} ${s.gender}`}>
-            <GenderIcon size={13} />
-            {gender}
+            {GenderIcon ? (
+              <GenderIcon size={13} />
+            ) : (
+              <IconQuestionMark size={13} />
+            )}
+            {gender ?? "Unknown"}
           </span>
         </div>
       </div>

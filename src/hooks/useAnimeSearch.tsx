@@ -41,7 +41,7 @@ const useAnimeSearch = (perPage: number) => {
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearchItem, page]);
+  }, [debouncedSearchItem, sort]);
 
   return {
     searchItem,

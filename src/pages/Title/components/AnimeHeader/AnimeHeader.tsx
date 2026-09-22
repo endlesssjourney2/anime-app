@@ -33,7 +33,7 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
           {anime?.status === "RELEASING" && (
             <div className={s.nextAiring}>
               <span className={s.episodeNumber}>
-                Episode {anime.nextAiringEpisode.episode}:
+                Episode {anime.nextAiringEpisode?.episode}:
               </span>
               <span className={s.airingDate}>{timeUntilAiring}</span>
             </div>

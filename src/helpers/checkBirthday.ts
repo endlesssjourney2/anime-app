@@ -5,5 +5,5 @@ export const checkBirthday = (day: number | null, month: number | null) => {
 
   return dayjs(day)
     .month(month - 1)
-    .format("MMMM D");
+    .format("MMM D");
 };

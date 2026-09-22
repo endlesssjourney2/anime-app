@@ -19,6 +19,15 @@ export type AniListStatus =
   | "CANCELLED"
   | "HIATUS";
 
+export type AniListFormat =
+  | "TV"
+  | "TV_SHORT"
+  | "MOVIE"
+  | "SPECIAL"
+  | "OVA"
+  | "ONA"
+  | "MUSIC";
+
 // fields for card
 export type AniListMedia = {
   id: number;
@@ -59,7 +68,7 @@ export type AniListMediaDetails = AniListMedia & {
   duration: number | null;
   externalLinks: AniListExternalLink[];
   trailer: AniListTrailer;
-  format: string;
+  format: AniListFormat;
 };
 
 //page

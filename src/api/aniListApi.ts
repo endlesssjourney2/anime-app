@@ -1,8 +1,10 @@
 import axios from "axios";
 import type {
+  AniListFormat,
   AniListMedia,
   AniListMediaDetails,
   AniListPageInfo,
+  AniListStatus,
   DetailsResponse,
   SearchResponse,
 } from "../types/AniList";
@@ -12,7 +14,8 @@ const ANILIST_URL = "https://graphql.anilist.co";
 //GraphQL
 
 const SEARCH_QUERY = `
-  query ($search: String, $page: Int, $perPage: Int, $sort: [MediaSort]) {
+  query ($search: String, $page: Int, $perPage: Int, $sort: [MediaSort], $format: MediaFormat
+  $status: MediaStatus) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
         total
@@ -20,7 +23,7 @@ const SEARCH_QUERY = `
         lastPage
         hasNextPage
       }
-      media(search: $search, type: ANIME, sort: $sort) {
+      media(search: $search, type: ANIME, sort: $sort, format: $format, status: $status) {
         id
         title { romaji english native }
         coverImage { large medium }
@@ -102,13 +105,22 @@ export const searchAnime = async (
   search = "",
   page = 1,
   perPage = 10,
-  sort: string[] = [""],
+  sort: string[] = [],
+  format: AniListFormat | null,
+  status: AniListStatus | null,
 ): Promise<{ media: AniListMedia[]; pageInfo: AniListPageInfo }> => {
   const response = await axios.post<SearchResponse>(
     ANILIST_URL,
     {
       query: SEARCH_QUERY,
-      variables: { search: search || undefined, page, perPage, sort },
+      variables: {
+        search: search || undefined,
+        page,
+        perPage,
+        sort,
+        format: format || undefined,
+        status: status || undefined,
+      },
     },
     { headers: { "Content-Type": "application/json" } },
   );

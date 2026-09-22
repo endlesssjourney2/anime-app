@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { searchAnime } from "../api/aniListApi";
 import useDebounce from "./useDebounce";
-import type { AniListMedia, AniListPageInfo } from "../types/AniList";
+import type {
+  AniListFormat,
+  AniListMedia,
+  AniListPageInfo,
+  AniListStatus,
+} from "../types/AniList";
 import type { AniListSort } from "../types/AniListSort";
 import { useSearchParams } from "react-router-dom";
 
@@ -22,11 +27,37 @@ const useAnimeSearch = (perPage: number) => {
     });
   };
 
+  const format = searchParams.get("format") as AniListFormat | null;
+  const setFormat = (value: AniListFormat | null) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (value === null) {
+        next.delete("format");
+      } else {
+        next.set("format", value);
+      }
+      return next;
+    });
+  };
+
+  const status = searchParams.get("status") as AniListStatus | null;
+  const setStatus = (value: AniListStatus | null) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (value === null) {
+        next.delete("status");
+      } else {
+        next.set("status", value);
+      }
+      return next;
+    });
+  };
+
   const debouncedSearchItem = useDebounce(searchItem, 500);
 
   useEffect(() => {
     setLoading(true);
-    searchAnime(debouncedSearchItem, page, perPage, [sort])
+    searchAnime(debouncedSearchItem, page, perPage, [sort], format, status)
       .then((result) => {
         setResults(result.media);
         setPageInfo(result.pageInfo);
@@ -37,11 +68,11 @@ const useAnimeSearch = (perPage: number) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [debouncedSearchItem, page, sort]);
+  }, [debouncedSearchItem, page, sort, status, format]);
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearchItem, sort]);
+  }, [debouncedSearchItem, sort, status, format]);
 
   return {
     searchItem,
@@ -53,6 +84,10 @@ const useAnimeSearch = (perPage: number) => {
     loading,
     sort,
     setSort,
+    format,
+    setFormat,
+    status,
+    setStatus,
   };
 };
 

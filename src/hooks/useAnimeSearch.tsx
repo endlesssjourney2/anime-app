@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { searchAnime } from "../api/aniListApi";
 import useDebounce from "./useDebounce";
 import type {
@@ -27,27 +27,44 @@ const useAnimeSearch = (perPage: number) => {
     });
   };
 
-  const format = searchParams.get("format") as AniListFormat | null;
-  const setFormat = (value: AniListFormat | null) => {
+  const formats = useMemo(
+    () => searchParams.getAll("format") as AniListFormat[],
+    [searchParams],
+  );
+  const setFormats = (value: AniListFormat) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
-      if (value === null) {
+      const current = next.getAll("format");
+
+      if (current.includes(value)) {
         next.delete("format");
+        current
+          .filter((v) => v !== value)
+          .forEach((v) => next.append("format", v));
       } else {
-        next.set("format", value);
+        next.append("format", value);
       }
+
       return next;
     });
   };
 
-  const status = searchParams.get("status") as AniListStatus | null;
-  const setStatus = (value: AniListStatus | null) => {
+  const statuses = useMemo(
+    () => searchParams.getAll("status") as AniListStatus[],
+    [searchParams],
+  );
+  const setStatuses = (value: AniListStatus) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
-      if (value === null) {
+      const current = next.getAll("status");
+
+      if (current.includes(value)) {
         next.delete("status");
+        current
+          .filter((v) => v !== value)
+          .forEach((v) => next.append("status", v));
       } else {
-        next.set("status", value);
+        next.append("status", value);
       }
       return next;
     });
@@ -57,7 +74,7 @@ const useAnimeSearch = (perPage: number) => {
 
   useEffect(() => {
     setLoading(true);
-    searchAnime(debouncedSearchItem, page, perPage, [sort], format, status)
+    searchAnime(debouncedSearchItem, page, perPage, [sort], formats, statuses)
       .then((result) => {
         setResults(result.media);
         setPageInfo(result.pageInfo);
@@ -68,11 +85,11 @@ const useAnimeSearch = (perPage: number) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [debouncedSearchItem, page, sort, status, format]);
+  }, [debouncedSearchItem, page, sort, statuses, formats]);
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearchItem, sort, status, format]);
+  }, [debouncedSearchItem, sort, statuses, formats]);
 
   return {
     searchItem,
@@ -84,10 +101,10 @@ const useAnimeSearch = (perPage: number) => {
     loading,
     sort,
     setSort,
-    format,
-    setFormat,
-    status,
-    setStatus,
+    formats,
+    setFormats,
+    statuses,
+    setStatuses,
   };
 };
 

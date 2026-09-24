@@ -16,10 +16,10 @@ const Main = () => {
     loading,
     sort,
     setSort,
-    format,
-    setFormat,
-    status,
-    setStatus,
+    formats,
+    setFormats,
+    statuses,
+    setStatuses,
   } = useAnimeSearch(15);
 
   const navigate = useNavigate();
@@ -34,10 +34,10 @@ const Main = () => {
         setSearchItem={setSearchItem}
         sort={sort}
         setSort={setSort}
-        format={format}
-        setFormat={setFormat}
-        status={status}
-        setStatus={setStatus}
+        formats={formats}
+        setFormats={setFormats}
+        statuses={statuses}
+        setStatuses={setStatuses}
         loading={loading}
       />
       {loading ? (

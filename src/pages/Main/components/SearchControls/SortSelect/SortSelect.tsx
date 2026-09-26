@@ -20,12 +20,12 @@ const SortSelect: FC<Props> = ({ sort, setSort }) => {
         <button className={s.trigger}>
           <Select.Value placeholder="Sort by" />
           <Select.Icon>
-            <IconChevronDown size={14} />
+            <IconChevronDown size={14} className={s.icon} />
           </Select.Icon>
         </button>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className={s.content} position="popper">
+        <Select.Content className={s.content} position="popper" align="center">
           <Select.Viewport>
             <Select.Group className={s.group}>
               <Select.Label className={s.label}>Sort by</Select.Label>
@@ -33,7 +33,7 @@ const SortSelect: FC<Props> = ({ sort, setSort }) => {
                 <Select.Item key={so.value} className={s.item} value={so.value}>
                   <Select.ItemText>{so.label}</Select.ItemText>
                   <Select.ItemIndicator className={s.indicator}>
-                    <IconCheck size={14} />
+                    <IconCheck size={15} color={"var(--color-accent)"} />
                   </Select.ItemIndicator>
                 </Select.Item>
               ))}

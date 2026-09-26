@@ -4,6 +4,7 @@ import type { AniListMediaDetails } from "../../../../../../types/AniList";
 import s from "./HeaderInfo.module.css";
 import { checkEpisodes } from "../../../../../../helpers/checkEpisodes";
 import ScoreBadge from "../../../../../../features/components/ScoreBadge/ScoreBadge";
+import FormatBadge from "../../../../../../features/components/FormatBadge/FormatBadge";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -23,7 +24,7 @@ const HeaderInfo: FC<Props> = ({ anime, animeTitle }) => {
         <span className={s.episodeValue}>
           {checkEpisodes(anime.episodes, anime.duration)}
         </span>
-        <span className={s.format}>{anime.format}</span>
+        <FormatBadge format={anime.format} />
       </div>
       <ScoreBadge score={anime.averageScore} />
     </div>

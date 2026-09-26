@@ -29,7 +29,3 @@
   align-items: center;
   gap: 10px;
 }
-
-.format {
-  color: var(--color-accent);
-}

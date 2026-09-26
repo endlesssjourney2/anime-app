@@ -14,7 +14,7 @@ export const FORMAT_OPTIONS: { value: AniListFormat; label: string }[] = [
 export const STATUS_OPTIONS: { value: AniListStatus; label: string }[] = [
   { value: "FINISHED", label: "Finished" },
   { value: "RELEASING", label: "Releasing" },
-  { value: "NOT_YET_RELEASED", label: "Not yet released" },
+  { value: "NOT_YET_RELEASED", label: "Upcoming" },
   { value: "CANCELLED", label: "Cancelled" },
   { value: "HIATUS", label: "Hiatus" },
 ];

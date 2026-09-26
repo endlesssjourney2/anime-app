@@ -61,6 +61,7 @@
 .indicator {
   width: 14px;
   height: 14px;
+  color: var(--color-accent);
 }
 
 .item[data-highlighted] {

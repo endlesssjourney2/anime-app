@@ -33,7 +33,7 @@ const SortSelect: FC<Props> = ({ sort, setSort }) => {
                 <Select.Item key={so.value} className={s.item} value={so.value}>
                   <Select.ItemText>{so.label}</Select.ItemText>
                   <Select.ItemIndicator className={s.indicator}>
-                    <IconCheck size={15} color={"var(--color-accent)"} />
+                    <IconCheck size={15} />
                   </Select.ItemIndicator>
                 </Select.Item>
               ))}

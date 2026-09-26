@@ -33,7 +33,7 @@ const FiltersMenu: FC<Props> = ({
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className={s.content} align="start">
+        <DropdownMenu.Content className={s.content} align="center">
           <div className={s.columns}>
             <DropdownMenu.Group className={s.column}>
               <DropdownMenu.Label className={s.label}>
@@ -49,7 +49,7 @@ const FiltersMenu: FC<Props> = ({
                 >
                   <div className={s.indicator}>
                     <DropdownMenu.ItemIndicator>
-                      <IconCheck size={14} />
+                      <IconCheck size={15} color={"var(--color-accent)"} />
                     </DropdownMenu.ItemIndicator>
                   </div>
                   {f.label}

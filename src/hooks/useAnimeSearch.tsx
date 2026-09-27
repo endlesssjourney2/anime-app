@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { searchAnime } from "../api/aniListApi";
 import useDebounce from "./useDebounce";
 import type {
@@ -9,6 +9,7 @@ import type {
 } from "../types/AniList";
 import type { AniListSort } from "../types/AniListSort";
 import { useSearchParams } from "react-router-dom";
+import useSortOptions from "./useSortOptions";
 
 const useAnimeSearch = (perPage: number) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +18,10 @@ const useAnimeSearch = (perPage: number) => {
   const [pageInfo, setPageInfo] = useState<AniListPageInfo | null>(null);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { selected: formats, toggle: setFormats } =
+    useSortOptions<AniListFormat>("format");
+  const { selected: statuses, toggle: setStatuses } =
+    useSortOptions<AniListStatus>("status");
 
   const sort = (searchParams.get("sort") as AniListSort) ?? "SCORE_DESC";
   const setSort = (value: AniListSort) => {
@@ -27,55 +32,14 @@ const useAnimeSearch = (perPage: number) => {
     });
   };
 
-  const formats = useMemo(
-    () => searchParams.getAll("format") as AniListFormat[],
-    [searchParams],
-  );
-  const setFormats = (value: AniListFormat) => {
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      const current = next.getAll("format");
-
-      if (current.includes(value)) {
-        next.delete("format");
-        current
-          .filter((v) => v !== value)
-          .forEach((v) => next.append("format", v));
-      } else {
-        next.append("format", value);
-      }
-
-      return next;
-    });
-  };
-
-  const statuses = useMemo(
-    () => searchParams.getAll("status") as AniListStatus[],
-    [searchParams],
-  );
-  const setStatuses = (value: AniListStatus) => {
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      const current = next.getAll("status");
-
-      if (current.includes(value)) {
-        next.delete("status");
-        current
-          .filter((v) => v !== value)
-          .forEach((v) => next.append("status", v));
-      } else {
-        next.append("status", value);
-      }
-      return next;
-    });
-  };
-
   const debouncedSearchItem = useDebounce(searchItem, 500);
 
   useEffect(() => {
+    let cancelled = false;
     setLoading(true);
     searchAnime(debouncedSearchItem, page, perPage, [sort], formats, statuses)
       .then((result) => {
+        if (cancelled) return;
         setResults(result.media);
         setPageInfo(result.pageInfo);
       })
@@ -83,8 +47,14 @@ const useAnimeSearch = (perPage: number) => {
         console.log(err);
       })
       .finally(() => {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, [debouncedSearchItem, page, sort, statuses, formats]);
 
   useEffect(() => {

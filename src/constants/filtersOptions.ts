@@ -11,6 +11,16 @@ export const FORMAT_OPTIONS: { value: AniListFormat; label: string }[] = [
   { value: "MUSIC", label: "Music" },
 ];
 
+export const FORMAT_LABELS: Record<AniListFormat, string> = {
+  TV: "TV",
+  MOVIE: "Movie",
+  OVA: "OVA",
+  ONA: "ONA",
+  TV_SHORT: "TV short",
+  SPECIAL: "Special",
+  MUSIC: "Music",
+};
+
 export const STATUS_OPTIONS: { value: AniListStatus; label: string }[] = [
   { value: "FINISHED", label: "Finished" },
   { value: "RELEASING", label: "Releasing" },
@@ -18,6 +28,14 @@ export const STATUS_OPTIONS: { value: AniListStatus; label: string }[] = [
   { value: "CANCELLED", label: "Cancelled" },
   { value: "HIATUS", label: "Hiatus" },
 ];
+
+export const STATUS_LABELS: Record<AniListStatus, string> = {
+  FINISHED: "Finished",
+  RELEASING: "Releasing",
+  NOT_YET_RELEASED: "Upcoming",
+  CANCELLED: "Cancelled",
+  HIATUS: "Hiatus",
+};
 
 export const SORT_OPTIONS: { value: AniListSort; label: string }[] = [
   { value: "SCORE_DESC", label: "Score" },

@@ -1,19 +1,10 @@
 import s from "./FormatBadge.module.css";
 import type { FC } from "react";
 import type { AniListFormat } from "../../../types/AniList";
+import { FORMAT_LABELS } from "../../../constants/filtersOptions";
 
 type Props = {
   format: AniListFormat;
-};
-
-const FORMAT_LABELS: Record<AniListFormat, string> = {
-  TV: "TV",
-  MOVIE: "Movie",
-  OVA: "OVA",
-  ONA: "ONA",
-  TV_SHORT: "TV short",
-  SPECIAL: "Special",
-  MUSIC: "Music",
 };
 
 const FormatBadge: FC<Props> = ({ format }) => {

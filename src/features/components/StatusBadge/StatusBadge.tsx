@@ -1,17 +1,10 @@
 import type { FC } from "react";
 import type { AniListStatus } from "../../../types/AniList";
 import s from "./StatusBadge.module.css";
+import { STATUS_LABELS } from "../../../constants/filtersOptions";
 
 type Props = {
   status: AniListStatus;
-};
-
-const STATUS_LABELS: Record<AniListStatus, string> = {
-  FINISHED: "Finished",
-  RELEASING: "Releasing",
-  NOT_YET_RELEASED: "Upcoming",
-  CANCELLED: "Cancelled",
-  HIATUS: "Hiatus",
 };
 
 const StatusBadge: FC<Props> = ({ status }) => {

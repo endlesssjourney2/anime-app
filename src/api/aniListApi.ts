@@ -50,7 +50,7 @@ const DETAILS_QUERY = `
       genres
       format
       startDate {year}
-      characters(sort: FAVOURITES_DESC, perPage: 8) {
+      characters(sort: ROLE, perPage: 9) {
         edges {
           role
           node {

@@ -2,8 +2,12 @@ import type { FC } from "react";
 import s from "./SearchControls.module.css";
 import type { AniListSort } from "../../../../types/AniListSort";
 import type { AniListFormat, AniListStatus } from "../../../../types/AniList";
-import FiltersMenu from "./FiltersMenu/FiltersMenu";
 import SortSelect from "./SortSelect/SortSelect";
+import MultiSelect from "../MultiSelect/MultiSelect";
+import {
+  FORMAT_OPTIONS,
+  STATUS_OPTIONS,
+} from "../../../../constants/filtersOptions";
 
 type Props = {
   searchItem: string;
@@ -38,12 +42,21 @@ const SearchControls: FC<Props> = ({
         onChange={(e) => setSearchItem(e.target.value)}
         placeholder="Search anime..."
       />
-      <FiltersMenu
-        statuses={statuses}
-        setStatuses={setStatuses}
-        formats={formats}
-        setFormats={setFormats}
-      />
+
+      <div className={s.multiSelectsContainer}>
+        <MultiSelect
+          label="Statuses"
+          options={STATUS_OPTIONS}
+          selected={statuses}
+          setSelected={setStatuses}
+        />
+        <MultiSelect
+          label="Formats"
+          options={FORMAT_OPTIONS}
+          selected={formats}
+          setSelected={setFormats}
+        />
+      </div>
       <SortSelect sort={sort} setSort={setSort} />
     </div>
   );

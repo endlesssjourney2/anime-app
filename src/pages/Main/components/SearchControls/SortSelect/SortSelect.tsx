@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { AniListSort } from "../../../../../types/AniListSort";
 import * as Select from "@radix-ui/react-select";
 import s from "./SortSelect.module.css";
-import { IconCheck, IconChevronDown } from "@tabler/icons-react";
+import { IconCheck, IconMenu2 } from "@tabler/icons-react";
 import { SORT_OPTIONS } from "../../../../../constants/filtersOptions";
 
 type Props = {
@@ -18,9 +18,8 @@ const SortSelect: FC<Props> = ({ sort, setSort }) => {
     >
       <Select.Trigger asChild>
         <button className={s.trigger}>
-          <Select.Value placeholder="Sort by" />
-          <Select.Icon>
-            <IconChevronDown size={14} className={s.icon} />
+          <Select.Icon className={s.icon}>
+            <IconMenu2 size={13} />
           </Select.Icon>
         </button>
       </Select.Trigger>

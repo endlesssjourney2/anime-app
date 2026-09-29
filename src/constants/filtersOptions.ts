@@ -1,5 +1,16 @@
-import type { AniListFormat, AniListStatus } from "../types/AniList";
+import type {
+  AniListFormat,
+  AniListGenre,
+  AniListStatus,
+} from "../types/AniList";
 import type { AniListSort } from "../types/AniListSort";
+import { AniListGenreCollection } from "./collections";
+
+export const GENRE_OPTIONS: { value: AniListGenre; label: string }[] =
+  AniListGenreCollection.map((g) => ({
+    value: g,
+    label: g,
+  }));
 
 export const FORMAT_OPTIONS: { value: AniListFormat; label: string }[] = [
   { value: "TV", label: "TV" },

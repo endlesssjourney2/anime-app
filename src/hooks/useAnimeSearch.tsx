@@ -3,6 +3,7 @@ import { searchAnime } from "../api/aniListApi";
 import useDebounce from "./useDebounce";
 import type {
   AniListFormat,
+  AniListGenre,
   AniListMedia,
   AniListPageInfo,
   AniListStatus,
@@ -22,6 +23,8 @@ const useAnimeSearch = (perPage: number) => {
     useSortOptions<AniListFormat>("format");
   const { selected: statuses, toggle: setStatuses } =
     useSortOptions<AniListStatus>("status");
+  const { selected: genres, toggle: setGenres } =
+    useSortOptions<AniListGenre>("genre");
 
   const sort = (searchParams.get("sort") as AniListSort) ?? "SCORE_DESC";
   const setSort = (value: AniListSort) => {
@@ -37,7 +40,15 @@ const useAnimeSearch = (perPage: number) => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    searchAnime(debouncedSearchItem, page, perPage, [sort], formats, statuses)
+    searchAnime(
+      debouncedSearchItem,
+      page,
+      perPage,
+      [sort],
+      formats,
+      statuses,
+      genres,
+    )
       .then((result) => {
         if (cancelled) return;
         setResults(result.media);
@@ -75,6 +86,8 @@ const useAnimeSearch = (perPage: number) => {
     setFormats,
     statuses,
     setStatuses,
+    genres,
+    setGenres,
   };
 };
 

@@ -1,11 +1,16 @@
 import type { FC } from "react";
 import s from "./SearchControls.module.css";
 import type { AniListSort } from "../../../../types/AniListSort";
-import type { AniListFormat, AniListStatus } from "../../../../types/AniList";
+import type {
+  AniListFormat,
+  AniListGenre,
+  AniListStatus,
+} from "../../../../types/AniList";
 import SortSelect from "./SortSelect/SortSelect";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import {
   FORMAT_OPTIONS,
+  GENRE_OPTIONS,
   STATUS_OPTIONS,
 } from "../../../../constants/filtersOptions";
 
@@ -18,6 +23,8 @@ type Props = {
   setStatuses: (v: AniListStatus) => void;
   formats: AniListFormat[];
   setFormats: (v: AniListFormat) => void;
+  genres: AniListGenre[];
+  setGenres: (v: AniListGenre) => void;
   loading: boolean;
 };
 
@@ -30,6 +37,8 @@ const SearchControls: FC<Props> = ({
   setStatuses,
   formats,
   setFormats,
+  genres,
+  setGenres,
   loading,
 }) => {
   return (
@@ -55,6 +64,12 @@ const SearchControls: FC<Props> = ({
           options={FORMAT_OPTIONS}
           selected={formats}
           setSelected={setFormats}
+        />
+        <MultiSelect
+          label="Genres"
+          options={GENRE_OPTIONS}
+          selected={genres}
+          setSelected={setGenres}
         />
       </div>
       <SortSelect sort={sort} setSort={setSort} />

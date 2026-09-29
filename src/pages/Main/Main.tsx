@@ -20,6 +20,8 @@ const Main = () => {
     setFormats,
     statuses,
     setStatuses,
+    genres,
+    setGenres,
   } = useAnimeSearch(15);
 
   const navigate = useNavigate();
@@ -38,6 +40,8 @@ const Main = () => {
         setFormats={setFormats}
         statuses={statuses}
         setStatuses={setStatuses}
+        genres={genres}
+        setGenres={setGenres}
         loading={loading}
       />
       {loading ? (

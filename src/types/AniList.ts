@@ -1,5 +1,10 @@
 import type { AniListCharacters } from "./Character";
 import type { AniListRelations } from "./Relation";
+import {
+  AniListFormatCollection,
+  AniListGenreCollection,
+  AniListStatusCollection,
+} from "../constants/collections";
 
 export type AniListTitle = {
   romaji: string;
@@ -12,21 +17,11 @@ export type AniListImage = {
   medium: string;
 };
 
-export type AniListStatus =
-  | "FINISHED"
-  | "RELEASING"
-  | "NOT_YET_RELEASED"
-  | "CANCELLED"
-  | "HIATUS";
+export type AniListGenre = (typeof AniListGenreCollection)[number];
 
-export type AniListFormat =
-  | "TV"
-  | "TV_SHORT"
-  | "MOVIE"
-  | "SPECIAL"
-  | "OVA"
-  | "ONA"
-  | "MUSIC";
+export type AniListStatus = (typeof AniListStatusCollection)[number];
+
+export type AniListFormat = (typeof AniListFormatCollection)[number];
 
 // fields for card
 export type AniListMedia = {
@@ -36,7 +31,7 @@ export type AniListMedia = {
   coverImage: AniListImage;
   averageScore: number | null;
   episodes: number | null;
-  genres: string[];
+  genres: AniListGenre[];
   status: AniListStatus;
 };
 

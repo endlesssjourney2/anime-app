@@ -1,0 +1,58 @@
+.list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+}
+
+.top {
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title {
+  height: 15px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.genres {
+  height: 10px;
+  width: 80%;
+  border-radius: 4px;
+}
+
+.title,
+.genres,
+.top {
+  background: linear-gradient(
+    90deg,
+    var(--color-card) 25%,
+    var(--color-card-hover) 50%,
+    var(--color-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

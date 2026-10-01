@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import useAnimeSearch from "../../hooks/useAnimeSearch";
 import s from "./Main.module.css";
-import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
 import AnimeItem from "./components/AnimeItem/AnimeItem";
 import SearchControls from "./components/SearchControls/SearchControls";
+import SkeletonMain from "./components/SkeletonMain/SkeletonMain";
 
 const Main = () => {
   const {
@@ -45,7 +45,7 @@ const Main = () => {
         loading={loading}
       />
       {loading ? (
-        <LoadingComponent />
+        <SkeletonMain />
       ) : (
         <>
           <div className={s.content}>

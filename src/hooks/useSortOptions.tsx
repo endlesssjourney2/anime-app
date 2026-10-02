@@ -10,17 +10,24 @@ const useSortOptions = <T extends string>(label: string) => {
   );
   const toggle = (value: T) => {
     setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      const current = next.getAll(label);
+      const entries = Array.from(prev.entries());
+      const alreadyExists = entries.some(
+        ([key, entryValue]) => key === label && entryValue === value,
+      );
 
-      if (current.includes(value)) {
-        next.delete(label);
-        current
-          .filter((v) => v !== value)
-          .forEach((v) => next.append(label, v));
-      } else {
-        next.append(label, value);
+      if (alreadyExists) {
+        const next = new URLSearchParams();
+
+        entries.forEach(([key, entryValue]) => {
+          if (key === label && entryValue === value) {
+            return;
+          }
+          next.append(key, entryValue);
+        });
+        return next;
       }
+      const next = new URLSearchParams(prev);
+      next.append(label, value);
       return next;
     });
   };

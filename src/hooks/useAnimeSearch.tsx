@@ -66,11 +66,11 @@ const useAnimeSearch = (perPage: number) => {
     return () => {
       cancelled = true;
     };
-  }, [debouncedSearchItem, page, sort, statuses, formats]);
+  }, [debouncedSearchItem, page, sort, statuses, formats, genres]);
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearchItem, sort, statuses, formats]);
+  }, [debouncedSearchItem, sort, statuses, formats, genres]);
 
   return {
     searchItem,

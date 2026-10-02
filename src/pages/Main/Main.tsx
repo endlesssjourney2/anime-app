@@ -4,6 +4,7 @@ import s from "./Main.module.css";
 import AnimeItem from "./components/AnimeItem/AnimeItem";
 import SearchControls from "./components/SearchControls/SearchControls";
 import SkeletonMain from "./components/SkeletonMain/SkeletonMain";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 
 const Main = () => {
   const {
@@ -11,7 +12,6 @@ const Main = () => {
     setSearchItem,
     results,
     pageInfo,
-    page,
     setPage,
     loading,
     sort,
@@ -25,6 +25,11 @@ const Main = () => {
   } = useAnimeSearch(15);
 
   const navigate = useNavigate();
+
+  const handleLoadMore = () => {
+    if (loading || !pageInfo?.hasNextPage) return;
+    setPage((prev) => prev + 1);
+  };
 
   return (
     <div className={s.mainPage}>
@@ -59,25 +64,10 @@ const Main = () => {
               ))}
             </ul>
           </div>
-          <div className={s.actionButtons}>
-            <button
-              className={s.btn}
-              onClick={() => setPage(page - 1)}
-              disabled={page === 1 || loading}
-            >
-              Prev
-            </button>
-            {pageInfo && (
-              <span className={s.info}>{`${page} - ${pageInfo.lastPage}`}</span>
-            )}
-            <button
-              className={s.btn}
-              onClick={() => setPage(page + 1)}
-              disabled={!pageInfo?.hasNextPage || loading}
-            >
-              Next
-            </button>
-          </div>
+          <LoadMoreBtn
+            onClick={handleLoadMore}
+            disabled={loading || !pageInfo?.hasNextPage}
+          />
         </>
       )}
     </div>

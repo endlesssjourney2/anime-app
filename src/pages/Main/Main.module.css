@@ -31,32 +31,3 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
 }
-
-.actionButtons {
-  margin: 30px 0 30px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-}
-
-.btn {
-  cursor: pointer;
-  background: var(--color-btn-bg);
-  border: 1px solid var(--color-btn-border);
-  color: var(--color-btn-text);
-  border-radius: 8px;
-  padding: 8px 16px;
-  transition: background 0.15s ease;
-}
-
-.btn:disabled {
-  background: var(--color-btn-bg-disabled);
-  color: var(--color-btn-text-disabled);
-  cursor: not-allowed;
-}
-
-.info {
-  color: var(--color-text-meta);
-  font-size: 13px;
-}

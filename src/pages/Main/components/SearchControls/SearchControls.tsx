@@ -13,6 +13,7 @@ import {
   GENRE_OPTIONS,
   STATUS_OPTIONS,
 } from "../../../../constants/filtersOptions";
+import FiltersBadges from "./FiltersBadges/FiltersBadges";
 
 type Props = {
   searchItem: string;
@@ -41,38 +42,57 @@ const SearchControls: FC<Props> = ({
   setGenres,
   loading,
 }) => {
-  return (
-    <div className={s.searchContainer}>
-      <input
-        disabled={loading}
-        className={s.searchInput}
-        type="text"
-        value={searchItem}
-        onChange={(e) => setSearchItem(e.target.value)}
-        placeholder="Search anime..."
-      />
+  const onRemove = (type: "format" | "status" | "genre", value: string) => {
+    switch (type) {
+      case "format":
+        setFormats(value as AniListFormat);
+        break;
+      case "status":
+        setStatuses(value as AniListStatus);
+        break;
+      case "genre":
+        setGenres(value as AniListGenre);
+        break;
+    }
+  };
 
-      <div className={s.multiSelectsContainer}>
-        <MultiSelect
-          label="Statuses"
-          options={STATUS_OPTIONS}
-          selected={statuses}
-          setSelected={setStatuses}
+  return (
+    <div className={s.container}>
+      <div className={s.searchContainer}>
+        <input
+          disabled={loading}
+          className={s.searchInput}
+          type="text"
+          value={searchItem}
+          onChange={(e) => setSearchItem(e.target.value)}
+          placeholder="Search anime..."
         />
-        <MultiSelect
-          label="Formats"
-          options={FORMAT_OPTIONS}
-          selected={formats}
-          setSelected={setFormats}
-        />
-        <MultiSelect
-          label="Genres"
-          options={GENRE_OPTIONS}
-          selected={genres}
-          setSelected={setGenres}
-        />
+
+        <div className={s.multiSelectsContainer}>
+          <MultiSelect
+            label="Statuses"
+            options={STATUS_OPTIONS}
+            selected={statuses}
+            setSelected={setStatuses}
+          />
+          <MultiSelect
+            label="Formats"
+            options={FORMAT_OPTIONS}
+            selected={formats}
+            setSelected={setFormats}
+          />
+          <MultiSelect
+            label="Genres"
+            options={GENRE_OPTIONS}
+            selected={genres}
+            setSelected={setGenres}
+          />
+        </div>
+        <SortSelect sort={sort} setSort={setSort} />
       </div>
-      <SortSelect sort={sort} setSort={setSort} />
+      <div>
+        <FiltersBadges onRemove={onRemove} />
+      </div>
     </div>
   );
 };

@@ -68,9 +68,6 @@ export type AniListMediaDetails = AniListMedia & {
 
 //page
 export type AniListPageInfo = {
-  total: number;
-  currentPage: number;
-  lastPage: number;
   hasNextPage: boolean;
 };
 

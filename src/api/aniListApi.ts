@@ -19,9 +19,6 @@ const SEARCH_QUERY = `
   $statusIn: [MediaStatus], $genreIn: [String]) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
-        total
-        currentPage
-        lastPage
         hasNextPage
       }
       media(search: $search, type: ANIME, sort: $sort, format_in: $formatIn, status_in: $statusIn,

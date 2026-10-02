@@ -51,7 +51,11 @@ const useAnimeSearch = (perPage: number) => {
     )
       .then((result) => {
         if (cancelled) return;
-        setResults(result.media);
+        if (page === 1) {
+          setResults(result.media);
+        } else {
+          setResults((prev) => [...prev, ...result.media]);
+        }
         setPageInfo(result.pageInfo);
       })
       .catch((err) => {

@@ -26,6 +26,9 @@ const useAnimeSearch = (perPage: number) => {
   const { selected: genres, toggle: setGenres } =
     useSortOptions<AniListGenre>("genre");
 
+  const initialLoading = loading && page === 1;
+  const loadMoreLoading = loading && page > 1;
+
   const sort = (searchParams.get("sort") as AniListSort) ?? "SCORE_DESC";
   const setSort = (value: AniListSort) => {
     setSearchParams((prev) => {
@@ -83,7 +86,6 @@ const useAnimeSearch = (perPage: number) => {
     pageInfo,
     page,
     setPage,
-    loading,
     sort,
     setSort,
     formats,
@@ -92,6 +94,8 @@ const useAnimeSearch = (perPage: number) => {
     setStatuses,
     genres,
     setGenres,
+    initialLoading,
+    loadMoreLoading,
   };
 };
 

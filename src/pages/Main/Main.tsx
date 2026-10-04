@@ -13,7 +13,6 @@ const Main = () => {
     results,
     pageInfo,
     setPage,
-    loading,
     sort,
     setSort,
     formats,
@@ -22,12 +21,14 @@ const Main = () => {
     setStatuses,
     genres,
     setGenres,
+    initialLoading,
+    loadMoreLoading,
   } = useAnimeSearch(15);
 
   const navigate = useNavigate();
 
   const handleLoadMore = () => {
-    if (loading || !pageInfo?.hasNextPage) return;
+    if (loadMoreLoading || !pageInfo?.hasNextPage) return;
     setPage((prev) => prev + 1);
   };
 
@@ -47,9 +48,9 @@ const Main = () => {
         setStatuses={setStatuses}
         genres={genres}
         setGenres={setGenres}
-        loading={loading}
+        loading={initialLoading || loadMoreLoading}
       />
-      {loading ? (
+      {initialLoading ? (
         <SkeletonMain />
       ) : (
         <>
@@ -65,8 +66,9 @@ const Main = () => {
             </ul>
           </div>
           <LoadMoreBtn
+            loading={loadMoreLoading}
             onClick={handleLoadMore}
-            disabled={loading || !pageInfo?.hasNextPage}
+            disabled={loadMoreLoading || !pageInfo?.hasNextPage}
           />
         </>
       )}

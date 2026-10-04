@@ -1,4 +1,3 @@
-import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
 import useAnimeDetails from "../../hooks/useAnimeDetails";
 import s from "./AnimeDetails.module.css";
 import { useParams } from "react-router-dom";
@@ -6,6 +5,7 @@ import AnimeHeader from "./components/AnimeHeader/AnimeHeader";
 import CharactersSection from "./components/CharactersSection/CharactersSection";
 import RelationsSection from "./components/RelationsSection/RelationsSection";
 import TrailerSection from "./components/TrailerSection/TrailerSection";
+import SkeletonTitle from "./components/SkeletonTitle/SkeletonTitle";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -17,7 +17,7 @@ const AnimeDetails = () => {
   return (
     <div className={s.titlePage}>
       {loading ? (
-        <LoadingComponent />
+        <SkeletonTitle />
       ) : (
         <>
           <AnimeHeader anime={anime} animeTitle={animeTitle} />

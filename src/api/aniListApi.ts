@@ -36,7 +36,7 @@ const SEARCH_QUERY = `
 
 // One anime details query
 const DETAILS_QUERY = `
-  query ($id: Int) {
+  query ($id: Int, $isMain: Boolean) {
     Media(id: $id, type: ANIME) {
       id
       title { romaji english native }
@@ -96,6 +96,11 @@ const DETAILS_QUERY = `
         id
         thumbnail
       }
+      studios(isMain: $isMain) {
+        nodes {
+          name
+        }
+      }
     }
   }
 `;
@@ -131,10 +136,11 @@ export const searchAnime = async (
 
 export const getAnimeById = async (
   id: number,
+  isMain = true,
 ): Promise<AniListMediaDetails> => {
   const response = await axios.post<DetailsResponse>(
     ANILIST_URL,
-    { query: DETAILS_QUERY, variables: { id } },
+    { query: DETAILS_QUERY, variables: { id, isMain } },
     { headers: { "Content-Type": "application/json" } },
   );
 

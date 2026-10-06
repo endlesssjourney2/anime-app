@@ -3,7 +3,6 @@ import s from "./AnimeHeader.module.css";
 import type { AniListMediaDetails } from "../../../../types/AniList";
 import { airingTimeFormatter } from "../../../../helpers/airingTimeFormatter";
 import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
-import ExternalLinks from "./components/ExternalLinks/ExternalLinks";
 import BackButton from "./components/BackButton/BackButton";
 
 type Props = {
@@ -39,9 +38,7 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
             </div>
           )}
         </div>
-
         <HeaderInfo anime={anime} animeTitle={animeTitle} />
-        <ExternalLinks externalLinks={anime.externalLinks} />
       </div>
     </>
   );

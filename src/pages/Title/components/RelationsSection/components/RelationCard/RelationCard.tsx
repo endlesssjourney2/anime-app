@@ -2,7 +2,7 @@ import type { FC } from "react";
 import s from "./RelationCard.module.css";
 import type { AniListRelation } from "../../../../../../types/Relation";
 import type { AniListStatus } from "../../../../../../types/AniList";
-import { checkEpisodes } from "../../../../../../helpers/checkEpisodes";
+import { getEpisodeInfo } from "../../../../../../helpers/getEpisodeInfo";
 import ScoreBadge from "../../../../../../features/components/ScoreBadge/ScoreBadge";
 import StatusBadge from "../../../../../../features/components/StatusBadge/StatusBadge";
 
@@ -45,6 +45,8 @@ const RelationCard: FC<Props> = ({
   episodes,
   averageScore,
 }) => {
+  const { episodesText } = getEpisodeInfo(episodes, null);
+
   return (
     <div className={s.item} onClick={onClick}>
       <img className={s.image} src={image} alt={title} />
@@ -55,7 +57,7 @@ const RelationCard: FC<Props> = ({
         </div>
         <div className={s.meta}>
           <span className={s.metaItem}>{format}</span>
-          <span className={s.metaItem}>{checkEpisodes(episodes, null)}</span>
+          <span className={s.metaItem}>{episodesText}</span>
           <StatusBadge status={status} />
         </div>
         <span className={`${s.relationType} ${s[relationType]}`}>

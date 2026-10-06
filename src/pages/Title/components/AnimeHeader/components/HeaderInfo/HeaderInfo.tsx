@@ -1,10 +1,8 @@
 import type { FC } from "react";
-import StatusBadge from "../../../../../../features/components/StatusBadge/StatusBadge";
 import type { AniListMediaDetails } from "../../../../../../types/AniList";
 import s from "./HeaderInfo.module.css";
-import { checkEpisodes } from "../../../../../../helpers/checkEpisodes";
-import ScoreBadge from "../../../../../../features/components/ScoreBadge/ScoreBadge";
-import FormatBadge from "../../../../../../features/components/FormatBadge/FormatBadge";
+import AnimeMetaInfo from "./AnimeMetaInfo/AnimeMetaInfo";
+import ExternalLinks from "../ExternalLinks/ExternalLinks";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -13,21 +11,13 @@ type Props = {
 
 const HeaderInfo: FC<Props> = ({ anime, animeTitle }) => {
   return (
-    <div className={s.info}>
-      <h1 className={s.title}>{animeTitle}</h1>
-      <div className={s.meta}>
-        <span>{anime?.genres.join(", ")}</span>
-        <StatusBadge status={anime.status} />
-        <span>{anime?.startDate.year}</span>
+    <>
+      <div className={s.info}>
+        <h1 className={s.title}>{animeTitle}</h1>
+        <AnimeMetaInfo anime={anime} />
       </div>
-      <div className={s.episodes}>
-        <span className={s.episodeValue}>
-          {checkEpisodes(anime.episodes, anime.duration)}
-        </span>
-        <FormatBadge format={anime.format} />
-      </div>
-      <ScoreBadge score={anime.averageScore} />
-    </div>
+      <ExternalLinks externalLinks={anime.externalLinks} />
+    </>
   );
 };
 

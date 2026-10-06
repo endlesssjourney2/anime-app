@@ -1,0 +1,33 @@
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaGenres,
+.metaItems {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.genres {
+  font-size: 17px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  color: var(--color-text-secondary);
+}
+
+.divider {
+  width: 1px;
+  height: 15px;
+  background-color: var(--color-text-divider);
+}

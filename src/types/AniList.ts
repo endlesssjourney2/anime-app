@@ -6,16 +6,30 @@ import {
   AniListStatusCollection,
 } from "../constants/collections";
 
+//title
 export type AniListTitle = {
   romaji: string;
   english: string | null;
   native: string;
 };
+//
 
+//image
 export type AniListImage = {
   large: string;
   medium: string;
 };
+//
+
+//studios
+export type AniListStudiosNode = {
+  name: string;
+};
+
+export type AniListStudios = {
+  nodes: AniListStudiosNode[];
+};
+//
 
 export type AniListGenre = (typeof AniListGenreCollection)[number];
 
@@ -34,24 +48,31 @@ export type AniListMedia = {
   genres: AniListGenre[];
   status: AniListStatus;
 };
+//
 
+//nextAiringEpisode
 type AniListNextAiringEpisode = {
   episode: number;
   timeUntilAiring: number;
 } | null;
+//
 
+//externalLinks
 export type AniListExternalLink = {
   url: string | null;
   color: string | null;
   site: string;
   type: "INFO" | "STREAMING" | "SOCIAL";
 };
+//
 
+//trailer
 export type AniListTrailer = {
   site: string | null;
   id: string | null;
   thumbnail: string | null;
 };
+//
 
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
@@ -64,7 +85,9 @@ export type AniListMediaDetails = AniListMedia & {
   externalLinks: AniListExternalLink[];
   trailer: AniListTrailer;
   format: AniListFormat;
+  studios: AniListStudios;
 };
+//
 
 //page
 export type AniListPageInfo = {
@@ -80,9 +103,12 @@ export type SearchResponse = {
     };
   };
 };
+//
 
+//details
 export type DetailsResponse = {
   data: {
     Media: AniListMediaDetails;
   };
 };
+//

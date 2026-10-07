@@ -1,16 +1,12 @@
 import s from "./AnimeMetaInfo.module.css";
-import {
-  IconBuilding,
-  IconCalendar,
-  IconClock,
-  IconStack2,
-} from "@tabler/icons-react";
+import { IconBuilding, IconClock, IconStack2 } from "@tabler/icons-react";
 import FormatBadge from "../../../../../../../features/components/FormatBadge/FormatBadge";
 import StatusBadge from "../../../../../../../features/components/StatusBadge/StatusBadge";
 import ScoreBadge from "../../../../../../../features/components/ScoreBadge/ScoreBadge";
 import { getEpisodeInfo } from "../../../../../../../helpers/getEpisodeInfo";
 import type { AniListMediaDetails } from "../../../../../../../types/AniList";
 import type { FC } from "react";
+import ReleaseInfo from "./ReleaseInfo/ReleaseInfo";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -22,9 +18,7 @@ const AnimeMetaInfo: FC<Props> = ({ anime }) => {
     anime.duration ?? null,
   );
 
-  const startYear = anime.startDate.year ?? "Unknown Year";
-
-  const studio = anime.studios.nodes[0].name ?? "Unknown Studio";
+  const studio = anime.studios.nodes[0]?.name ?? "Unknown Studio";
 
   return (
     <div className={s.meta}>
@@ -46,17 +40,18 @@ const AnimeMetaInfo: FC<Props> = ({ anime }) => {
         </div>
         <div className={s.divider} />
         <div className={s.metaItem}>
-          <IconCalendar size={16} />
-          {startYear}
-        </div>
-        <div className={s.divider} />
-        <div className={s.metaItem}>
           <IconBuilding size={16} />
           {studio}
         </div>
         <div className={s.divider} />
         <ScoreBadge score={anime.averageScore} />
       </div>
+      <ReleaseInfo
+        startDate={anime.startDate}
+        endDate={anime.endDate}
+        season={anime.season}
+        seasonYear={anime.seasonYear}
+      />
     </div>
   );
 };

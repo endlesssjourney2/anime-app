@@ -1,0 +1,35 @@
+.divider {
+  width: 1px;
+  height: 15px;
+  background-color: var(--color-text-divider);
+}
+
+.metaItems {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  color: var(--color-text-secondary);
+}
+
+.FALL {
+  color: var(--color-season-fall);
+}
+.SPRING {
+  color: var(--color-season-spring);
+}
+
+.WINTER {
+  color: var(--color-season-winter);
+}
+
+.SUMMER {
+  color: var(--color-season-summer);
+}

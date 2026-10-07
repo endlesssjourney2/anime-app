@@ -74,10 +74,21 @@ export type AniListTrailer = {
 };
 //
 
+export type AniListDate = {
+  year: number | null;
+  month: number | null;
+  day: number | null;
+};
+
+export type AniListSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL";
+
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
-  startDate: { year: number | null };
+  startDate: AniListDate;
+  endDate: AniListDate;
+  season: AniListSeason | null;
+  seasonYear: number | null;
   characters: AniListCharacters;
   relations: AniListRelations;
   nextAiringEpisode: AniListNextAiringEpisode;

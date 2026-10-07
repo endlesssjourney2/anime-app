@@ -48,7 +48,10 @@ const DETAILS_QUERY = `
       status
       genres
       format
-      startDate {year}
+      startDate {year month day}
+      endDate {year month day}
+      season
+      seasonYear
       characters(sort: ROLE, perPage: 9) {
         edges {
           role

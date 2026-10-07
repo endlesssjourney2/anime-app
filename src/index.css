@@ -102,4 +102,10 @@ ul {
   --color-relation-parent: #6f91e8;
   --color-relation-related: #9da8bd;
   --color-relation-other: #707b91;
+
+  /* season colors */
+  --color-season-fall: #d07a5f;
+  --color-season-spring: #68c49a;
+  --color-season-winter: #7f9ce8;
+  --color-season-summer: #e3be63;
 }

@@ -104,6 +104,15 @@ const DETAILS_QUERY = `
           name
         }
       }
+      rankings {
+        allTime
+        rank
+        type
+        format
+        context
+        year
+        season
+      }
     }
   }
 `;

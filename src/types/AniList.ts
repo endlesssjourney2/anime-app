@@ -5,6 +5,7 @@ import {
   AniListGenreCollection,
   AniListStatusCollection,
 } from "../constants/collections";
+import type { AniListRankings } from "./Rankings";
 
 //title
 export type AniListTitle = {
@@ -97,6 +98,7 @@ export type AniListMediaDetails = AniListMedia & {
   trailer: AniListTrailer;
   format: AniListFormat;
   studios: AniListStudios;
+  rankings: AniListRankings;
 };
 //
 

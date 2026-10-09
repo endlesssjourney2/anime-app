@@ -2,15 +2,15 @@ import type { FC } from "react";
 import type { AniListMedia } from "../../../../types/AniList";
 import s from "./AnimeItem.module.css";
 import StatusBadge from "../../../../features/components/StatusBadge/StatusBadge";
+import { Link } from "react-router-dom";
 
 type Props = {
   anime: AniListMedia;
-  onClick: () => void;
 };
 
-const AnimeItem: FC<Props> = ({ anime, onClick }) => {
+const AnimeItem: FC<Props> = ({ anime }) => {
   return (
-    <li key={anime.id} className={s.item} onClick={onClick}>
+    <Link to={`/anime/${anime.id}`} key={anime.id} className={s.item}>
       <div className={s.top}>
         <img src={anime.coverImage.large} alt={anime.title.english} />
       </div>
@@ -24,7 +24,7 @@ const AnimeItem: FC<Props> = ({ anime, onClick }) => {
           <StatusBadge status={anime.status} />
         </div>
       </div>
-    </li>
+    </Link>
   );
 };
 

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import useAnimeSearch from "../../hooks/useAnimeSearch";
 import s from "./Main.module.css";
 import AnimeItem from "./components/AnimeItem/AnimeItem";
@@ -24,8 +23,6 @@ const Main = () => {
     initialLoading,
     loadMoreLoading,
   } = useAnimeSearch(15);
-
-  const navigate = useNavigate();
 
   const handleLoadMore = () => {
     if (loadMoreLoading || !pageInfo?.hasNextPage) return;
@@ -57,11 +54,7 @@ const Main = () => {
           <div className={s.content}>
             <ul className={s.list}>
               {results.map((a) => (
-                <AnimeItem
-                  key={a.id}
-                  anime={a}
-                  onClick={() => navigate(`/anime/${a.id}`)}
-                />
+                <AnimeItem key={a.id} anime={a} />
               ))}
             </ul>
           </div>

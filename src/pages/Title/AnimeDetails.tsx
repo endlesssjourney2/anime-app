@@ -6,6 +6,7 @@ import CharactersSection from "./components/CharactersSection/CharactersSection"
 import RelationsSection from "./components/RelationsSection/RelationsSection";
 import TrailerSection from "./components/TrailerSection/TrailerSection";
 import SkeletonTitle from "./components/SkeletonTitle/SkeletonTitle";
+import RecommendationsSection from "./components/RecommendationsSection/RecommendationsSection";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -29,6 +30,9 @@ const AnimeDetails = () => {
 
           {anime?.relations.edges.length > 0 && (
             <RelationsSection relations={anime.relations} />
+          )}
+          {anime?.recommendations.nodes.length > 0 && (
+            <RecommendationsSection recommendations={anime.recommendations} />
           )}
           {anime?.characters.edges.length > 0 && (
             <CharactersSection characters={anime.characters} />

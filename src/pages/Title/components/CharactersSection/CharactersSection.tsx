@@ -13,14 +13,7 @@ const CharactersSection: FC<Props> = ({ characters }) => {
       <p className={s.sectionTitle}>Characters</p>
       <div className={s.charactersList}>
         {characters.edges.map((c) => (
-          <CharacterCard
-            image={c.node.image.large}
-            name={c.node.name}
-            role={c.role}
-            dateOfBirth={c.node.dateOfBirth}
-            age={c.node.age}
-            gender={c.node.gender}
-          />
+          <CharacterCard role={c.role} character={c.node} key={c.node.id} />
         ))}
       </div>
     </div>

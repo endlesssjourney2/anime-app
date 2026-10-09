@@ -83,6 +83,27 @@ const DETAILS_QUERY = `
           }
         }
       }
+      recommendations(perPage: 6) {
+        nodes {
+          mediaRecommendation {
+            id
+            title {
+              romaji
+              english
+              native
+            }
+            type
+            format
+            coverImage {
+              large
+              medium
+            }
+            averageScore
+            episodes
+            genres
+          }
+        }
+      }
       nextAiringEpisode {
         episode
         timeUntilAiring

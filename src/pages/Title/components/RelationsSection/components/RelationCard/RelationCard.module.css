@@ -1,5 +1,5 @@
 .item {
-  margin-top: 2px;
+  text-decoration: none;
   display: flex;
   height: 150px;
   background: var(--color-card);

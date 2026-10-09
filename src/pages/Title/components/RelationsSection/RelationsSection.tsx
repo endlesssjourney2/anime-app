@@ -20,9 +20,7 @@ const RelationsSection: FC<Props> = ({ relations }) => {
           <RelationCard
             onClick={() => navigate(`/anime/${r.node.id}`)}
             key={r.node.id}
-            title={
-              r.node.title.english ?? r.node.title.romaji ?? r.node.title.native
-            }
+            title={r.node.title.english ?? r.node.title.romaji ?? r.node.title.native}
             image={r.node.coverImage.large}
             relationType={r.relationType}
             episodes={r.node.episodes}

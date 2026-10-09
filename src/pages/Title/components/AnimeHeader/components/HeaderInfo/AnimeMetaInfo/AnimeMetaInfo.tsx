@@ -7,6 +7,7 @@ import { getEpisodeInfo } from "../../../../../../../helpers/getEpisodeInfo";
 import type { AniListMediaDetails } from "../../../../../../../types/AniList";
 import type { FC } from "react";
 import ReleaseInfo from "./ReleaseInfo/ReleaseInfo";
+import RankingInfo from "./RankingInfo/RankingInfo";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -52,6 +53,7 @@ const AnimeMetaInfo: FC<Props> = ({ anime }) => {
         season={anime.season}
         seasonYear={anime.seasonYear}
       />
+      <RankingInfo rankings={anime.rankings} />
     </div>
   );
 };

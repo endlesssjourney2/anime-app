@@ -10,9 +10,7 @@ import SkeletonTitle from "./components/SkeletonTitle/SkeletonTitle";
 const AnimeDetails = () => {
   const { id } = useParams();
 
-  const { anime, animeTitle, clearDescription, loading } = useAnimeDetails(
-    Number(id),
-  );
+  const { anime, animeTitle, clearDescription, loading } = useAnimeDetails(Number(id));
 
   return (
     <div className={s.titlePage}>

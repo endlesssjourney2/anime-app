@@ -108,4 +108,8 @@ ul {
   --color-season-spring: #68c49a;
   --color-season-winter: #7f9ce8;
   --color-season-summer: #e3be63;
+
+  /* ranking colors */
+  --color-rated: #e0b45f;
+  --color-popularity: #e47467;
 }

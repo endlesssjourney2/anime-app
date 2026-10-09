@@ -1,9 +1,4 @@
-import type {
-  AniListFormat,
-  AniListImage,
-  AniListStatus,
-  AniListTitle,
-} from "./AniList";
+import type { AniListFormat, AniListImage, AniListStatus, AniListTitle } from "./AniList";
 
 export type AniListRelation =
   | "ADAPTATION"

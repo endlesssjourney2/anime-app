@@ -6,6 +6,7 @@ import {
   AniListStatusCollection,
 } from "../constants/collections";
 import type { AniListRankings } from "./Rankings";
+import type { AniListRecommendation } from "./Recommendations";
 
 //title
 export type AniListTitle = {
@@ -92,6 +93,7 @@ export type AniListMediaDetails = AniListMedia & {
   seasonYear: number | null;
   characters: AniListCharacters;
   relations: AniListRelations;
+  recommendations: AniListRecommendation;
   nextAiringEpisode: AniListNextAiringEpisode;
   duration: number | null;
   externalLinks: AniListExternalLink[];

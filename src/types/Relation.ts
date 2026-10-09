@@ -16,7 +16,7 @@ export type AniListRelation =
   | "CONTAINS"
   | "SAME_UNIVERSE";
 
-type RelationNode = {
+export type RelationNode = {
   id: number;
   title: AniListTitle;
   coverImage: AniListImage;

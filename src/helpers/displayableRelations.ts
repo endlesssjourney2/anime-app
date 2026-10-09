@@ -1,6 +1,6 @@
 import type { AniListRelation, RelationEdge } from "../types/Relation";
 
-//with OTHER and CHARACTER filtered out(cause its not what i want! kew::), sorted by priority(preauel > sequel > everything else)
+//with OTHER and CHARACTER filtered out(cause its not what i want kew::), sorted by priority(prequel > sequel > everything else)
 const RELATION_PRIORITY: Record<AniListRelation, number> = {
   PREQUEL: 0,
   SEQUEL: 1,
@@ -27,8 +27,6 @@ export const getDisplayableRelations = (edges: RelationEdge[]) => {
         r.relationType !== "OTHER",
     )
     .sort((a, b) => {
-      return (
-        RELATION_PRIORITY[a.relationType] - RELATION_PRIORITY[b.relationType]
-      );
+      return RELATION_PRIORITY[a.relationType] - RELATION_PRIORITY[b.relationType];
     });
 };

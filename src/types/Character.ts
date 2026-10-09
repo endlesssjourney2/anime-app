@@ -1,4 +1,4 @@
-type CharacterNode = {
+export type CharacterNode = {
   id: number;
   name: { full: string | null; native: string | null };
   image: { large: string };
@@ -7,7 +7,7 @@ type CharacterNode = {
   gender: string | null;
 };
 
-export type DateOfBirth = {
+type DateOfBirth = {
   month: number | null;
   day: number | null;
 };

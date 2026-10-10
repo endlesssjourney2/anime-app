@@ -17,9 +17,11 @@ const useAnimeDetails = (id: number) => {
   }, [id]);
 
   const clearDescription = anime?.description
-    .replace(/<br\s*\/?>/gi, " ")
-    .replace(/<[^>]*>/g, "")
-    .trim();
+    ? anime.description
+        .replace(/<br\s*\/?>/gi, " ")
+        .replace(/<[^>]*>/g, "")
+        .trim()
+    : null;
 
   const animeTitle =
     anime?.title.english ?? anime?.title.native ?? anime?.title.romaji;

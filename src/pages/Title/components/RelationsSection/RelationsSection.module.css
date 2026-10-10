@@ -1,5 +1,5 @@
 .section {
-  margin: 32px 0 32px 0;
+  margin-top: 32px;
 }
 
 .sectionTitle {
@@ -10,8 +10,7 @@
 }
 
 .relationsList {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 4px 2px 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 12px;
 }

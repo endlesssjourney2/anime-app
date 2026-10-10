@@ -1,0 +1,48 @@
+.divider {
+  width: 1px;
+  height: 15px;
+  background-color: var(--color-text-divider);
+}
+
+.rankings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.metaItems {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.rated {
+  color: var(--color-rated);
+}
+
+.popularity {
+  color: var(--color-popularity);
+}
+
+.ratingList {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  column-gap: 20px;
+  row-gap: 5px;
+}
+
+.additionalMeta {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.7px;
+}

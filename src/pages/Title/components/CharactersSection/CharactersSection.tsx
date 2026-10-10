@@ -1,10 +1,10 @@
 import type { FC } from "react";
-import type { AnilistCharacters } from "../../../../types/Character";
+import type { AniListCharacters } from "../../../../types/Character";
 import s from "./CharactersSection.module.css";
 import CharacterCard from "./components/CharacterCard/CharacterCard";
 
 type Props = {
-  characters: AnilistCharacters;
+  characters: AniListCharacters;
 };
 
 const CharactersSection: FC<Props> = ({ characters }) => {
@@ -13,11 +13,7 @@ const CharactersSection: FC<Props> = ({ characters }) => {
       <p className={s.sectionTitle}>Characters</p>
       <div className={s.charactersList}>
         {characters.edges.map((c) => (
-          <CharacterCard
-            image={c.node.image.large}
-            name={c.node.name.full}
-            role={c.role}
-          />
+          <CharacterCard role={c.role} character={c.node} key={c.node.id} />
         ))}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import type { AniListImage, AniListTitle } from "./AniList";
+import type { AniListFormat, AniListImage, AniListStatus, AniListTitle } from "./AniList";
 
 export type AniListRelation =
   | "ADAPTATION"
@@ -16,11 +16,15 @@ export type AniListRelation =
   | "CONTAINS"
   | "SAME_UNIVERSE";
 
-type RelationNode = {
+export type RelationNode = {
   id: number;
   title: AniListTitle;
   coverImage: AniListImage;
   type: "ANIME" | "MANGA";
+  format: AniListFormat;
+  status: AniListStatus;
+  episodes: number | null;
+  averageScore: number | null;
 };
 
 export type RelationEdge = {
@@ -28,6 +32,6 @@ export type RelationEdge = {
   node: RelationNode;
 };
 
-export type AnilistRelations = {
+export type AniListRelations = {
   edges: RelationEdge[];
 };

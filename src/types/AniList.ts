@@ -1,23 +1,43 @@
-import type { AnilistCharacters } from "./Character";
-import type { AnilistRelations } from "./Relation";
+import type { AniListCharacters } from "./Character";
+import type { AniListRelations } from "./Relation";
+import {
+  AniListFormatCollection,
+  AniListGenreCollection,
+  AniListStatusCollection,
+} from "../constants/collections";
+import type { AniListRankings } from "./Rankings";
+import type { AniListRecommendation } from "./Recommendations";
 
+//title
 export type AniListTitle = {
   romaji: string;
   english: string | null;
   native: string;
 };
+//
 
+//image
 export type AniListImage = {
   large: string;
   medium: string;
 };
+//
 
-export type AniListStatus =
-  | "FINISHED"
-  | "RELEASING"
-  | "NOT_YET_RELEASED"
-  | "CANCELLED"
-  | "HIATUS";
+//studios
+export type AniListStudiosNode = {
+  name: string;
+};
+
+export type AniListStudios = {
+  nodes: AniListStudiosNode[];
+};
+//
+
+export type AniListGenre = (typeof AniListGenreCollection)[number];
+
+export type AniListStatus = (typeof AniListStatusCollection)[number];
+
+export type AniListFormat = (typeof AniListFormatCollection)[number];
 
 // fields for card
 export type AniListMedia = {
@@ -27,23 +47,65 @@ export type AniListMedia = {
   coverImage: AniListImage;
   averageScore: number | null;
   episodes: number | null;
-  genres: string[];
+  genres: AniListGenre[];
   status: AniListStatus;
 };
+//
+
+//nextAiringEpisode
+type AniListNextAiringEpisode = {
+  episode: number;
+  timeUntilAiring: number;
+} | null;
+//
+
+//externalLinks
+export type AniListExternalLink = {
+  url: string | null;
+  color: string | null;
+  site: string;
+  type: "INFO" | "STREAMING" | "SOCIAL";
+};
+//
+
+//trailer
+export type AniListTrailer = {
+  site: string | null;
+  id: string | null;
+  thumbnail: string | null;
+};
+//
+
+export type AniListDate = {
+  year: number | null;
+  month: number | null;
+  day: number | null;
+};
+
+export type AniListSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL";
 
 // fields for details of one title
 export type AniListMediaDetails = AniListMedia & {
   bannerImage: string | null;
-  startDate: { year: number | null };
-  characters: AnilistCharacters;
-  relations: AnilistRelations;
+  startDate: AniListDate;
+  endDate: AniListDate;
+  season: AniListSeason | null;
+  seasonYear: number | null;
+  characters: AniListCharacters;
+  relations: AniListRelations;
+  recommendations: AniListRecommendation;
+  nextAiringEpisode: AniListNextAiringEpisode;
+  duration: number | null;
+  externalLinks: AniListExternalLink[];
+  trailer: AniListTrailer;
+  format: AniListFormat;
+  studios: AniListStudios;
+  rankings: AniListRankings;
 };
+//
 
 //page
 export type AniListPageInfo = {
-  total: number;
-  currentPage: number;
-  lastPage: number;
   hasNextPage: boolean;
 };
 
@@ -56,9 +118,12 @@ export type SearchResponse = {
     };
   };
 };
+//
 
+//details
 export type DetailsResponse = {
   data: {
     Media: AniListMediaDetails;
   };
 };
+//

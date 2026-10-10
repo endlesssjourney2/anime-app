@@ -1,8 +1,11 @@
 import axios from "axios";
 import type {
+  AniListFormat,
+  AniListGenre,
   AniListMedia,
   AniListMediaDetails,
   AniListPageInfo,
+  AniListStatus,
   DetailsResponse,
   SearchResponse,
 } from "../types/AniList";
@@ -12,15 +15,14 @@ const ANILIST_URL = "https://graphql.anilist.co";
 //GraphQL
 
 const SEARCH_QUERY = `
-  query ($search: String, $page: Int, $perPage: Int, $sort: [MediaSort]) {
+  query ($search: String, $page: Int, $perPage: Int, $sort: [MediaSort], $formatIn: [MediaFormat]
+  $statusIn: [MediaStatus], $genreIn: [String]) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
-        total
-        currentPage
-        lastPage
         hasNextPage
       }
-      media(search: $search, type: ANIME, sort: $sort) {
+      media(search: $search, type: ANIME, sort: $sort, format_in: $formatIn, status_in: $statusIn,
+      genre_in: $genreIn) {
         id
         title { romaji english native }
         coverImage { large medium }
@@ -34,7 +36,7 @@ const SEARCH_QUERY = `
 
 // One anime details query
 const DETAILS_QUERY = `
-  query ($id: Int) {
+  query ($id: Int, $isMain: Boolean) {
     Media(id: $id, type: ANIME) {
       id
       title { romaji english native }
@@ -45,14 +47,24 @@ const DETAILS_QUERY = `
       episodes
       status
       genres
-      startDate {year}
-      characters(sort: FAVOURITES_DESC, perPage: 8) {
+      format
+      startDate {year month day}
+      endDate {year month day}
+      season
+      seasonYear
+      characters(sort: ROLE, perPage: 9) {
         edges {
           role
           node {
             id
-            name{full}
+            name{full, native}
             image{large}
+            gender
+            dateOfBirth {
+              month
+              day
+            }
+            age
           }
         }
       }
@@ -64,8 +76,63 @@ const DETAILS_QUERY = `
           title { romaji english }
           coverImage { large }
           type
+          format
+          status
+          episodes
+          averageScore
           }
         }
+      }
+      recommendations(perPage: 6) {
+        nodes {
+          mediaRecommendation {
+            id
+            title {
+              romaji
+              english
+              native
+            }
+            type
+            format
+            coverImage {
+              large
+              medium
+            }
+            averageScore
+            episodes
+            genres
+          }
+        }
+      }
+      nextAiringEpisode {
+        episode
+        timeUntilAiring
+      }
+      duration
+      externalLinks {
+        url
+        color
+        site
+        type
+      }
+      trailer {
+        site
+        id
+        thumbnail
+      }
+      studios(isMain: $isMain) {
+        nodes {
+          name
+        }
+      }
+      rankings {
+        allTime
+        rank
+        type
+        format
+        context
+        year
+        season
       }
     }
   }
@@ -75,13 +142,24 @@ export const searchAnime = async (
   search = "",
   page = 1,
   perPage = 10,
-  sort: string[] = ["SCORE_DESC"],
+  sort: string[] = [],
+  formatIn: AniListFormat[],
+  statusIn: AniListStatus[],
+  genreIn: AniListGenre[],
 ): Promise<{ media: AniListMedia[]; pageInfo: AniListPageInfo }> => {
   const response = await axios.post<SearchResponse>(
     ANILIST_URL,
     {
       query: SEARCH_QUERY,
-      variables: { search: search || undefined, page, perPage, sort },
+      variables: {
+        search: search || undefined,
+        page,
+        perPage,
+        sort,
+        formatIn: formatIn.length ? formatIn : undefined,
+        statusIn: statusIn.length ? statusIn : undefined,
+        genreIn: genreIn.length ? genreIn : undefined,
+      },
     },
     { headers: { "Content-Type": "application/json" } },
   );
@@ -91,10 +169,11 @@ export const searchAnime = async (
 
 export const getAnimeById = async (
   id: number,
+  isMain = true,
 ): Promise<AniListMediaDetails> => {
   const response = await axios.post<DetailsResponse>(
     ANILIST_URL,
-    { query: DETAILS_QUERY, variables: { id } },
+    { query: DETAILS_QUERY, variables: { id, isMain } },
     { headers: { "Content-Type": "application/json" } },
   );
 

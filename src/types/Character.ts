@@ -1,7 +1,15 @@
-type CharacterNode = {
+export type CharacterNode = {
   id: number;
-  name: { full: string };
+  name: { full: string | null; native: string | null };
   image: { large: string };
+  dateOfBirth: DateOfBirth;
+  age: string | null;
+  gender: string | null;
+};
+
+type DateOfBirth = {
+  month: number | null;
+  day: number | null;
 };
 
 export type CharacterRole = "MAIN" | "SUPPORTING" | "BACKGROUND";
@@ -11,6 +19,6 @@ type CharacterEdge = {
   node: CharacterNode;
 };
 
-export type AnilistCharacters = {
+export type AniListCharacters = {
   edges: CharacterEdge[];
 };

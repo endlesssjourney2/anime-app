@@ -1,12 +1,15 @@
 import type { FC } from "react";
 import s from "./RelationCard.module.css";
-import type { AniListRelation } from "../../../../../../types/Relation";
+import type { AniListRelation, RelationNode } from "../../../../../../types/Relation";
+import { getEpisodeInfo } from "../../../../../../helpers/getEpisodeInfo";
+import ScoreBadge from "../../../../../../features/components/ScoreBadge/ScoreBadge";
+import StatusBadge from "../../../../../../features/components/StatusBadge/StatusBadge";
+import { Link } from "react-router-dom";
+import { FORMAT_LABELS } from "../../../../../../constants/filtersOptions";
 
 type Props = {
-  onClick: () => void;
   relationType: AniListRelation;
-  title: string;
-  image: string;
+  anime: RelationNode;
 };
 
 export const RELATION_LABELS: Record<
@@ -27,15 +30,33 @@ export const RELATION_LABELS: Record<
   SAME_UNIVERSE: "Same universe",
 };
 
-const RelationCard: FC<Props> = ({ relationType, title, image, onClick }) => {
+const RelationCard: FC<Props> = ({
+  relationType,
+
+  anime,
+}) => {
+  const { episodesText } = getEpisodeInfo(anime.episodes, null);
+  const image = anime.coverImage.large ?? anime.coverImage.medium;
+  const title = anime.title.english ?? anime.title.romaji ?? anime.title.native;
+
   return (
-    <div className={s.item}>
-      <img className={s.image} src={image} alt={title} onClick={onClick} />
-      <p className={s.title}>{title}</p>
-      <p className={`${s.relationType} ${s[relationType]}`}>
-        {RELATION_LABELS[relationType]}
-      </p>
-    </div>
+    <Link className={s.item} to={`/anime/${anime.id}`}>
+      <img className={s.image} src={image} alt={title} />
+      <div className={s.info}>
+        <div className={s.header}>
+          <span className={s.title}>{title}</span>
+          <ScoreBadge score={anime.averageScore} />
+        </div>
+        <div className={s.meta}>
+          <span className={s.metaItem}>{FORMAT_LABELS[anime.format]}</span>
+          <span className={s.metaItem}>{episodesText}</span>
+          <StatusBadge status={anime.status} />
+        </div>
+        <span className={`${s.relationType} ${s[relationType]}`}>
+          {RELATION_LABELS[relationType]}
+        </span>
+      </div>
+    </Link>
   );
 };
 

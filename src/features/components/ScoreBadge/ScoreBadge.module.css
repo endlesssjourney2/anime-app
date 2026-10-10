@@ -1,0 +1,16 @@
+.score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: var(--color-score-bg);
+  border: 1px solid var(--color-score-border);
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.scoreValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-score);
+}

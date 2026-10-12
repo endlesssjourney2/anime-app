@@ -1,0 +1,54 @@
+.header {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.characterImage {
+  object-fit: cover;
+  border-radius: 18px;
+  max-height: 345px;
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+}
+
+.full {
+  font-size: 32px;
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+}
+
+.native {
+  font-size: 28px;
+  color: var(--color-text-secondary);
+}
+
+.other {
+  margin: 12px 0 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  padding: 6px 10px;
+  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-btn-border);
+  color: var(--color-text-secondary);
+  border-radius: 8px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5px;
+}

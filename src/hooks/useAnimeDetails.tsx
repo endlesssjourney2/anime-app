@@ -23,8 +23,7 @@ const useAnimeDetails = (id: number) => {
         .trim()
     : null;
 
-  const animeTitle =
-    anime?.title.english ?? anime?.title.native ?? anime?.title.romaji;
+  const animeTitle = anime?.title.english ?? anime?.title.native ?? anime?.title.romaji;
 
   return { anime, clearDescription, animeTitle, loading };
 };

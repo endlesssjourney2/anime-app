@@ -11,9 +11,7 @@ type Props = {
 };
 
 const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
-  const timeUntilAiring = airingTimeFormatter(
-    anime?.nextAiringEpisode?.timeUntilAiring,
-  );
+  const timeUntilAiring = airingTimeFormatter(anime?.nextAiringEpisode?.timeUntilAiring);
 
   return (
     <>
@@ -24,11 +22,7 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
 
       <div className={s.headerBlock}>
         <div className={s.imgInfo}>
-          <img
-            className={s.poster}
-            src={anime?.coverImage.large}
-            alt={animeTitle}
-          />
+          <img className={s.poster} src={anime?.coverImage.large} alt={animeTitle} />
           {anime?.status === "RELEASING" && (
             <div className={s.nextAiring}>
               <span className={s.episodeNumber}>

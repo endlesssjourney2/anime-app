@@ -9,6 +9,7 @@
 body {
   min-height: 100vh;
   background-color: var(--color-bg);
+  font-family: "Inter", sans-serif;
 }
 
 ul {

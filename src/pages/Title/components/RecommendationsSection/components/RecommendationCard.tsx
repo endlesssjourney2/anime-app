@@ -4,7 +4,7 @@ import ScoreBadge from "../../../../../features/components/ScoreBadge/ScoreBadge
 import type { MediaRecommendation } from "../../../../../types/Recommendations";
 import { getEpisodeInfo } from "../../../../../helpers/getEpisodeInfo";
 import { Link } from "react-router-dom";
-import { FORMAT_LABELS } from "../../../../../constants/filtersOptions";
+import FormatBadge from "../../../../../features/components/FormatBadge/FormatBadge";
 
 type Props = {
   anime: MediaRecommendation;
@@ -28,9 +28,7 @@ const RecommendationCard: FC<Props> = ({ anime }) => {
           <span className={s.title}>{title}</span>
           <ScoreBadge score={anime.averageScore} />
           <div className={s.meta}>
-            {anime.format && (
-              <span className={s.metaItem}>{FORMAT_LABELS[anime.format]}</span>
-            )}
+            {anime.format && <FormatBadge format={anime.format} variant="compact" />}
             <span className={s.metaItem}>{episodesText}</span>
           </div>
         </div>

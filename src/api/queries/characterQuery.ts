@@ -8,16 +8,18 @@ export const CHARACTER_QUERY = `
       dateOfBirth { month day }
       age
       media(type: $type, sort: $sort) {
-      nodes {
-        title {
-          english
-          romaji
-          native
-        }
-        id
-        type
-        format
-        coverImage { large medium }
+      edges {
+        characterRole
+        node {
+          title { english romaji native }
+          id
+          type
+          format
+          status
+          coverImage { large medium }
+          episodes
+          seasonYear
+          }
         }
       }
     }

@@ -1,16 +1,24 @@
-import type { AniListFormat, AniListImage, AniListTitle } from "./AniList";
-import type { DateOfBirth } from "./Character";
+import type { AniListFormat, AniListImage, AniListStatus, AniListTitle } from "./AniList";
+import type { CharacterRole, DateOfBirth } from "./Character";
 
 export type MediaNode = {
   id: number;
   title: AniListTitle;
   type: "ANIME";
   format: AniListFormat | null;
+  status: AniListStatus | null;
   coverImage: AniListImage | null;
+  episodes: number | null;
+  seasonYear: number | null;
 };
 
-type CharacterMedia = {
-  nodes: MediaNode[];
+type MediaEdges = {
+  characterRole: CharacterRole;
+  node: MediaNode;
+};
+
+export type CharacterMedia = {
+  edges: MediaEdges[];
 };
 
 //character fields

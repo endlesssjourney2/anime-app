@@ -1,0 +1,56 @@
+.item {
+  display: flex;
+  max-height: 175px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.item:hover {
+  background: var(--color-card-hover);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.image {
+  width: 140px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  min-width: 0;
+  flex-direction: column;
+  padding: 9px 10px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.seasonInfo {
+  margin-top: auto;
+  color: var(--color-text-secondary);
+}

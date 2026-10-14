@@ -5,12 +5,15 @@ import { STATUS_LABELS } from "../../../constants/filtersOptions";
 
 type Props = {
   status: AniListStatus;
+  variant?: "default" | "compact";
 };
 
-const StatusBadge: FC<Props> = ({ status }) => {
-  return (
-    <span className={`${s.badge} ${s[status]}`}>{STATUS_LABELS[status]}</span>
-  );
+const StatusBadge: FC<Props> = ({ status, variant = "default" }) => {
+  if (variant === "compact") {
+    return <span className={`${s.compact} ${s[status]}`}>{STATUS_LABELS[status]}</span>;
+  }
+
+  return <span className={s.badge}>{STATUS_LABELS[status]}</span>;
 };
 
 export default StatusBadge;

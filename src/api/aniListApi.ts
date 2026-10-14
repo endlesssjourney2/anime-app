@@ -61,10 +61,12 @@ export const getAnimeById = async (
 
 export const getCharacterById = async (
   characterId: number,
+  type = "ANIME",
+  sort = ["START_DATE_DESC"],
 ): Promise<AniListCharacterDetails> => {
   const response = await axios.post<CharacterResponse>(
     ANILIST_URL,
-    { query: CHARACTER_QUERY, variables: { characterId } },
+    { query: CHARACTER_QUERY, variables: { characterId, type, sort } },
     { headers: { "Content-Type": "application/json" } },
   );
 

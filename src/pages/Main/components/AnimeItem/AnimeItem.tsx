@@ -21,7 +21,7 @@ const AnimeItem: FC<Props> = ({ anime }) => {
         <span className={s.genres}>{anime.genres.join(", ")}</span>
         <div className={s.info}>
           <span className={s.avgScore}>{anime.averageScore}</span>
-          <StatusBadge status={anime.status} />
+          <StatusBadge status={anime.status} variant="compact" />
         </div>
       </div>
     </Link>

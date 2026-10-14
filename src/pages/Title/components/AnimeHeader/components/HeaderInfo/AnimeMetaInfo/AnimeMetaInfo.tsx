@@ -25,7 +25,7 @@ const AnimeMetaInfo: FC<Props> = ({ anime }) => {
     <div className={s.meta}>
       <div className={s.metaGenres}>
         <span className={s.genres}>{anime.genres.join(" · ")}</span>
-        <StatusBadge status={anime.status} />
+        <StatusBadge status={anime.status} variant="compact" />
       </div>
       <div className={s.metaItems}>
         <FormatBadge format={anime.format} />

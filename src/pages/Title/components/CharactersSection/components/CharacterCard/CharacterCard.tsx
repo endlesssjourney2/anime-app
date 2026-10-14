@@ -10,6 +10,7 @@ import type { CharacterNode, CharacterRole } from "../../../../../../types/Chara
 import s from "./CharacterCard.module.css";
 import type { FC } from "react";
 import { Link } from "react-router-dom";
+import RoleBadge from "../../../../../../features/components/RoleBadge/RoleBadge";
 
 type Props = {
   role: CharacterRole;
@@ -33,7 +34,7 @@ const CharacterCard: FC<Props> = ({ role, character }) => {
           <span className={s.nameNative}>{character.name.native}</span>
         </div>
         <div className={s.mid}>
-          <span className={`${s.role} ${s[role]}`}>{role}</span>
+          <RoleBadge role={role} />
         </div>
         <div className={s.meta}>
           <span className={`${s.metaItem} ${s.age}`}>

@@ -1,8 +1,4 @@
-import type {
-  AniListFormat,
-  AniListGenre,
-  AniListStatus,
-} from "../types/AniList";
+import type { AniListFormat, AniListGenre, AniListStatus } from "../types/AniList";
 import type { AniListSort } from "../types/AniListSort";
 import { AniListGenreCollection } from "./collections";
 

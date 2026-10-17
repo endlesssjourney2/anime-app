@@ -6,6 +6,7 @@ import type {
   AniListMediaDetails,
   AniListPageInfo,
   AniListStatus,
+  AniListType,
   CharacterResponse,
   DetailsResponse,
   SearchResponse,
@@ -61,8 +62,8 @@ export const getAnimeById = async (
 
 export const getCharacterById = async (
   characterId: number,
-  type = "ANIME",
-  sort = ["START_DATE_DESC"],
+  type: AniListType,
+  sort: string[] = [],
 ): Promise<AniListCharacterDetails> => {
   const response = await axios.post<CharacterResponse>(
     ANILIST_URL,

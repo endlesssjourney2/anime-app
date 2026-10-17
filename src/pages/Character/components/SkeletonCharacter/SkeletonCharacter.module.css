@@ -1,0 +1,124 @@
+.header {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.img {
+  height: 345px;
+  width: 230px;
+  border-radius: 18px;
+}
+
+.details {
+  flex: 1;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.other {
+  margin: 12px 0 12px 0;
+  display: flex;
+  gap: 8px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.section {
+  margin-top: 30px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 12px;
+}
+
+.item {
+  display: flex;
+  height: 175px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.itemInfo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 9px 10px;
+}
+
+.itemDetails {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.season {
+  margin-top: auto;
+}
+
+.nameItem,
+.otherItem,
+.infoItem,
+.descItem {
+  border-radius: 6px;
+}
+
+.img,
+.nameItem,
+.otherItem,
+.descItem,
+.infoItem {
+  background: linear-gradient(
+    90deg,
+    var(--color-card) 25%,
+    var(--color-card-hover) 50%,
+    var(--color-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.itemImg,
+.title,
+.detItem,
+.season {
+  background: linear-gradient(
+    90deg,
+    var(--color-btn-bg) 25%,
+    var(--color-btn-bg-hover) 50%,
+    var(--color-btn-bg) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

@@ -1,11 +1,11 @@
 import s from "./Character.module.css";
 import { useParams } from "react-router-dom";
 import useCharacterDetails from "../../hooks/useCharacterDetails";
-import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
 import CharacterHeader from "./components/CharacterHeader/CharacterHeader";
 import CharacterMediaItem from "./components/CharacterMediaItem/CharacterMediaItem";
 import SortSelect from "../../features/components/SortSelect/SortSelect";
 import { SORT_OPTIONS_CHARACTERS } from "../../constants/filtersOptions";
+import SkeletonCharacter from "./components/SkeletonCharacter/SkeletonCharacter";
 
 const Character = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const Character = () => {
   return (
     <div className={s.characterPage}>
       {loading ? (
-        <LoadingComponent />
+        <SkeletonCharacter />
       ) : (
         <>
           <CharacterHeader character={character} />

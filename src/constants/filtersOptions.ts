@@ -1,5 +1,5 @@
 import type { AniListFormat, AniListGenre, AniListStatus } from "../types/AniList";
-import type { AniListSort } from "../types/AniListSort";
+import type { AniListSort, AniListSortCharacter } from "../types/AniListSort";
 import { AniListGenreCollection } from "./collections";
 
 export const GENRE_OPTIONS: { value: AniListGenre; label: string }[] =
@@ -48,4 +48,12 @@ export const SORT_OPTIONS: { value: AniListSort; label: string }[] = [
   { value: "SCORE_DESC", label: "Score" },
   { value: "POPULARITY_DESC", label: "Popularity" },
   { value: "TRENDING_DESC", label: "Trending" },
+];
+
+export const SORT_OPTIONS_CHARACTERS: { value: AniListSortCharacter; label: string }[] = [
+  { value: "SCORE_DESC", label: "Score" },
+  { value: "POPULARITY_DESC", label: "Popularity" },
+  { value: "TRENDING_DESC", label: "Trending" },
+  { value: "START_DATE_DESC", label: "Newest" },
+  { value: "START_DATE", label: "Oldest" },
 ];

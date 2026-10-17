@@ -1,10 +1,16 @@
-import type { AniListFormat, AniListImage, AniListStatus, AniListTitle } from "./AniList";
+import type {
+  AniListFormat,
+  AniListImage,
+  AniListStatus,
+  AniListTitle,
+  AniListType,
+} from "./AniList";
 import type { CharacterRole, DateOfBirth } from "./Character";
 
 export type MediaNode = {
   id: number;
   title: AniListTitle;
-  type: "ANIME";
+  type: AniListType | null;
   format: AniListFormat | null;
   status: AniListStatus | null;
   coverImage: AniListImage | null;

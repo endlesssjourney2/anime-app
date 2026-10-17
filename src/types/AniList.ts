@@ -24,6 +24,10 @@ export type AniListImage = {
 };
 //
 
+//type
+export type AniListType = "ANIME" | "MANGA";
+//
+
 //studios
 export type AniListStudiosNode = {
   name: string;

@@ -1,13 +1,13 @@
-import type { AniListFormat, AniListImage, AniListTitle } from "./AniList";
+import type { AniListFormat, AniListImage, AniListTitle, AniListType } from "./AniList";
 
 export type MediaRecommendation = {
   id: number;
   title: AniListTitle;
-  type: "ANIME" | "MANGA" | null;
+  type: AniListType | null;
   format: AniListFormat | null;
-  coverImage: AniListImage;
+  coverImage: AniListImage | null;
   averageScore: number | null;
-  episodes: number;
+  episodes: number | null;
   genres: string[];
 };
 

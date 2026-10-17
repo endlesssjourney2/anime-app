@@ -4,11 +4,13 @@ import useCharacterDetails from "../../hooks/useCharacterDetails";
 import LoadingComponent from "../../features/components/LoadingComponent/LoadingComponent";
 import CharacterHeader from "./components/CharacterHeader/CharacterHeader";
 import CharacterMediaItem from "./components/CharacterMediaItem/CharacterMediaItem";
+import SortSelect from "../../features/components/SortSelect/SortSelect";
+import { SORT_OPTIONS_CHARACTERS } from "../../constants/filtersOptions";
 
 const Character = () => {
   const { id } = useParams();
 
-  const { character, loading } = useCharacterDetails(Number(id));
+  const { character, loading, sort, setSort } = useCharacterDetails(Number(id));
 
   return (
     <div className={s.characterPage}>
@@ -20,6 +22,11 @@ const Character = () => {
           <div className={s.section}>
             <div className={s.appearanceInfo}>
               <span>Appearance {character?.media.edges.length ?? 0}</span>
+              <SortSelect
+                sort={sort}
+                setSort={(value) => setSort(value)}
+                options={SORT_OPTIONS_CHARACTERS}
+              />
             </div>
             <div className={s.appearanceList}>
               {character?.media.edges.map((m) => (

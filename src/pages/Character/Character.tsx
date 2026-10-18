@@ -12,6 +12,8 @@ const Character = () => {
 
   const { character, loading, sort, setSort } = useCharacterDetails(Number(id));
 
+  const appearanceLength = character?.media.edges.length;
+
   return (
     <div className={s.characterPage}>
       {loading ? (
@@ -21,7 +23,7 @@ const Character = () => {
           <CharacterHeader character={character} />
           <div className={s.section}>
             <div className={s.appearanceInfo}>
-              <span>Appearance {character?.media.edges.length ?? 0}</span>
+              <span>Media Appearance ({appearanceLength})</span>
               <SortSelect
                 sort={sort}
                 setSort={(value) => setSort(value)}

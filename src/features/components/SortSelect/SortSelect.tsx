@@ -1,6 +1,6 @@
 import * as Select from "@radix-ui/react-select";
 import s from "./SortSelect.module.css";
-import { IconCheck, IconMenu2 } from "@tabler/icons-react";
+import { IconArrowsSort, IconCheck } from "@tabler/icons-react";
 
 type SelectOptions<T extends string> = {
   value: T;
@@ -29,7 +29,7 @@ const SortSelect = <T extends string>({
           {trigger ? (
             <span>{trigger}</span>
           ) : (
-            <Select.Icon className={s.icon}>{<IconMenu2 size={13} />}</Select.Icon>
+            <Select.Icon className={s.icon}>{<IconArrowsSort size={13} />}</Select.Icon>
           )}
         </button>
       </Select.Trigger>

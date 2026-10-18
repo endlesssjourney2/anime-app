@@ -7,7 +7,7 @@ export type CharacterNode = {
   gender: string | null;
 };
 
-type DateOfBirth = {
+export type DateOfBirth = {
   month: number | null;
   day: number | null;
 };

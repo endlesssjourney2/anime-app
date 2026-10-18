@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import Main from "./pages/Main/Main";
 import AnimeDetails from "./pages/Title/AnimeDetails";
+import Character from "./pages/Character/Character";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Main /> },
       { path: "anime/:id", element: <AnimeDetails /> },
+      { path: "character/:id", element: <Character /> },
     ],
   },
 ]);

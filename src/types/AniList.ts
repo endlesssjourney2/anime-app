@@ -7,6 +7,7 @@ import {
 } from "../constants/collections";
 import type { AniListRankings } from "./Rankings";
 import type { AniListRecommendation } from "./Recommendations";
+import type { AniListCharacterDetails } from "./CharacterDetails";
 
 //title
 export type AniListTitle = {
@@ -21,6 +22,10 @@ export type AniListImage = {
   large: string;
   medium: string;
 };
+//
+
+//type
+export type AniListType = "ANIME" | "MANGA";
 //
 
 //studios
@@ -127,3 +132,9 @@ export type DetailsResponse = {
   };
 };
 //
+
+export type CharacterResponse = {
+  data: {
+    Character: AniListCharacterDetails;
+  };
+};

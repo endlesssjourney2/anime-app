@@ -6,11 +6,12 @@ import type {
   AniListGenre,
   AniListStatus,
 } from "../../../../types/AniList";
-import SortSelect from "./SortSelect/SortSelect";
+import SortSelect from "../../../../features/components/SortSelect/SortSelect";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import {
   FORMAT_OPTIONS,
   GENRE_OPTIONS,
+  SORT_OPTIONS,
   STATUS_OPTIONS,
 } from "../../../../constants/filtersOptions";
 import FiltersBadges from "./FiltersBadges/FiltersBadges";
@@ -88,7 +89,7 @@ const SearchControls: FC<Props> = ({
             setSelected={setGenres}
           />
         </div>
-        <SortSelect sort={sort} setSort={setSort} />
+        <SortSelect sort={sort} setSort={setSort} options={SORT_OPTIONS} />
       </div>
       <div>
         <FiltersBadges onRemove={onRemove} />

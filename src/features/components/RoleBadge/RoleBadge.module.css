@@ -1,0 +1,25 @@
+.role {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+.MAIN {
+  color: var(--color-role-main);
+  background: var(--color-role-main-bg);
+  border-color: var(--color-role-main-border);
+}
+
+.SUPPORTING {
+  color: var(--color-role-supporting);
+  background: var(--color-role-supporting-bg);
+  border-color: var(--color-role-supporting-border);
+}
+
+.BACKGROUND {
+  color: var(--color-role-background);
+  background: var(--color-role-background-bg);
+  border-color: var(--color-role-background-border);
+}

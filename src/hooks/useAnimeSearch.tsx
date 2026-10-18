@@ -23,8 +23,7 @@ const useAnimeSearch = (perPage: number) => {
     useSortOptions<AniListFormat>("format");
   const { selected: statuses, toggle: setStatuses } =
     useSortOptions<AniListStatus>("status");
-  const { selected: genres, toggle: setGenres } =
-    useSortOptions<AniListGenre>("genre");
+  const { selected: genres, toggle: setGenres } = useSortOptions<AniListGenre>("genre");
 
   const initialLoading = loading && page === 1;
   const loadMoreLoading = loading && page > 1;
@@ -43,15 +42,7 @@ const useAnimeSearch = (perPage: number) => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    searchAnime(
-      debouncedSearchItem,
-      page,
-      perPage,
-      [sort],
-      formats,
-      statuses,
-      genres,
-    )
+    searchAnime(debouncedSearchItem, page, perPage, [sort], formats, statuses, genres)
       .then((result) => {
         if (cancelled) return;
         if (page === 1) {

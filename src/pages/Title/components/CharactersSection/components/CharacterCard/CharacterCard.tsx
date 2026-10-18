@@ -9,6 +9,8 @@ import { checkBirthday } from "../../../../../../helpers/checkBirthday";
 import type { CharacterNode, CharacterRole } from "../../../../../../types/Character";
 import s from "./CharacterCard.module.css";
 import type { FC } from "react";
+import { Link } from "react-router-dom";
+import RoleBadge from "../../../../../../features/components/RoleBadge/RoleBadge";
 
 type Props = {
   role: CharacterRole;
@@ -21,10 +23,10 @@ const CharacterCard: FC<Props> = ({ role, character }) => {
       ? IconGenderMale
       : character.gender === "Female"
         ? IconGenderFemale
-        : null;
+        : IconQuestionMark;
 
   return (
-    <div className={s.item}>
+    <Link to={`/character/${character.id}`} className={s.item}>
       <img className={s.image} src={character.image.large} alt={character.name.native} />
       <div className={s.info}>
         <div className={s.header}>
@@ -32,7 +34,7 @@ const CharacterCard: FC<Props> = ({ role, character }) => {
           <span className={s.nameNative}>{character.name.native}</span>
         </div>
         <div className={s.mid}>
-          <span className={`${s.role} ${s[role]}`}>{role}</span>
+          <RoleBadge role={role} />
         </div>
         <div className={s.meta}>
           <span className={`${s.metaItem} ${s.age}`}>
@@ -44,12 +46,12 @@ const CharacterCard: FC<Props> = ({ role, character }) => {
             {checkBirthday(character.dateOfBirth.day, character.dateOfBirth.month)}
           </span>
           <span className={`${s.metaItem} ${s.gender}`}>
-            {GenderIcon ? <GenderIcon size={13} /> : <IconQuestionMark size={13} />}
+            <GenderIcon size={13} />
             {character.gender ?? "Unknown"}
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

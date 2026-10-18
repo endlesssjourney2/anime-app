@@ -6,137 +6,17 @@ import type {
   AniListMediaDetails,
   AniListPageInfo,
   AniListStatus,
+  AniListType,
+  CharacterResponse,
   DetailsResponse,
   SearchResponse,
 } from "../types/AniList";
+import { SEARCH_QUERY } from "./queries/searchQuery";
+import { DETAILS_QUERY } from "./queries/detailsQuery";
+import type { AniListCharacterDetails } from "../types/CharacterDetails";
+import { CHARACTER_QUERY } from "./queries/characterQuery";
 
 const ANILIST_URL = "https://graphql.anilist.co";
-
-//GraphQL
-
-const SEARCH_QUERY = `
-  query ($search: String, $page: Int, $perPage: Int, $sort: [MediaSort], $formatIn: [MediaFormat]
-  $statusIn: [MediaStatus], $genreIn: [String]) {
-    Page(page: $page, perPage: $perPage) {
-      pageInfo {
-        hasNextPage
-      }
-      media(search: $search, type: ANIME, sort: $sort, format_in: $formatIn, status_in: $statusIn,
-      genre_in: $genreIn) {
-        id
-        title { romaji english native }
-        coverImage { large medium }
-        averageScore
-        genres
-        status
-      }
-    }
-  }
-`;
-
-// One anime details query
-const DETAILS_QUERY = `
-  query ($id: Int, $isMain: Boolean) {
-    Media(id: $id, type: ANIME) {
-      id
-      title { romaji english native }
-      description
-      coverImage { large medium }
-      bannerImage
-      averageScore
-      episodes
-      status
-      genres
-      format
-      startDate {year month day}
-      endDate {year month day}
-      season
-      seasonYear
-      characters(sort: ROLE, perPage: 9) {
-        edges {
-          role
-          node {
-            id
-            name{full, native}
-            image{large}
-            gender
-            dateOfBirth {
-              month
-              day
-            }
-            age
-          }
-        }
-      }
-      relations {
-      edges {
-        relationType
-        node {
-          id
-          title { romaji english }
-          coverImage { large }
-          type
-          format
-          status
-          episodes
-          averageScore
-          }
-        }
-      }
-      recommendations(perPage: 6) {
-        nodes {
-          mediaRecommendation {
-            id
-            title {
-              romaji
-              english
-              native
-            }
-            type
-            format
-            coverImage {
-              large
-              medium
-            }
-            averageScore
-            episodes
-            genres
-          }
-        }
-      }
-      nextAiringEpisode {
-        episode
-        timeUntilAiring
-      }
-      duration
-      externalLinks {
-        url
-        color
-        site
-        type
-      }
-      trailer {
-        site
-        id
-        thumbnail
-      }
-      studios(isMain: $isMain) {
-        nodes {
-          name
-        }
-      }
-      rankings {
-        allTime
-        rank
-        type
-        format
-        context
-        year
-        season
-      }
-    }
-  }
-`;
 
 export const searchAnime = async (
   search = "",
@@ -178,4 +58,18 @@ export const getAnimeById = async (
   );
 
   return response.data.data.Media;
+};
+
+export const getCharacterById = async (
+  characterId: number,
+  type: AniListType,
+  sort: string[] = [],
+): Promise<AniListCharacterDetails> => {
+  const response = await axios.post<CharacterResponse>(
+    ANILIST_URL,
+    { query: CHARACTER_QUERY, variables: { characterId, type, sort } },
+    { headers: { "Content-Type": "application/json" } },
+  );
+
+  return response.data.data.Character;
 };

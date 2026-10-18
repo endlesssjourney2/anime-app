@@ -15,6 +15,8 @@ import { SEARCH_QUERY } from "./queries/searchQuery";
 import { DETAILS_QUERY } from "./queries/detailsQuery";
 import type { AniListCharacterDetails } from "../types/CharacterDetails";
 import { CHARACTER_QUERY } from "./queries/characterQuery";
+import { CHARACTER_SEARCH_QUERY } from "./queries/characterSearchQuery";
+import type { CharacterSearch, CharacterSearchResponse } from "../types/CharacterSearch";
 
 const ANILIST_URL = "https://graphql.anilist.co";
 
@@ -32,7 +34,7 @@ export const searchAnime = async (
     {
       query: SEARCH_QUERY,
       variables: {
-        search: search || undefined,
+        search: search.trim() || undefined,
         page,
         perPage,
         sort,
@@ -58,6 +60,23 @@ export const getAnimeById = async (
   );
 
   return response.data.data.Media;
+};
+
+export const searchCharacter = async (
+  search: string,
+  perPage = 18,
+  sort = search.trim() ? ["SEARCH_MATCH"] : ["FAVOURITES_DESC"],
+): Promise<CharacterSearch[]> => {
+  const response = await axios.post<CharacterSearchResponse>(
+    ANILIST_URL,
+    {
+      query: CHARACTER_SEARCH_QUERY,
+      variables: { search: search.trim() || undefined, perPage, sort },
+    },
+    { headers: { "Content-Type": "application/json" } },
+  );
+
+  return response.data.data.Page.characters;
 };
 
 export const getCharacterById = async (

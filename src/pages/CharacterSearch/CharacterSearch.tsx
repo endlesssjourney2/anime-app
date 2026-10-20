@@ -8,7 +8,7 @@ const CharacterSearch = () => {
     useCharacterSearch();
 
   const handleLoadMore = () => {
-    if (!pageInfo?.hasNextPage) return;
+    if (loadMoreLoading || !pageInfo?.hasNextPage) return;
     setPage((prev) => prev + 1);
   };
 

@@ -3,7 +3,7 @@ import s from "./Main.module.css";
 import AnimeItem from "./components/AnimeItem/AnimeItem";
 import SearchControls from "./components/SearchControls/SearchControls";
 import SkeletonMain from "./components/SkeletonMain/SkeletonMain";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import LoadMoreBtn from "../../features/components/LoadMoreBtn/LoadMoreBtn";
 
 const Main = () => {
   const {

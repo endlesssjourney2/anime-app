@@ -64,19 +64,20 @@ export const getAnimeById = async (
 
 export const searchCharacter = async (
   search: string,
-  perPage = 18,
+  perPage: number,
+  page: number,
   sort = search.trim() ? ["SEARCH_MATCH"] : ["FAVOURITES_DESC"],
-): Promise<CharacterSearch[]> => {
+): Promise<{ characters: CharacterSearch[]; pageInfo: AniListPageInfo }> => {
   const response = await axios.post<CharacterSearchResponse>(
     ANILIST_URL,
     {
       query: CHARACTER_SEARCH_QUERY,
-      variables: { search: search.trim() || undefined, perPage, sort },
+      variables: { search: search.trim() || undefined, perPage, page, sort },
     },
     { headers: { "Content-Type": "application/json" } },
   );
 
-  return response.data.data.Page.characters;
+  return response.data.data.Page;
 };
 
 export const getCharacterById = async (

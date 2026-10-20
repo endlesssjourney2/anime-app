@@ -1,4 +1,4 @@
-import type { AniListImage } from "./AniList";
+import type { AniListImage, AniListPageInfo } from "./AniList";
 
 export type CharacterSearch = {
   id: number;
@@ -10,6 +10,7 @@ export type CharacterSearchResponse = {
   data: {
     Page: {
       characters: CharacterSearch[];
+      pageInfo: AniListPageInfo;
     };
   };
 };

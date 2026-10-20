@@ -1,0 +1,64 @@
+.charactersPage {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0px 10px 10px 10px;
+}
+
+.header {
+  margin: 30px 0 30px 0;
+}
+
+.headerTitle {
+  color: var(--color-text-primary);
+  font-size: 30px;
+  font-family: var(--font-heading);
+  font-weight: 300;
+  text-align: center;
+}
+
+.search {
+  margin-bottom: 30px;
+}
+
+.searchInput {
+  max-width: 320px;
+  width: 100%;
+  padding: 0 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 17px;
+  outline: none;
+  height: 44px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.searchInput:hover {
+  border-color: var(--color-border-strong);
+}
+
+.searchInput:focus {
+  border-color: var(--color-accent);
+}
+
+.content {
+  width: 100%;
+}
+
+.list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}

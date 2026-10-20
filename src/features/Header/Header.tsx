@@ -11,7 +11,10 @@ const Header = () => {
 
         <nav className={s.nav}>
           <Link className={s.navLink} to="/">
-            Home
+            Anime
+          </Link>
+          <Link className={s.navLink} to={"/characters"}>
+            Characters
           </Link>
         </nav>
 

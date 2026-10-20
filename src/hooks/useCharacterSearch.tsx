@@ -50,7 +50,6 @@ const useCharacterSearch = () => {
     results,
     pageInfo,
     setPage,
-    page,
     initialLoading,
     loadMoreLoading,
   };

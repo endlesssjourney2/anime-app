@@ -22,3 +22,11 @@ type CharacterEdge = {
 export type AniListCharacters = {
   edges: CharacterEdge[];
 };
+
+export type LoadMoreCharactersResponse = {
+  data: {
+    Media: {
+      characters: AniListCharacters;
+    };
+  };
+};

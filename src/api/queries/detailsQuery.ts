@@ -21,7 +21,7 @@ export const DETAILS_QUERY = `
           role
           node {
             id
-            name{full, native}
+            name{full native}
             image{large}
             gender
             dateOfBirth {
@@ -101,3 +101,26 @@ export const DETAILS_QUERY = `
     }
   }
 `;
+
+export const CHARACTERS_QUERY = `
+  query ($id: Int, $page: Int, $perPage: Int, $sort: [CharacterSort]) {
+  Media(id: $id) {
+    characters(page: $page, perPage: $perPage, sort: $sort) {
+      edges {
+        role
+        node {
+          id
+          name{full native}
+          image{large}
+          gender
+          dateOfBirth {month day}
+          age
+        }
+      }
+      
+    }
+  }
+}
+`;
+
+// pageInfo {hasNextPage}

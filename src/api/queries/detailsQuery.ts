@@ -31,6 +31,8 @@ export const DETAILS_QUERY = `
             age
           }
         }
+        pageInfo { hasNextPage }
+        
       }
       relations {
       edges {
@@ -47,7 +49,7 @@ export const DETAILS_QUERY = `
           }
         }
       }
-      recommendations(perPage: 6) {
+      recommendations(sort: RATING_DESC, perPage: 6) {
         nodes {
           mediaRecommendation {
             id
@@ -67,6 +69,7 @@ export const DETAILS_QUERY = `
             genres
           }
         }
+        pageInfo { hasNextPage }
       }
       nextAiringEpisode {
         episode
@@ -117,10 +120,30 @@ export const CHARACTERS_QUERY = `
           age
         }
       }
-      
+      pageInfo { hasNextPage }
     }
   }
 }
 `;
 
-// pageInfo {hasNextPage}
+export const RECOMMENDATIONS_QUERY = `
+  query ($id: Int, $page: Int, $perPage: Int, $sort: [RecommendationSort]) {
+  Media(id: $id) {
+    recommendations(page: $page, perPage: $perPage, sort: $sort) {
+      nodes {
+        mediaRecommendation {
+            id
+            title { romaji english native }
+            type
+            format
+            coverImage {large medium}
+            averageScore
+            episodes
+            genres
+        }
+      }
+      pageInfo { hasNextPage }
+    }
+  }
+}
+`;

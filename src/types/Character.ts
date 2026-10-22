@@ -21,6 +21,7 @@ type CharacterEdge = {
 
 export type AniListCharacters = {
   edges: CharacterEdge[];
+  pageInfo: { hasNextPage: boolean };
 };
 
 export type LoadMoreCharactersResponse = {

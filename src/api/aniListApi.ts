@@ -12,12 +12,20 @@ import type {
   SearchResponse,
 } from "../types/AniList";
 import { SEARCH_QUERY } from "./queries/searchQuery";
-import { CHARACTERS_QUERY, DETAILS_QUERY } from "./queries/detailsQuery";
+import {
+  CHARACTERS_QUERY,
+  DETAILS_QUERY,
+  RECOMMENDATIONS_QUERY,
+} from "./queries/detailsQuery";
 import type { AniListCharacterDetails } from "../types/CharacterDetails";
 import { CHARACTER_QUERY } from "./queries/characterQuery";
 import { CHARACTER_SEARCH_QUERY } from "./queries/characterSearchQuery";
 import type { CharacterSearch, CharacterSearchResponse } from "../types/CharacterSearch";
 import type { AniListCharacters, LoadMoreCharactersResponse } from "../types/Character";
+import type {
+  AniListRecommendation,
+  LoadMoreRecommendationsResponse,
+} from "../types/Recommendations";
 
 const ANILIST_URL = "https://graphql.anilist.co";
 
@@ -76,6 +84,21 @@ export const loadMoreCharacters = async (
   );
 
   return response.data.data.Media.characters;
+};
+
+export const loadMoreRecommendations = async (
+  id: number,
+  page: number,
+  perPage = 6,
+  sort = ["RATING_DESC"],
+): Promise<AniListRecommendation> => {
+  const response = await axios.post<LoadMoreRecommendationsResponse>(
+    ANILIST_URL,
+    { query: RECOMMENDATIONS_QUERY, variables: { id, page, perPage, sort } },
+    { headers: { "Content-Type": "application/json" } },
+  );
+
+  return response.data.data.Media.recommendations;
 };
 
 export const searchCharacter = async (

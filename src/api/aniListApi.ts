@@ -31,8 +31,8 @@ const ANILIST_URL = "https://graphql.anilist.co";
 
 export const searchAnime = async (
   search = "",
-  page = 1,
-  perPage = 10,
+  page: number,
+  perPage: number,
   sort: string[] = [],
   formatIn: AniListFormat[],
   statusIn: AniListStatus[],

@@ -9,6 +9,7 @@ const useCharacterSearch = () => {
   const [results, setResults] = useState<CharacterSearch[]>([]);
   const [pageInfo, setPageInfo] = useState<AniListPageInfo | null>(null);
   const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState("18");
   const [loading, setLoading] = useState(false);
 
   const initialLoading = loading && page === 1;
@@ -19,7 +20,7 @@ const useCharacterSearch = () => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    searchCharacter(debouncedSearchItem, 18, page)
+    searchCharacter(debouncedSearchItem, Number(perPage), page)
       .then((results) => {
         if (cancelled) return;
         if (page === 1) {
@@ -38,11 +39,11 @@ const useCharacterSearch = () => {
     return () => {
       cancelled = true;
     };
-  }, [debouncedSearchItem, page]);
+  }, [debouncedSearchItem, page, perPage]);
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearchItem]);
+  }, [debouncedSearchItem, perPage]);
 
   return {
     searchItem,
@@ -50,6 +51,8 @@ const useCharacterSearch = () => {
     results,
     pageInfo,
     setPage,
+    perPage,
+    setPerPage,
     initialLoading,
     loadMoreLoading,
   };

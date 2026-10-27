@@ -12,7 +12,7 @@ import type { AniListSort } from "../types/AniListSort";
 import { useSearchParams } from "react-router-dom";
 import useSortOptions from "./useSortOptions";
 
-const useAnimeSearch = (perPage: number) => {
+const useAnimeSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchItem, setSearchItem] = useState("");
   const [results, setResults] = useState<AniListMedia[]>([]);
@@ -37,12 +37,29 @@ const useAnimeSearch = (perPage: number) => {
     });
   };
 
+  const perPage = searchParams.get("perPage") ?? "15";
+  const setPerPage = (value: string) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.set("perPage", value);
+      return next;
+    });
+  };
+
   const debouncedSearchItem = useDebounce(searchItem, 500);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    searchAnime(debouncedSearchItem, page, perPage, [sort], formats, statuses, genres)
+    searchAnime(
+      debouncedSearchItem,
+      page,
+      Number(perPage),
+      [sort],
+      formats,
+      statuses,
+      genres,
+    )
       .then((result) => {
         if (cancelled) return;
         if (page === 1) {
@@ -64,11 +81,11 @@ const useAnimeSearch = (perPage: number) => {
     return () => {
       cancelled = true;
     };
-  }, [debouncedSearchItem, page, sort, statuses, formats, genres]);
+  }, [debouncedSearchItem, page, perPage, sort, statuses, formats, genres]);
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearchItem, sort, statuses, formats, genres]);
+  }, [debouncedSearchItem, sort, perPage, statuses, formats, genres]);
 
   return {
     searchItem,
@@ -77,6 +94,8 @@ const useAnimeSearch = (perPage: number) => {
     pageInfo,
     page,
     setPage,
+    perPage,
+    setPerPage,
     sort,
     setSort,
     formats,

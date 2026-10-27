@@ -2,10 +2,19 @@ import s from "./CharacterSearch.module.css";
 import useCharacterSearch from "../../hooks/useCharacterSearch";
 import CharacterItem from "./components/CharacterItem/CharacterItem";
 import LoadMoreBtn from "../../features/components/LoadMoreBtn/LoadMoreBtn";
+import SearchControls from "./components/SearchControls/SearchControls";
 
 const CharacterSearch = () => {
-  const { setSearchItem, searchItem, results, pageInfo, setPage, loadMoreLoading } =
-    useCharacterSearch();
+  const {
+    setSearchItem,
+    searchItem,
+    perPage,
+    setPerPage,
+    results,
+    pageInfo,
+    setPage,
+    loadMoreLoading,
+  } = useCharacterSearch();
 
   const handleLoadMore = () => {
     if (loadMoreLoading || !pageInfo?.hasNextPage) return;
@@ -17,15 +26,12 @@ const CharacterSearch = () => {
       <div className={s.header}>
         <h2 className={s.headerTitle}>Search characters here</h2>
       </div>
-      <div className={s.search}>
-        <input
-          placeholder="Search character..."
-          className={s.searchInput}
-          type="text"
-          value={searchItem}
-          onChange={(e) => setSearchItem(e.target.value)}
-        />
-      </div>
+      <SearchControls
+        searchItem={searchItem}
+        setSearchItem={setSearchItem}
+        perPage={perPage}
+        setPerPage={setPerPage}
+      />
       <div className={s.content}>
         <ul className={s.list}>
           {results.map((c) => (

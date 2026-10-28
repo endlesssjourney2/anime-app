@@ -32,7 +32,9 @@ const RankingInfo: FC<Props> = ({ rankings }) => {
             </span>
           </div>
         )}
-        <div className={s.divider} />
+
+        {ratedAllTime && popularAllTime && <div className={s.divider} />}
+
         {popularAllTime && (
           <div className={`${s.metaItem} ${s.popularity}`}>
             <IconFlame size={16} />

@@ -12,11 +12,12 @@ type Props = {
   perPage: string;
   setPerPage: (v: string) => void;
   options: options[];
+  disabled?: boolean;
 };
 
-const PerPageSelect: FC<Props> = ({ perPage, setPerPage, options }) => {
+const PerPageSelect: FC<Props> = ({ perPage, setPerPage, options, disabled }) => {
   return (
-    <Select.Root value={perPage} onValueChange={setPerPage}>
+    <Select.Root value={perPage} onValueChange={setPerPage} disabled={disabled}>
       <Select.Trigger className={s.trigger}>
         <Select.Value />
       </Select.Trigger>

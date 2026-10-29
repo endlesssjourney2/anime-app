@@ -33,7 +33,13 @@ const useLoadMore = <T,>({ initialData, fetchPage, initialHasNextPage }: Props<T
     }
   };
 
-  return { items, loading, loadMore, hasNextPage };
+  const reset = (resetData: T[], hasNext: boolean) => {
+    setItems(resetData);
+    setPage(1);
+    setHasNextPage(hasNext);
+  };
+
+  return { items, loading, loadMore, hasNextPage, reset };
 };
 
 export default useLoadMore;

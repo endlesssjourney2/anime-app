@@ -74,7 +74,7 @@ export const getAnimeById = async (
 export const loadMoreCharacters = async (
   id: number,
   page: number,
-  perPage = 9,
+  perPage: number,
   sort = ["ROLE"],
 ): Promise<AniListCharacters> => {
   const response = await axios.post<LoadMoreCharactersResponse>(
@@ -89,7 +89,7 @@ export const loadMoreCharacters = async (
 export const loadMoreRecommendations = async (
   id: number,
   page: number,
-  perPage = 6,
+  perPage: number,
   sort = ["RATING_DESC"],
 ): Promise<AniListRecommendation> => {
   const response = await axios.post<LoadMoreRecommendationsResponse>(

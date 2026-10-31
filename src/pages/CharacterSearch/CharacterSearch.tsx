@@ -3,6 +3,7 @@ import useCharacterSearch from "../../hooks/useCharacterSearch";
 import CharacterItem from "./components/CharacterItem/CharacterItem";
 import LoadMoreBtn from "../../features/components/LoadMoreBtn/LoadMoreBtn";
 import SearchControls from "./components/SearchControls/SearchControls";
+import SkeletonCharacterSearch from "./components/SkeletonCharacterSearch/SkeletonCharacterSearch";
 
 const CharacterSearch = () => {
   const {
@@ -13,6 +14,7 @@ const CharacterSearch = () => {
     results,
     pageInfo,
     setPage,
+    initialLoading,
     loadMoreLoading,
   } = useCharacterSearch();
 
@@ -32,18 +34,22 @@ const CharacterSearch = () => {
         perPage={perPage}
         setPerPage={setPerPage}
       />
-      <div className={s.content}>
-        <ul className={s.list}>
-          {results.map((c) => (
-            <CharacterItem character={c} key={c.id} />
-          ))}
-        </ul>
-        <LoadMoreBtn
-          loading={loadMoreLoading}
-          onClick={handleLoadMore}
-          disabled={loadMoreLoading || !pageInfo?.hasNextPage}
-        />
-      </div>
+      {initialLoading ? (
+        <SkeletonCharacterSearch />
+      ) : (
+        <div className={s.content}>
+          <ul className={s.list}>
+            {results.map((c) => (
+              <CharacterItem character={c} key={c.id} />
+            ))}
+          </ul>
+          <LoadMoreBtn
+            loading={loadMoreLoading}
+            onClick={handleLoadMore}
+            disabled={loadMoreLoading || !pageInfo?.hasNextPage}
+          />
+        </div>
+      )}
     </div>
   );
 };

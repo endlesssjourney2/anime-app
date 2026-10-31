@@ -30,7 +30,7 @@ const SearchControls: FC<Props> = ({
         options={[
           { value: "12", label: "12 characters" },
           { value: "18", label: "18 characters" },
-          { value: "32", label: "36 characters" },
+          { value: "36", label: "36 characters" },
           { value: "48", label: "48 characters" },
         ]}
       />

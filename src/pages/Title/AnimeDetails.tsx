@@ -32,10 +32,13 @@ const AnimeDetails = () => {
             <RelationsSection relations={anime.relations} />
           )}
           {anime?.recommendations.nodes.length > 0 && (
-            <RecommendationsSection recommendations={anime.recommendations} />
+            <RecommendationsSection
+              recommendations={anime.recommendations}
+              id={anime.id}
+            />
           )}
           {anime?.characters.edges.length > 0 && (
-            <CharactersSection characters={anime.characters} />
+            <CharactersSection characters={anime.characters} id={anime.id} />
           )}
         </>
       )}

@@ -17,4 +17,13 @@ type RecommendationNode = {
 
 export type AniListRecommendation = {
   nodes: RecommendationNode[];
+  pageInfo: { hasNextPage: boolean };
+};
+
+export type LoadMoreRecommendationsResponse = {
+  data: {
+    Media: {
+      recommendations: AniListRecommendation;
+    };
+  };
 };

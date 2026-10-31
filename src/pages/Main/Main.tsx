@@ -3,8 +3,7 @@ import s from "./Main.module.css";
 import AnimeItem from "./components/AnimeItem/AnimeItem";
 import SearchControls from "./components/SearchControls/SearchControls";
 import SkeletonMain from "./components/SkeletonMain/SkeletonMain";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-
+import LoadMoreBtn from "../../features/components/LoadMoreBtn/LoadMoreBtn";
 const Main = () => {
   const {
     searchItem,
@@ -22,7 +21,9 @@ const Main = () => {
     setGenres,
     initialLoading,
     loadMoreLoading,
-  } = useAnimeSearch(15);
+    perPage,
+    setPerPage,
+  } = useAnimeSearch();
 
   const handleLoadMore = () => {
     if (loadMoreLoading || !pageInfo?.hasNextPage) return;
@@ -35,6 +36,8 @@ const Main = () => {
         <h2 className={s.headerTitle}>Search anime here</h2>
       </div>
       <SearchControls
+        perPage={perPage}
+        setPerPage={setPerPage}
         searchItem={searchItem}
         setSearchItem={setSearchItem}
         sort={sort}

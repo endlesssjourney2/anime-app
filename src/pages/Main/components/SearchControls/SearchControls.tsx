@@ -15,8 +15,11 @@ import {
   STATUS_OPTIONS,
 } from "../../../../constants/filtersOptions";
 import FiltersBadges from "./FiltersBadges/FiltersBadges";
+import PerPageSelect from "../../../../features/components/PerPageSelect/PerPageSelect";
 
 type Props = {
+  perPage: string;
+  setPerPage: (v: string) => void;
   searchItem: string;
   setSearchItem: (v: string) => void;
   sort: AniListSort;
@@ -31,6 +34,8 @@ type Props = {
 };
 
 const SearchControls: FC<Props> = ({
+  setPerPage,
+  perPage,
   searchItem,
   setSearchItem,
   sort,
@@ -89,6 +94,16 @@ const SearchControls: FC<Props> = ({
             setSelected={setGenres}
           />
         </div>
+        <PerPageSelect
+          perPage={perPage}
+          setPerPage={setPerPage}
+          options={[
+            { value: "10", label: "10 anime" },
+            { value: "15", label: "15 anime" },
+            { value: "25", label: "25 anime" },
+            { value: "50", label: "50 anime" },
+          ]}
+        />
         <SortSelect sort={sort} setSort={setSort} options={SORT_OPTIONS} />
       </div>
       <div>

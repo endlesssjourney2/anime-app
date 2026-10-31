@@ -3,14 +3,24 @@ import useDebounce from "./useDebounce";
 import { searchCharacter } from "../api/aniListApi";
 import type { CharacterSearch } from "../types/CharacterSearch";
 import type { AniListPageInfo } from "../types/AniList";
+import { useSearchParams } from "react-router-dom";
 
 const useCharacterSearch = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchItem, setSearchItem] = useState("");
   const [results, setResults] = useState<CharacterSearch[]>([]);
   const [pageInfo, setPageInfo] = useState<AniListPageInfo | null>(null);
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState("18");
   const [loading, setLoading] = useState(false);
+
+  const perPage = searchParams.get("perPage") ?? "12";
+  const setPerPage = (value: string) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.set("perPage", value);
+      return next;
+    });
+  };
 
   const initialLoading = loading && page === 1;
   const loadMoreLoading = loading && page > 1;

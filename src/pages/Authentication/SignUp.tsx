@@ -3,6 +3,7 @@ import s from "./Authentication.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "../../db/supabase";
+import { IconLockPassword, IconMail } from "@tabler/icons-react";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -11,10 +12,13 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
+    if (loading) return;
+
     if (!email || !password) return toast.error("Please fill in all fields");
 
     if (password.length < 6)
       return toast.error("Password must be at least 6 characters long");
+
     setLoading(true);
 
     const { data, error } = await supabase.auth.signUp({
@@ -47,23 +51,28 @@ const SignUp = () => {
           }}
         >
           <div className={s.inputContainer}>
-            <input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={s.input}
-              required
-            />
-
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={s.input}
-              required
-            />
+            <div className={s.inputWrapper}>
+              <IconMail className={s.inputIcon} size={20} />
+              <input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={s.input}
+                required
+              />
+            </div>
+            <div className={s.inputWrapper}>
+              <IconLockPassword className={s.inputIcon} size={20} />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={s.input}
+                required
+              />
+            </div>
           </div>
 
           <button type="submit" className={s.btn} disabled={loading}>

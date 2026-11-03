@@ -51,31 +51,54 @@
   gap: 14px;
 }
 
-.input {
+.inputWrapper {
   width: 100%;
-  padding: 14px 16px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 15px;
   background-color: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  color: var(--color-text-primary);
-  font-size: 16px;
-  outline: none;
   transition:
     background 0.2s,
     border-color 0.2s,
     box-shadow 0.2s;
 }
 
+.input {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  padding: 14px 0;
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 16px;
+  outline: none;
+}
+
+.inputIcon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
 .input::placeholder {
   color: var(--color-text-secondary);
 }
 
-.input:hover {
+.inputWrapper:hover {
   border-color: var(--color-border-strong);
 }
 
-.input:focus {
+.inputWrapper:focus-within {
   border-color: var(--color-accent);
+}
+
+.inputWrapper:focus-within .inputIcon {
+  color: var(--color-accent);
 }
 
 .btn {

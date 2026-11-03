@@ -3,6 +3,7 @@ import s from "./Authentication.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "../../db/supabase";
+import { IconLockPassword, IconMail } from "@tabler/icons-react";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -46,23 +47,28 @@ const SignIn = () => {
           }}
         >
           <div className={s.inputContainer}>
-            <input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={s.input}
-              required
-            />
-
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={s.input}
-              required
-            />
+            <div className={s.inputWrapper}>
+              <IconMail className={s.inputIcon} size={20} />
+              <input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={s.input}
+                required
+              />
+            </div>
+            <div className={s.inputWrapper}>
+              <IconLockPassword className={s.inputIcon} size={20} />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={s.input}
+                required
+              />
+            </div>
           </div>
 
           <button type="submit" className={s.btn} disabled={loading}>

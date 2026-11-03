@@ -29,6 +29,14 @@
 
 .nav {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.right,
+.left {
+  display: flex;
   align-items: center;
   gap: 12px;
 }

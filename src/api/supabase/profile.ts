@@ -24,22 +24,18 @@ export const updateProfile = async (userId: string, payload: UpdateProfilePayloa
   return data;
 };
 
-export const uploadAvatar = async (userId: string, file: File) => {
-  const extensions: Record<string, string> = {
-    "image/jpeg": "jpg",
-    "image/png": "png",
-    "image/webp": "webp",
-  };
+const extensions: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+};
 
+export const uploadAvatar = async (userId: string, file: File) => {
   const extension = extensions[file.type];
 
-  if (!extension) {
-    throw new Error("Invalid file type");
-  }
+  if (!extension) throw new Error("Invalid file type");
 
-  if (file.size > 2 * 1024 * 1024) {
-    throw new Error("File size exceeds 2MB");
-  }
+  if (file.size > 2 * 1024 * 1024) throw new Error("File size exceeds 2MB");
 
   const path = `${userId}/${crypto.randomUUID()}.${extension}`;
 
@@ -50,6 +46,26 @@ export const uploadAvatar = async (userId: string, file: File) => {
   if (error) throw error;
 
   const { data } = supabase.storage.from("avatars").getPublicUrl(path);
+
+  return data.publicUrl;
+};
+
+export const uploadBanner = async (userId: string, file: File) => {
+  const extension = extensions[file.type];
+
+  if (!extension) throw new Error("Invalid file type");
+
+  if (file.size > 5 * 1024 * 1024) throw new Error("File size exceeds 5MB");
+
+  const path = `${userId}/${crypto.randomUUID()}.${extension}`;
+
+  const { error } = await supabase.storage.from("banners").upload(path, file, {
+    contentType: file.type,
+    upsert: false,
+  });
+  if (error) throw error;
+
+  const { data } = supabase.storage.from("banners").getPublicUrl(path);
 
   return data.publicUrl;
 };

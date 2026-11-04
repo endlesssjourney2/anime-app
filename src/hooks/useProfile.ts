@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import type { Profile } from "../types/Profile";
+import type { Profile, UpdateProfilePayload } from "../types/Profile";
 import { useAuth } from "../context/AuthContext";
-import { getProfile, updateProfile, uploadAvatar } from "../api/supabase/profile";
+import {
+  getProfile,
+  updateProfile,
+  uploadAvatar,
+  uploadBanner,
+} from "../api/supabase/profile";
 
 const useProfile = () => {
   const { user, loading: authLoading } = useAuth();
@@ -33,12 +38,14 @@ const useProfile = () => {
     fetchProfile();
   }, [user, authLoading]);
 
-  const editName = async (newName: string) => {
+  const editProfile = async (
+    payload: Omit<UpdateProfilePayload, "avatar_url" | "banner_url">,
+  ) => {
     if (!user) return;
     setActionLoading(true);
 
     try {
-      const data = await updateProfile(user.id, { display_name: newName });
+      const data = await updateProfile(user.id, payload);
       setProfile(data);
     } finally {
       setActionLoading(false);
@@ -58,7 +65,20 @@ const useProfile = () => {
     }
   };
 
-  return { profile, initLoading, actionLoading, editAvatar, editName };
+  const editBanner = async (file: File) => {
+    if (!user) return;
+    setActionLoading(true);
+
+    try {
+      const bannerUrl = await uploadBanner(user.id, file);
+      const data = await updateProfile(user.id, { banner_url: bannerUrl });
+      setProfile(data);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  return { profile, initLoading, actionLoading, editAvatar, editProfile, editBanner };
 };
 
 export default useProfile;

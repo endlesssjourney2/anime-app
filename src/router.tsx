@@ -7,6 +7,7 @@ import SignIn from "./pages/Authentication/SignIn";
 import SignUp from "./pages/Authentication/SignUp";
 import MainLayout from "./Layout/MainLayout";
 import AuthLayout from "./Layout/AuthLayout";
+import Profile from "./pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: "characters", element: <CharacterSearch /> },
       { path: "anime/:id", element: <AnimeDetails /> },
       { path: "character/:id", element: <Character /> },
+      { path: "profile", element: <Profile /> },
     ],
   },
   {

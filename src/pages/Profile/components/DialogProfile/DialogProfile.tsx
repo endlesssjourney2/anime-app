@@ -2,13 +2,15 @@ import { IconX } from "@tabler/icons-react";
 import { Dialog } from "radix-ui";
 import s from "./DialogProfile.module.css";
 import { useState, type FC } from "react";
-import type { Profile } from "../../../../types/Profile";
+import type { Profile, UpdateProfilePayload } from "../../../../types/Profile";
 import { toast } from "sonner";
 
 type Props = {
   profile: Profile;
   loading: boolean;
-  onSave: (payload: { display_name: string; description: string }) => Promise<void>;
+  onSave: (
+    payload: Omit<UpdateProfilePayload, "avatar_url" | "banner_url">,
+  ) => Promise<void>;
 };
 
 const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {

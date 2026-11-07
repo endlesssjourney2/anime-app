@@ -12,16 +12,16 @@ type Props = {
 };
 
 const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
-  const [name, setName] = useState(profile?.display_name);
-  const [description, setDescription] = useState(profile?.description ?? "");
+  const [name, setName] = useState(profile.display_name);
+  const [description, setDescription] = useState(profile.description ?? "");
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (loading) return;
 
     if (nextOpen) {
-      setName(profile?.display_name);
-      setDescription(profile?.description ?? "");
+      setName(profile.display_name);
+      setDescription(profile.description ?? "");
     }
     setOpen(nextOpen);
   };
@@ -29,6 +29,12 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
   const handleSubmit = async () => {
     if (!name.trim()) {
       toast.error("Name cannot be empty");
+      return;
+    }
+
+    if (description === profile.description && name === profile.display_name) {
+      setOpen(false);
+      toast("Nothing to save");
       return;
     }
 
@@ -102,7 +108,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
                 placeholder="Your display name"
               />
 
-              <span className={s.counter}>{name?.length}/32</span>
+              <span className={s.counter}>{name.length}/32</span>
             </div>
 
             <div className={s.field}>
@@ -121,7 +127,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
                 placeholder="Type something about yourself..."
               />
 
-              <span className={s.counter}>{description?.length}/300</span>
+              <span className={s.counter}>{description.length}/300</span>
             </div>
 
             <div className={s.footer}>
@@ -131,11 +137,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
                 </button>
               </Dialog.Close>
 
-              <button
-                type="submit"
-                className={s.save}
-                disabled={loading || !name?.trim()}
-              >
+              <button type="submit" className={s.save} disabled={loading || !name.trim()}>
                 {loading ? "Saving..." : "Save changes"}
               </button>
             </div>

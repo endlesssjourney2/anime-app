@@ -1,18 +1,22 @@
-import { IconCamera } from "@tabler/icons-react";
 import type { Profile, UpdateProfilePayload } from "../../../../types/Profile";
 import { useRef, type FC } from "react";
 import s from "./ProfileHeader.module.css";
 import DialogProfile from "../DialogProfile/DialogProfile";
 import { toast } from "sonner";
+import ProfileImageDropdown from "../ProfileImageDropdown/ProfileImageDropdown";
 
 type Props = {
   profile: Profile;
   loading: boolean;
   editProfile: (
-    payload: Omit<UpdateProfilePayload, "avatar_url" | "banner_url">,
+    payload: Omit<UpdateProfilePayload, "avatar_path" | "banner_path">,
   ) => Promise<void>;
   editBanner: (file: File) => Promise<void>;
   editAvatar: (file: File) => Promise<void>;
+  bannerUrl: string | null;
+  avatarUrl: string | null;
+  removeAvatar: () => Promise<void>;
+  removeBanner: () => Promise<void>;
 };
 
 const ProfileHeader: FC<Props> = ({
@@ -21,6 +25,10 @@ const ProfileHeader: FC<Props> = ({
   editProfile,
   editAvatar,
   editBanner,
+  bannerUrl,
+  avatarUrl,
+  removeAvatar,
+  removeBanner,
 }) => {
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const bannerInputRef = useRef<HTMLInputElement>(null);
@@ -52,25 +60,40 @@ const ProfileHeader: FC<Props> = ({
     }
   };
 
+  const handleRemoveAvatar = async () => {
+    try {
+      await removeAvatar();
+      toast.success("Avatar removed successfully!");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to remove avatar");
+    }
+  };
+
+  const handleRemoveBanner = async () => {
+    try {
+      await removeBanner();
+      toast.success("Banner removed successfully!");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to remove banner");
+    }
+  };
+
   return (
     <>
       <div className={s.bannerWrapper}>
-        {profile.banner_url ? (
-          <img className={s.banner} src={profile.banner_url} alt="" />
+        {bannerUrl ? (
+          <img className={s.banner} src={bannerUrl} alt="" />
         ) : (
           <div className={s.banner} />
         )}
-
-        <button
-          type="button"
-          className={s.bannerIcon}
-          onClick={() => bannerInputRef.current?.click()}
-          disabled={loading}
-          aria-label="Change banner"
-          title="Change banner"
-        >
-          <IconCamera size={20} stroke={1.8} />
-        </button>
+        <div className={s.bannerIcon}>
+          <ProfileImageDropdown
+            changeImage={() => bannerInputRef.current?.click()}
+            removeImage={handleRemoveBanner}
+            hasImage={Boolean(bannerUrl)}
+            loading={loading}
+          />
+        </div>
       </div>
 
       <input
@@ -89,33 +112,29 @@ const ProfileHeader: FC<Props> = ({
       />
       <div className={s.profileInfo}>
         <div className={s.avatarInfo}>
-          {profile.avatar_url ? (
-            <img
-              className={s.avatar}
-              src={profile.avatar_url}
-              alt={profile.display_name}
-            />
+          {avatarUrl ? (
+            <img className={s.avatar} src={avatarUrl} alt={profile.display_name} />
           ) : (
             <div className={s.avatar}>{profile.display_name.charAt(0).toUpperCase()}</div>
           )}
 
-          <button
-            type="button"
-            className={s.avatarIcon}
-            onClick={() => avatarInputRef.current?.click()}
-            disabled={loading}
-            aria-label="Change avatar"
-            title="Change avatar"
-          >
-            <IconCamera size={18} stroke={1.8} />
-          </button>
+          <div className={s.avatarIcon}>
+            <ProfileImageDropdown
+              changeImage={() => avatarInputRef.current?.click()}
+              removeImage={handleRemoveAvatar}
+              hasImage={Boolean(avatarUrl)}
+              loading={loading}
+            />
+          </div>
         </div>
         <div className={s.about}>
           <div className={s.top}>
             <h2 className={s.name}>{profile.display_name}</h2>
             <DialogProfile profile={profile} loading={loading} onSave={editProfile} />
           </div>
-          <span className={s.description}>{profile.description ?? "Description"}</span>
+          <span className={s.description}>
+            {profile.description?.trim() || "No description yet"}
+          </span>
         </div>
       </div>
     </>

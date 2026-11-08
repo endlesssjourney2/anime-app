@@ -8,9 +8,10 @@ import { IconLogout, IconUser } from "@tabler/icons-react";
 type Props = {
   handleLogout: () => Promise<void>;
   profile: Profile;
+  avatarUrl: string;
 };
 
-const ProfileDropdown: FC<Props> = ({ handleLogout, profile }) => {
+const ProfileDropdown: FC<Props> = ({ handleLogout, profile, avatarUrl }) => {
   const firstProfileLetter = profile?.display_name
     ? profile.display_name.charAt(0).toUpperCase()
     : "";
@@ -21,8 +22,8 @@ const ProfileDropdown: FC<Props> = ({ handleLogout, profile }) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button type="button" className={s.trigger} aria-label="Profile menu">
-          {profile?.avatar_url ? (
-            <img src={profile.avatar_url} alt="" className={s.avatar} />
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="" className={s.avatar} />
           ) : (
             <span>{firstProfileLetter}</span>
           )}

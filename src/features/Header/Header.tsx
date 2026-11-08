@@ -7,7 +7,7 @@ import ProfileDropdown from "./components/ProfileDropdown/ProfileDropdown";
 
 const Header = () => {
   const { user } = useAuth();
-  const { profile } = useProfile();
+  const { profile, avatarUrl } = useProfile();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -30,7 +30,11 @@ const Header = () => {
             </Link>
           </div>
           {user ? (
-            <ProfileDropdown handleLogout={handleLogout} profile={profile} />
+            <ProfileDropdown
+              handleLogout={handleLogout}
+              profile={profile}
+              avatarUrl={avatarUrl}
+            />
           ) : (
             <div className={s.left}>
               <Link className={s.navLink} to={"/signup"}>

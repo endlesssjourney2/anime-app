@@ -6,3 +6,10 @@
   margin: 0 auto;
   padding: 0px 10px 10px 10px;
 }
+
+.noProfile {
+  margin-top: 20px;
+  font-size: 24px;
+  color: var(--color-text-primary);
+  text-align: center;
+}

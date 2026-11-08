@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import type { Profile, UpdateProfilePayload } from "../types/Profile";
 import { useAuth } from "../context/AuthContext";
 import {
+  deleteProfileImage,
   getProfile,
+  getProfileImage,
   updateProfile,
   uploadAvatar,
   uploadBanner,
@@ -54,12 +56,22 @@ const useProfile = () => {
 
   const editAvatar = async (file: File) => {
     if (!user) return;
+
     setActionLoading(true);
+    const oldPath = profile?.avatar_path;
 
     try {
-      const avatarUrl = await uploadAvatar(user.id, file);
-      const data = await updateProfile(user.id, { avatar_url: avatarUrl });
-      setProfile(data);
+      const path = await uploadAvatar(user.id, file);
+      try {
+        const data = await updateProfile(user.id, { avatar_path: path });
+        setProfile(data);
+      } catch (error) {
+        await deleteProfileImage("avatars", path);
+        throw error;
+      }
+      if (oldPath) {
+        await deleteProfileImage("avatars", oldPath);
+      }
     } finally {
       setActionLoading(false);
     }
@@ -67,18 +79,77 @@ const useProfile = () => {
 
   const editBanner = async (file: File) => {
     if (!user) return;
+
     setActionLoading(true);
+    const oldPath = profile?.banner_path;
 
     try {
-      const bannerUrl = await uploadBanner(user.id, file);
-      const data = await updateProfile(user.id, { banner_url: bannerUrl });
-      setProfile(data);
+      const path = await uploadBanner(user.id, file);
+      try {
+        const data = await updateProfile(user.id, { banner_path: path });
+        setProfile(data);
+      } catch (error) {
+        await deleteProfileImage("banners", path);
+        throw error;
+      }
+      if (oldPath) {
+        await deleteProfileImage("banners", oldPath);
+      }
     } finally {
       setActionLoading(false);
     }
   };
 
-  return { profile, initLoading, actionLoading, editAvatar, editProfile, editBanner };
+  const removeAvatar = async () => {
+    if (!user) return;
+
+    const path = profile?.avatar_path;
+    if (!path) return;
+
+    setActionLoading(true);
+
+    try {
+      const data = await updateProfile(user.id, { avatar_path: null });
+      setProfile(data);
+
+      await deleteProfileImage("avatars", path);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const removeBanner = async () => {
+    if (!user) return;
+
+    const path = profile?.banner_path;
+    if (!path) return;
+
+    setActionLoading(true);
+    try {
+      const data = await updateProfile(user.id, { banner_path: null });
+      setProfile(data);
+
+      await deleteProfileImage("banners", path);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const avatarUrl = getProfileImage("avatars", profile?.avatar_path);
+  const bannerUrl = getProfileImage("banners", profile?.banner_path);
+
+  return {
+    profile,
+    initLoading,
+    actionLoading,
+    editAvatar,
+    editProfile,
+    editBanner,
+    avatarUrl,
+    bannerUrl,
+    removeAvatar,
+    removeBanner,
+  };
 };
 
 export default useProfile;

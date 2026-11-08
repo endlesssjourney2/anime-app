@@ -36,16 +36,19 @@ const ProfileImageDropdown: FC<Props> = ({
             {hasImage ? "Change Image" : "Upload image"}
           </DropdownMenu.Item>
 
-          <DropdownMenu.Separator className={s.separator} />
-
-          <DropdownMenu.Item
-            className={`${s.item} ${s.delete}`}
-            onSelect={removeImage}
-            disabled={!hasImage}
-          >
-            <IconTrash size={17} />
-            Remove image
-          </DropdownMenu.Item>
+          {hasImage && (
+            <>
+              <DropdownMenu.Separator className={s.separator} />
+              <DropdownMenu.Item
+                className={`${s.item} ${s.remove}`}
+                onSelect={removeImage}
+                disabled={!hasImage}
+              >
+                <IconTrash size={17} />
+                Remove image
+              </DropdownMenu.Item>
+            </>
+          )}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

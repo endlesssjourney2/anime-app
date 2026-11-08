@@ -34,7 +34,10 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
       return;
     }
 
-    if (description === profile.description && name === profile.display_name) {
+    if (
+      description.trim() === profile.description &&
+      name.trim() === profile.display_name
+    ) {
       setOpen(false);
       toast("Nothing to save");
       return;

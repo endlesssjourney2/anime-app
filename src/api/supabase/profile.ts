@@ -45,9 +45,7 @@ export const uploadAvatar = async (userId: string, file: File) => {
   });
   if (error) throw error;
 
-  const { data } = supabase.storage.from("avatars").getPublicUrl(path);
-
-  return data.publicUrl;
+  return path;
 };
 
 export const uploadBanner = async (userId: string, file: File) => {
@@ -65,7 +63,18 @@ export const uploadBanner = async (userId: string, file: File) => {
   });
   if (error) throw error;
 
-  const { data } = supabase.storage.from("banners").getPublicUrl(path);
+  return path;
+};
+
+export const getProfileImage = (bucket: "avatars" | "banners", path: string | null) => {
+  if (!path) return null;
+
+  const { data } = supabase.storage.from(bucket).getPublicUrl(path);
 
   return data.publicUrl;
+};
+
+export const deleteProfileImage = async (bucket: "avatars" | "banners", path: string) => {
+  const { error } = await supabase.storage.from(bucket).remove([path]);
+  if (error) throw error;
 };

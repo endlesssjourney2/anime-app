@@ -9,13 +9,14 @@ type Props = {
   profile: Profile;
   loading: boolean;
   onSave: (
-    payload: Omit<UpdateProfilePayload, "avatar_url" | "banner_url">,
+    payload: Omit<UpdateProfilePayload, "avatar_path" | "banner_path">,
   ) => Promise<void>;
 };
 
 const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
   const [name, setName] = useState(profile.display_name);
   const [description, setDescription] = useState(profile.description ?? "");
+  const [username, setUsername] = useState(profile.username ?? "");
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (nextOpen: boolean) => {
@@ -24,6 +25,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
     if (nextOpen) {
       setName(profile.display_name);
       setDescription(profile.description ?? "");
+      setUsername(profile.username ?? "");
     }
     setOpen(nextOpen);
   };
@@ -34,19 +36,31 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
       return;
     }
 
-    if (
-      description.trim() === profile.description &&
-      name.trim() === profile.display_name
-    ) {
+    const normalizedName = name.trim();
+    const normalizedDescription = description.trim();
+    const normalizedUsername = username.trim().toLowerCase();
+
+    const unchanged =
+      normalizedName === profile.display_name &&
+      normalizedDescription === (profile.description ?? "") &&
+      normalizedUsername === (profile.username ?? "");
+
+    if (unchanged) {
       setOpen(false);
       toast("Nothing to save");
       return;
     }
 
+    if (normalizedUsername && !/^[a-z0-9_]{3,20}$/.test(normalizedUsername)) {
+      toast.error("Username must be 3–20 characters. Using only (a-z, 0-9, _)");
+      return;
+    }
+
     try {
       await onSave({
-        display_name: name.trim(),
-        description: description.trim() || null,
+        display_name: normalizedName,
+        description: normalizedDescription || null,
+        username: normalizedUsername || null,
       });
       toast.success("Profile updated successfully!");
       setOpen(false);
@@ -114,6 +128,25 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
               />
 
               <span className={s.counter}>{name.length}/32</span>
+            </div>
+
+            <div className={s.field}>
+              <label className={s.label} htmlFor="profile-username">
+                Username
+              </label>
+
+              <input
+                className={s.input}
+                id="profile-username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                maxLength={20}
+                minLength={3}
+                disabled={loading}
+                placeholder="Your username"
+              />
+
+              <span className={s.counter}>{username.length}/20</span>
             </div>
 
             <div className={s.field}>

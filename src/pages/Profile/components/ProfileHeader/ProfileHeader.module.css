@@ -66,6 +66,11 @@
   align-items: center;
 }
 
+.nameInfo {
+  display: flex;
+  gap: 8px;
+}
+
 .name {
   min-width: 0;
   font-family: var(--font-heading);

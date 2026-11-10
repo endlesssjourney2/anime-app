@@ -5,40 +5,41 @@ import DialogProfile from "../DialogProfile/DialogProfile";
 import { toast } from "sonner";
 import ProfileImageDropdown from "../ProfileImageDropdown/ProfileImageDropdown";
 
-type Props = {
-  profile: Profile;
-  loading: boolean;
+type ProfileActions = {
   editProfile: (
     payload: Omit<UpdateProfilePayload, "avatar_path" | "banner_path">,
   ) => Promise<void>;
   editBanner: (file: File) => Promise<void>;
   editAvatar: (file: File) => Promise<void>;
-  bannerUrl: string | null;
-  avatarUrl: string | null;
   removeAvatar: () => Promise<void>;
   removeBanner: () => Promise<void>;
 };
 
+type Props = {
+  profile: Profile;
+  actionLoading?: boolean;
+  actions?: ProfileActions;
+  bannerUrl: string | null;
+  avatarUrl: string | null;
+};
+
 const ProfileHeader: FC<Props> = ({
   profile,
-  loading,
-  editProfile,
-  editAvatar,
-  editBanner,
+  actionLoading,
   bannerUrl,
   avatarUrl,
-  removeAvatar,
-  removeBanner,
+  actions,
 }) => {
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const bannerInputRef = useRef<HTMLInputElement>(null);
 
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+
+    if (!file || !actions) return;
 
     try {
-      await editAvatar(file);
+      await actions.editAvatar(file);
       toast.success("Avatar updated successfully!");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to update avatar");
@@ -49,9 +50,11 @@ const ProfileHeader: FC<Props> = ({
 
   const handleEditBanner = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+
+    if (!file || !actions) return;
+
     try {
-      await editBanner(file);
+      await actions.editBanner(file);
       toast.success("Banner updated successfully!");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to update banner");
@@ -61,8 +64,10 @@ const ProfileHeader: FC<Props> = ({
   };
 
   const handleRemoveAvatar = async () => {
+    if (!actions) return;
+
     try {
-      await removeAvatar();
+      await actions.removeAvatar();
       toast.success("Avatar removed successfully!");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to remove avatar");
@@ -70,8 +75,10 @@ const ProfileHeader: FC<Props> = ({
   };
 
   const handleRemoveBanner = async () => {
+    if (!actions) return;
+
     try {
-      await removeBanner();
+      await actions.removeBanner();
       toast.success("Banner removed successfully!");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to remove banner");
@@ -86,30 +93,36 @@ const ProfileHeader: FC<Props> = ({
         ) : (
           <div className={s.banner} />
         )}
-        <div className={s.bannerIcon}>
-          <ProfileImageDropdown
-            changeImage={() => bannerInputRef.current?.click()}
-            removeImage={handleRemoveBanner}
-            hasImage={Boolean(bannerUrl)}
-            loading={loading}
-          />
-        </div>
+        {actions && (
+          <div className={s.bannerIcon}>
+            <ProfileImageDropdown
+              changeImage={() => bannerInputRef.current?.click()}
+              removeImage={handleRemoveBanner}
+              hasImage={Boolean(bannerUrl)}
+              loading={actionLoading}
+            />
+          </div>
+        )}
       </div>
 
-      <input
-        ref={avatarInputRef}
-        style={{ display: "none" }}
-        onChange={handleAvatarChange}
-        type="file"
-        accept=".jpeg, .jpg, .png, .webp"
-      />
-      <input
-        ref={bannerInputRef}
-        style={{ display: "none" }}
-        onChange={handleEditBanner}
-        type="file"
-        accept=".jpeg, .jpg, .png, .webp"
-      />
+      {actions && (
+        <>
+          <input
+            ref={avatarInputRef}
+            style={{ display: "none" }}
+            onChange={handleAvatarChange}
+            type="file"
+            accept=".jpeg, .jpg, .png, .webp"
+          />
+          <input
+            ref={bannerInputRef}
+            style={{ display: "none" }}
+            onChange={handleEditBanner}
+            type="file"
+            accept=".jpeg, .jpg, .png, .webp"
+          />
+        </>
+      )}
       <div className={s.profileInfo}>
         <div className={s.avatarInfo}>
           {avatarUrl ? (
@@ -117,20 +130,30 @@ const ProfileHeader: FC<Props> = ({
           ) : (
             <div className={s.avatar}>{profile.display_name.charAt(0).toUpperCase()}</div>
           )}
-
-          <div className={s.avatarIcon}>
-            <ProfileImageDropdown
-              changeImage={() => avatarInputRef.current?.click()}
-              removeImage={handleRemoveAvatar}
-              hasImage={Boolean(avatarUrl)}
-              loading={loading}
-            />
-          </div>
+          {actions && (
+            <div className={s.avatarIcon}>
+              <ProfileImageDropdown
+                changeImage={() => avatarInputRef.current?.click()}
+                removeImage={handleRemoveAvatar}
+                hasImage={Boolean(avatarUrl)}
+                loading={actionLoading}
+              />
+            </div>
+          )}
         </div>
         <div className={s.about}>
           <div className={s.top}>
-            <h2 className={s.name}>{profile.display_name}</h2>
-            <DialogProfile profile={profile} loading={loading} onSave={editProfile} />
+            <div className={s.nameInfo}>
+              <h2 className={s.name}>{profile.display_name}</h2>
+              <span className={s.username}>{profile.username}</span>
+            </div>
+            {actions && (
+              <DialogProfile
+                profile={profile}
+                loading={actionLoading}
+                onSave={actions.editProfile}
+              />
+            )}
           </div>
           <span className={s.description}>
             {profile.description?.trim() || "No description yet"}

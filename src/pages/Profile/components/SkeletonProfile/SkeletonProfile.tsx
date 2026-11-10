@@ -2,7 +2,7 @@ import s from "./SkeletonProfile.module.css";
 
 const SkeletonProfile = () => {
   return (
-    <>
+    <div className={s.skeleton}>
       <div className={s.banner} />
 
       <div className={s.info}>
@@ -12,7 +12,7 @@ const SkeletonProfile = () => {
           <div className={s.description} style={{ width: "70%", height: "15px" }} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

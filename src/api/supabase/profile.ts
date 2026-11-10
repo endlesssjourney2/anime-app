@@ -12,6 +12,18 @@ export const getProfile = async (userId: string): Promise<Profile> => {
   return data;
 };
 
+export const getProfileByUsername = async (username: string): Promise<Profile | null> => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("username", username.toLowerCase())
+    .maybeSingle();
+
+  if (error) throw error;
+
+  return data;
+};
+
 export const updateProfile = async (userId: string, payload: UpdateProfilePayload) => {
   const { data, error } = await supabase
     .from("profiles")

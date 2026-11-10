@@ -35,12 +35,8 @@ const Profile = () => {
         profile={profile}
         bannerUrl={bannerUrl}
         avatarUrl={avatarUrl}
-        loading={actionLoading}
-        editAvatar={editAvatar}
-        editBanner={editBanner}
-        editProfile={editProfile}
-        removeAvatar={removeAvatar}
-        removeBanner={removeBanner}
+        actionLoading={actionLoading}
+        actions={{ editProfile, editBanner, editAvatar, removeAvatar, removeBanner }}
       />
     </div>
   );

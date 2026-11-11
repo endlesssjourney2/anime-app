@@ -16,7 +16,7 @@ type Props = {
 const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
   const [name, setName] = useState(profile.display_name);
   const [description, setDescription] = useState(profile.description ?? "");
-  const [username, setUsername] = useState(profile.username ?? "");
+  const [username, setUsername] = useState(profile.username);
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (nextOpen: boolean) => {
@@ -25,7 +25,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
     if (nextOpen) {
       setName(profile.display_name);
       setDescription(profile.description ?? "");
-      setUsername(profile.username ?? "");
+      setUsername(profile.username);
     }
     setOpen(nextOpen);
   };
@@ -43,7 +43,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
     const unchanged =
       normalizedName === profile.display_name &&
       normalizedDescription === (profile.description ?? "") &&
-      normalizedUsername === (profile.username ?? "");
+      normalizedUsername === profile.username;
 
     if (unchanged) {
       setOpen(false);
@@ -51,7 +51,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
       return;
     }
 
-    if (normalizedUsername && !/^[a-z0-9_]{3,20}$/.test(normalizedUsername)) {
+    if (!/^[a-z0-9_]{3,20}$/.test(normalizedUsername)) {
       toast.error("Username must be 3–20 characters. Using only (a-z, 0-9, _)");
       return;
     }
@@ -60,7 +60,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
       await onSave({
         display_name: normalizedName,
         description: normalizedDescription || null,
-        username: normalizedUsername || null,
+        username: normalizedUsername,
       });
       toast.success("Profile updated successfully!");
       setOpen(false);
@@ -142,6 +142,7 @@ const DialogProfile: FC<Props> = ({ profile, loading, onSave }) => {
                 onChange={(e) => setUsername(e.target.value)}
                 maxLength={20}
                 minLength={3}
+                required
                 disabled={loading}
                 placeholder="Your username"
               />

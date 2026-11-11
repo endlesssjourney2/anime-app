@@ -4,6 +4,7 @@ import s from "./ProfileHeader.module.css";
 import DialogProfile from "../DialogProfile/DialogProfile";
 import { toast } from "sonner";
 import ProfileImageDropdown from "../ProfileImageDropdown/ProfileImageDropdown";
+import { IconAt, IconCopy } from "@tabler/icons-react";
 
 type ProfileActions = {
   editProfile: (
@@ -85,6 +86,15 @@ const ProfileHeader: FC<Props> = ({
     }
   };
 
+  const handleCopyUsername = async (username: string) => {
+    try {
+      await navigator.clipboard.writeText(username);
+      toast.success("Username copied to clipboard");
+    } catch (err) {
+      toast.error("Failed to copy the username");
+    }
+  };
+
   return (
     <>
       <div className={s.bannerWrapper}>
@@ -128,7 +138,9 @@ const ProfileHeader: FC<Props> = ({
           {avatarUrl ? (
             <img className={s.avatar} src={avatarUrl} alt={profile.display_name} />
           ) : (
-            <div className={s.avatar}>{profile.display_name.charAt(0).toUpperCase()}</div>
+            <div className={s.noAvatar}>
+              {profile.display_name.charAt(0).toUpperCase()}
+            </div>
           )}
           {actions && (
             <div className={s.avatarIcon}>
@@ -145,7 +157,19 @@ const ProfileHeader: FC<Props> = ({
           <div className={s.top}>
             <div className={s.nameInfo}>
               <h2 className={s.name}>{profile.display_name}</h2>
-              <span className={s.username}>{profile.username}</span>
+              <div className={s.usernameCont}>
+                <div className={s.usernameWrapper}>
+                  <IconAt size={14} className={s.atIcon} />
+                  <span className={s.username}>{profile.username}</span>
+                </div>
+                <button
+                  type="button"
+                  className={s.copyBtn}
+                  onClick={() => handleCopyUsername(profile.username)}
+                >
+                  <IconCopy size={16} />
+                </button>
+              </div>
             </div>
             {actions && (
               <DialogProfile

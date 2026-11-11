@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import useProfile from "../../hooks/useProfile";
 import s from "./Profile.module.css";
@@ -23,11 +22,11 @@ const Profile = () => {
 
   if (authLoading) return <SkeletonProfile />;
 
-  if (!user) return <Navigate to="/" replace />;
+  if (!user) return <div className={s.noFound}>No user</div>;
 
   if (initLoading) return <SkeletonProfile />;
 
-  if (!profile) return <div className={s.noProfile}>No profile found</div>;
+  if (!profile) return <div className={s.noFound}>No profile found</div>;
 
   return (
     <div className={s.profile}>

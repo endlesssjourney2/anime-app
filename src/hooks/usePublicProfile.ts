@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import type { Profile } from "../types/Profile";
-import { getProfile, getProfileImage } from "../api/supabase/profile";
+import { getProfileByUsername, getProfileImage } from "../api/supabase/profile";
 
-const usePublicProfile = (id?: string) => {
+const usePublicProfile = (username?: string) => {
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [initLoading, setInitLoading] = useState(false);
+  const [initLoading, setInitLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) {
+    if (!username) {
       setProfile(null);
       setInitLoading(false);
       return;
@@ -15,8 +15,9 @@ const usePublicProfile = (id?: string) => {
 
     const fetchProfile = async () => {
       setInitLoading(true);
+      setProfile(null);
       try {
-        const data = await getProfile(id);
+        const data = await getProfileByUsername(username);
         setProfile(data);
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -26,7 +27,7 @@ const usePublicProfile = (id?: string) => {
     };
 
     fetchProfile();
-  }, [id]);
+  }, [username]);
 
   const avatarUrl = getProfileImage("avatars", profile?.avatar_path ?? null);
   const bannerUrl = getProfileImage("banners", profile?.banner_path ?? null);

@@ -7,11 +7,15 @@ import RelationsSection from "./components/RelationsSection/RelationsSection";
 import TrailerSection from "./components/TrailerSection/TrailerSection";
 import SkeletonTitle from "./components/SkeletonTitle/SkeletonTitle";
 import RecommendationsSection from "./components/RecommendationsSection/RecommendationsSection";
+import useAnimeFavorites from "../../hooks/useAnimeFavorites";
 
 const AnimeDetails = () => {
   const { id } = useParams();
 
   const { anime, animeTitle, clearDescription, loading } = useAnimeDetails(Number(id));
+
+  const { isFavorite, addFavorite, removeFavorite, isLoading, isPending } =
+    useAnimeFavorites();
 
   return (
     <div className={s.titlePage}>
@@ -19,7 +23,14 @@ const AnimeDetails = () => {
         <SkeletonTitle />
       ) : (
         <>
-          <AnimeHeader anime={anime} animeTitle={animeTitle} />
+          <AnimeHeader
+            anime={anime}
+            animeTitle={animeTitle}
+            isFavorite={isFavorite(anime.id)}
+            removeFavorite={() => removeFavorite.mutate(anime.id)}
+            addFavorite={() => addFavorite.mutate(anime.id)}
+            disabled={isLoading || isPending}
+          />
           {clearDescription && (
             <div className={s.section}>
               <p className={s.sectionTitle}>Description</p>

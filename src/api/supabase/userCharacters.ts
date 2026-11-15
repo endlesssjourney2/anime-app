@@ -1,6 +1,6 @@
 import { supabase } from "../../db/supabase";
 
-export const addFavoriteCharacter = async (userId: string, characterId: number) => {
+export const addCharacterToFavorites = async (userId: string, characterId: number) => {
   const { error } = await supabase.from("user_characters").insert({
     user_id: userId,
     character_id: characterId,
@@ -9,7 +9,10 @@ export const addFavoriteCharacter = async (userId: string, characterId: number) 
   if (error) throw error;
 };
 
-export const removeFavoriteCharacter = async (userId: string, characterId: number) => {
+export const removeCharacterFromFavorites = async (
+  userId: string,
+  characterId: number,
+) => {
   const { error } = await supabase
     .from("user_characters")
     .delete()
@@ -19,7 +22,7 @@ export const removeFavoriteCharacter = async (userId: string, characterId: numbe
   if (error) throw error;
 };
 
-export const getFavoriteCharactersIds = async (userId: string) => {
+export const getFavoriteCharacterIds = async (userId: string) => {
   const { data, error } = await supabase
     .from("user_characters")
     .select("character_id")

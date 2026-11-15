@@ -4,13 +4,25 @@ import type { AniListMediaDetails } from "../../../../types/AniList";
 import { airingTimeFormatter } from "../../../../helpers/airingTimeFormatter";
 import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
 import BackButton from "./components/BackButton/BackButton";
+import FavoriteActionBtn from "../../../../features/components/FavoriteActionBtn/FavoriteActionBtn";
 
 type Props = {
   anime: AniListMediaDetails;
   animeTitle: string;
+  isFavorite: boolean;
+  removeFavorite: (animeId: number) => void;
+  addFavorite: (animeId: number) => void;
+  disabled: boolean;
 };
 
-const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
+const AnimeHeader: FC<Props> = ({
+  anime,
+  animeTitle,
+  isFavorite,
+  removeFavorite,
+  addFavorite,
+  disabled,
+}) => {
   const timeUntilAiring = airingTimeFormatter(anime?.nextAiringEpisode?.timeUntilAiring);
 
   return (
@@ -18,6 +30,13 @@ const AnimeHeader: FC<Props> = ({ anime, animeTitle }) => {
       <div className={s.bannerWrapper}>
         <img className={s.banner} src={anime?.bannerImage} alt={animeTitle} />
         <BackButton />
+        <FavoriteActionBtn
+          isFavorite={isFavorite}
+          removeFavorite={removeFavorite}
+          addFavorite={addFavorite}
+          id={anime.id}
+          disabled={disabled}
+        />
       </div>
 
       <div className={s.headerBlock}>

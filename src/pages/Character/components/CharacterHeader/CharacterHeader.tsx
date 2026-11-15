@@ -10,22 +10,32 @@ import {
   IconHourglass,
   IconQuestionMark,
 } from "@tabler/icons-react";
+import FavoriteActionBtn from "../../../../features/components/FavoriteActionBtn/FavoriteActionBtn";
 
 type Props = {
   character: AniListCharacterDetails;
+  addFavorite: () => void;
+  removeFavorite: () => void;
+  isFavorite: boolean;
+  disabled: boolean;
 };
 
-const CharacterHeader: FC<Props> = ({ character }) => {
-  const birthDay = character?.dateOfBirth?.day;
-  const birthMonth = character?.dateOfBirth?.month;
+const CharacterHeader: FC<Props> = ({
+  character,
+  addFavorite,
+  removeFavorite,
+  isFavorite,
+  disabled,
+}) => {
+  const birthDay = character.dateOfBirth?.day;
+  const birthMonth = character.dateOfBirth?.month;
 
-  const ages =
-    character?.age === "1" ? `${character?.age} year` : `${character?.age} years`;
+  const ages = character.age === "1" ? `${character.age} year` : `${character.age} years`;
 
   const GenderIcon =
-    character?.gender === "Male"
+    character.gender === "Male"
       ? IconGenderMale
-      : character?.gender === "Female"
+      : character.gender === "Female"
         ? IconGenderFemale
         : IconQuestionMark;
 
@@ -33,16 +43,16 @@ const CharacterHeader: FC<Props> = ({ character }) => {
     <div className={s.header}>
       <img
         className={s.characterImage}
-        src={character?.image.large}
-        alt={character?.name.full}
+        src={character.image.large}
+        alt={character.name.full}
       />
       <div className={s.details}>
         <div className={s.name}>
-          <span className={s.full}>{character?.name.full}</span>
-          <span className={s.native}>{character?.name.native}</span>
+          <span className={s.full}>{character.name.full}</span>
+          <span className={s.native}>{character.name.native}</span>
         </div>
         <div className={s.other}>
-          {character?.age && (
+          {character.age && (
             <span className={s.badge}>
               <IconHourglass size={15} />
               {ages}
@@ -54,15 +64,22 @@ const CharacterHeader: FC<Props> = ({ character }) => {
               {checkBirthday(birthDay, birthMonth)}
             </span>
           )}
-          {character?.gender && (
+          {character.gender && (
             <span className={s.badge}>
               <GenderIcon size={15} />
-              {character?.gender}
+              {character.gender}
             </span>
           )}
         </div>
         <CharacterDescription description={character?.description} />
       </div>
+      <FavoriteActionBtn
+        id={character.id}
+        addFavorite={addFavorite}
+        removeFavorite={removeFavorite}
+        isFavorite={isFavorite}
+        disabled={disabled}
+      />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 export const CHARACTER_QUERY = `
   query ($characterId: Int, $type: MediaType, $sort: [MediaSort]) {
     Character(id: $characterId) {
+      id
       name { full native }
       image { large }
       description

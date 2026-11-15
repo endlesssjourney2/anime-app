@@ -1,6 +1,6 @@
 import { supabase } from "../../db/supabase";
 
-export const addFavoriteAnime = async (userId: string, animeId: number) => {
+export const addAnimeToFavorites = async (userId: string, animeId: number) => {
   const { error } = await supabase.from("user_anime").insert({
     user_id: userId,
     anime_id: animeId,
@@ -10,7 +10,7 @@ export const addFavoriteAnime = async (userId: string, animeId: number) => {
   if (error) throw error;
 };
 
-export const removeFavoriteAnime = async (userId: string, animeId: number) => {
+export const removeAnimeFromFavorites = async (userId: string, animeId: number) => {
   const { error } = await supabase
     .from("user_anime")
     .delete()

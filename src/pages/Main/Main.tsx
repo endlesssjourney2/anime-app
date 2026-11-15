@@ -4,6 +4,8 @@ import AnimeItem from "./components/AnimeItem/AnimeItem";
 import SearchControls from "./components/SearchControls/SearchControls";
 import SkeletonMain from "./components/SkeletonMain/SkeletonMain";
 import LoadMoreBtn from "../../features/components/LoadMoreBtn/LoadMoreBtn";
+import useAnimeFavorites from "../../hooks/useAnimeFavorites";
+
 const Main = () => {
   const {
     searchItem,
@@ -24,6 +26,9 @@ const Main = () => {
     perPage,
     setPerPage,
   } = useAnimeSearch();
+
+  const { isFavorite, addFavorite, removeFavorite, isLoading, isPending } =
+    useAnimeFavorites();
 
   const handleLoadMore = () => {
     if (loadMoreLoading || !pageInfo?.hasNextPage) return;
@@ -57,7 +62,14 @@ const Main = () => {
           <div className={s.content}>
             <ul className={s.list}>
               {results.map((a) => (
-                <AnimeItem key={a.id} anime={a} />
+                <AnimeItem
+                  key={a.id}
+                  anime={a}
+                  isFavorite={isFavorite(a.id)}
+                  addFavorite={addFavorite.mutate}
+                  removeFavorite={removeFavorite.mutate}
+                  disabled={isLoading || isPending}
+                />
               ))}
             </ul>
           </div>

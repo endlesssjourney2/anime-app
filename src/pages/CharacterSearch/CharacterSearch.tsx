@@ -4,6 +4,7 @@ import CharacterItem from "./components/CharacterItem/CharacterItem";
 import LoadMoreBtn from "../../features/components/LoadMoreBtn/LoadMoreBtn";
 import SearchControls from "./components/SearchControls/SearchControls";
 import SkeletonCharacterSearch from "./components/SkeletonCharacterSearch/SkeletonCharacterSearch";
+import useCharacterFavorites from "../../hooks/useCharacterFavorites";
 
 const CharacterSearch = () => {
   const {
@@ -17,6 +18,9 @@ const CharacterSearch = () => {
     initialLoading,
     loadMoreLoading,
   } = useCharacterSearch();
+
+  const { isFavorite, addFavorite, removeFavorite, isLoading, isPending } =
+    useCharacterFavorites();
 
   const handleLoadMore = () => {
     if (loadMoreLoading || !pageInfo?.hasNextPage) return;
@@ -40,7 +44,14 @@ const CharacterSearch = () => {
         <div className={s.content}>
           <ul className={s.list}>
             {results.map((c) => (
-              <CharacterItem character={c} key={c.id} />
+              <CharacterItem
+                character={c}
+                key={c.id}
+                addFavorite={addFavorite.mutate}
+                removeFavorite={removeFavorite.mutate}
+                isFavorite={isFavorite(c.id)}
+                disabled={isLoading || isPending}
+              />
             ))}
           </ul>
           <LoadMoreBtn

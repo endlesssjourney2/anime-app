@@ -29,6 +29,7 @@ export type CharacterMedia = {
 
 //character fields
 export type AniListCharacterDetails = {
+  id: number;
   name: { full: string | null; native: string | null };
   image: AniListImage;
   description: string | null;

@@ -31,7 +31,7 @@ const WatchStatusSelect: FC<Props> = ({ onStatusChange, disabled, status }) => {
     >
       <Select.Trigger className={s.trigger}>
         <div className={s.triggerValue}>
-          <IconBookmark size={19} />
+          <IconBookmark size={17} />
           <Select.Value />
         </div>
         <Select.Icon className={s.icon}>

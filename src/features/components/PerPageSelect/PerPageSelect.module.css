@@ -3,26 +3,32 @@
   justify-content: center;
   align-items: center;
   gap: 6px;
-  padding: 10px 14px;
+  padding: 0 14px;
   height: 44px;
-  background: var(--color-btn-bg);
+  background-color: var(--color-btn-bg);
   border: 1px solid var(--color-btn-border);
   border-radius: 8px;
-  color: var(--color-btn-text);
+  color: var(--color-text-primary);
+  outline: none;
+  overflow: hidden;
   cursor: pointer;
   transition:
-    background,
-    border-color 0.15s ease;
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .trigger:hover {
+  background-color: var(--color-btn-bg-hover);
   border-color: var(--color-border-strong);
-  background: var(--color-btn-bg-hover);
+}
+
+.trigger[data-state="open"] {
+  border-color: var(--color-accent);
 }
 
 .trigger:focus-visible {
-  outline: none;
-  border-color: var(--color-accent);
+  outline: 1px solid var(--color-accent);
+  outline-offset: 1px;
 }
 
 .content {
@@ -33,6 +39,13 @@
   padding: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   z-index: 2000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .label {
@@ -41,8 +54,8 @@
   font-weight: 600;
   color: var(--color-text-muted);
   padding: 4px 8px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
 }
 
 .item {
@@ -50,12 +63,32 @@
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  font-size: 15px;
-  color: var(--color-text-primary);
+  border-radius: 8px;
+  min-height: 34px;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
   cursor: pointer;
   outline: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.item[data-highlighted] {
+  background-color: var(--color-card-hover);
+  color: var(--color-text-primary);
+}
+
+.item[data-state="checked"] {
+  background-color: rgba(82, 120, 229, 0.1);
+  color: var(--color-accent-hover);
+}
+
+.item[data-disabled] {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .indicator {
@@ -65,5 +98,17 @@
 }
 
 .item[data-highlighted] {
-  background: var(--color-card-hover);
+  background-color: var(--color-card-hover);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

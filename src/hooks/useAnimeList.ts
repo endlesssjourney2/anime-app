@@ -4,7 +4,7 @@ import { getAnimeList, setAnimeWatchStatus } from "../api/supabase/userAnime";
 import type { WatchStatus } from "../types/UserAnime";
 import { toast } from "sonner";
 
-const useAnimeList = () => {
+const useAnimeList = (status?: WatchStatus | null) => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
 
@@ -46,7 +46,11 @@ const useAnimeList = () => {
     return animeList?.find((anime) => anime.anime_id === animeId)?.watch_status ?? null;
   };
 
-  return { animeList, setStatus, getWatchStatus, isLoading };
+  const filteredAnimeList = animeList?.filter(
+    (anime) => status === null || anime.watch_status === status,
+  );
+
+  return { animeList, setStatus, getWatchStatus, filteredAnimeList, isLoading };
 };
 
 export default useAnimeList;

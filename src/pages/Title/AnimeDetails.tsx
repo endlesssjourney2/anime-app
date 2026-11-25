@@ -8,6 +8,7 @@ import TrailerSection from "./components/TrailerSection/TrailerSection";
 import SkeletonTitle from "./components/SkeletonTitle/SkeletonTitle";
 import RecommendationsSection from "./components/RecommendationsSection/RecommendationsSection";
 import useAnimeFavorites from "../../hooks/useAnimeFavorites";
+import useAnimeList from "../../hooks/useAnimeList";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -16,6 +17,10 @@ const AnimeDetails = () => {
 
   const { isFavorite, addFavorite, removeFavorite, isLoading, isPending } =
     useAnimeFavorites();
+
+  const { getWatchStatus, setStatus, isLoading: animeListLoading } = useAnimeList();
+
+  const currentStatus = anime ? getWatchStatus(anime.id) : null;
 
   return (
     <div className={s.titlePage}>
@@ -27,10 +32,19 @@ const AnimeDetails = () => {
             anime={anime}
             animeTitle={animeTitle}
             isFavorite={isFavorite(anime.id)}
-            removeFavorite={() => removeFavorite.mutate(anime.id)}
-            addFavorite={() => addFavorite.mutate(anime.id)}
+            removeFavorite={removeFavorite.mutate}
+            addFavorite={addFavorite.mutate}
             disabled={isLoading || isPending}
+            status={currentStatus}
+            onStatusChange={(newStatus) => {
+              setStatus.mutate({
+                animeId: anime?.id,
+                status: newStatus,
+              });
+            }}
+            disabledSelect={animeListLoading || setStatus.isPending}
           />
+
           {clearDescription && (
             <div className={s.section}>
               <p className={s.sectionTitle}>Description</p>

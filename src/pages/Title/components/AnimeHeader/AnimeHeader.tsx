@@ -5,6 +5,7 @@ import { airingTimeFormatter } from "../../../../helpers/airingTimeFormatter";
 import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
 import BackButton from "./components/BackButton/BackButton";
 import FavoriteActionBtn from "../../../../features/components/FavoriteActionBtn/FavoriteActionBtn";
+import type { WatchStatus } from "../../../../types/UserAnime";
 
 type Props = {
   anime: AniListMediaDetails;
@@ -13,6 +14,9 @@ type Props = {
   removeFavorite: (animeId: number) => void;
   addFavorite: (animeId: number) => void;
   disabled: boolean;
+  status: WatchStatus | null;
+  onStatusChange: (status: WatchStatus | null) => void;
+  disabledSelect: boolean;
 };
 
 const AnimeHeader: FC<Props> = ({
@@ -22,6 +26,9 @@ const AnimeHeader: FC<Props> = ({
   removeFavorite,
   addFavorite,
   disabled,
+  status,
+  onStatusChange,
+  disabledSelect,
 }) => {
   const timeUntilAiring = airingTimeFormatter(anime?.nextAiringEpisode?.timeUntilAiring);
 
@@ -51,7 +58,13 @@ const AnimeHeader: FC<Props> = ({
             </div>
           )}
         </div>
-        <HeaderInfo anime={anime} animeTitle={animeTitle} />
+        <HeaderInfo
+          anime={anime}
+          animeTitle={animeTitle}
+          status={status}
+          onStatusChange={onStatusChange}
+          disabledSelect={disabledSelect}
+        />
       </div>
     </>
   );

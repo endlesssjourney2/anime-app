@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import useProfile from "../../hooks/useProfile";
 import s from "./Profile.module.css";
 import ProfileHeader from "./components/ProfileHeader/ProfileHeader";
 import SkeletonProfile from "./components/SkeletonProfile/SkeletonProfile";
+import type { WatchStatus } from "../../types/UserAnime";
+import useWatchList from "../../hooks/useWatchList";
+import WatchList from "./components/WatchList/WatchList";
+import StatusTabs from "./components/StatusTabs/StatusTabs";
+import useAnimeList from "../../hooks/useAnimeList";
 
 const Profile = () => {
   const {
@@ -17,6 +23,12 @@ const Profile = () => {
     removeAvatar,
     removeBanner,
   } = useProfile();
+
+  const [watchStatus, setWatchStatus] = useState<WatchStatus | null>(null);
+
+  const { getWatchStatus } = useAnimeList(watchStatus);
+
+  const { watchList } = useWatchList(watchStatus);
 
   const { user, loading: authLoading } = useAuth();
 
@@ -37,6 +49,8 @@ const Profile = () => {
         actionLoading={actionLoading}
         actions={{ editProfile, editBanner, editAvatar, removeAvatar, removeBanner }}
       />
+      <StatusTabs status={watchStatus} onChange={setWatchStatus} />
+      <WatchList watchList={watchList} getWatchStatus={getWatchStatus} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import type { AniListFormat, AniListGenre, AniListStatus } from "../types/AniList";
 import type { AniListSort, AniListSortCharacter } from "../types/AniListSort";
+import type { WatchStatus } from "../types/UserAnime";
 import { AniListGenreCollection } from "./collections";
 
 export const GENRE_OPTIONS: { value: AniListGenre; label: string }[] =
@@ -57,3 +58,19 @@ export const SORT_OPTIONS_CHARACTERS: { value: AniListSortCharacter; label: stri
   { value: "START_DATE_DESC", label: "Newest" },
   { value: "START_DATE", label: "Oldest" },
 ];
+
+export const WATCH_STATUS_OPTIONS: { value: WatchStatus; label: string }[] = [
+  { value: "completed", label: "Completed" },
+  { value: "watching", label: "Watching" },
+  { value: "planned", label: "Planned" },
+  { value: "on_hold", label: "On hold" },
+  { value: "dropped", label: "Dropped" },
+];
+
+export const WATCH_STATUS_LABELS: Record<WatchStatus, string> = {
+  completed: "Completed",
+  watching: "Watching",
+  planned: "Planned",
+  on_hold: "On hold",
+  dropped: "Dropped",
+};

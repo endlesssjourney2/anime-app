@@ -113,4 +113,26 @@ ul {
   /* ranking colors */
   --color-rated: #e0b45f;
   --color-popularity: #e47467;
+
+  /* watching status */
+
+  --color-watch-completed: #6f91e8;
+  --color-watch-completed-bg: #1d2942;
+  --color-watch-completed-border: #3d568c;
+
+  --color-watch-watching: #5fc7a1;
+  --color-watch-watching-bg: #192d29;
+  --color-watch-watching-border: #30594b;
+
+  --color-watch-planned: #bba0e8;
+  --color-watch-planned-bg: #29223b;
+  --color-watch-planned-border: #554474;
+
+  --color-watch-on-hold: #d6a85f;
+  --color-watch-on-hold-bg: #30291e;
+  --color-watch-on-hold-border: #665333;
+
+  --color-watch-dropped: #dc6477;
+  --color-watch-dropped-bg: #352129;
+  --color-watch-dropped-border: #6b3644;
 }

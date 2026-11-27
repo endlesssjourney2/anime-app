@@ -3,14 +3,7 @@ import type { WatchStatus } from "../../../../types/UserAnime";
 import type { FC } from "react";
 import { IconBookmark, IconCheck, IconChevronDown } from "@tabler/icons-react";
 import s from "./WatchStatusSelect.module.css";
-
-const options: { value: WatchStatus; label: string }[] = [
-  { value: "completed", label: "Completed" },
-  { value: "watching", label: "Watching" },
-  { value: "planned", label: "Planned" },
-  { value: "on_hold", label: "On hold" },
-  { value: "dropped", label: "Dropped" },
-];
+import { WATCH_STATUS_OPTIONS } from "../../../../constants/filtersOptions";
 
 type Props = {
   onStatusChange: (status: WatchStatus | null) => void;
@@ -56,7 +49,7 @@ const WatchStatusSelect: FC<Props> = ({ onStatusChange, disabled, status }) => {
                 </Select.ItemIndicator>
               </Select.Item>
 
-              {options.map((o) => (
+              {WATCH_STATUS_OPTIONS.map((o) => (
                 <Select.Item key={o.value} className={s.item} value={o.value}>
                   <Select.ItemText>{o.label ?? o.value}</Select.ItemText>
                   <Select.ItemIndicator className={s.indicator}>

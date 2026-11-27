@@ -26,6 +26,8 @@ import type {
   AniListRecommendation,
   LoadMoreRecommendationsResponse,
 } from "../types/Recommendations";
+import { WATCH_LIST_QUERY } from "./queries/watchListQuery";
+import type { WatchListMedia, WatchListResponse } from "../types/WatchList";
 
 const ANILIST_URL = "https://graphql.anilist.co";
 
@@ -131,4 +133,19 @@ export const getCharacterById = async (
   );
 
   return response.data.data.Character;
+};
+
+export const getWatchListByIds = async (
+  page: number,
+  perPage: number,
+  idIn: number[],
+  sort: string[],
+): Promise<WatchListMedia> => {
+  const response = await axios.post<WatchListResponse>(
+    ANILIST_URL,
+    { query: WATCH_LIST_QUERY, variables: { page, perPage, idIn, sort } },
+    { headers: { "Content-Type": "application/json" } },
+  );
+
+  return response.data.data.Page.media;
 };
